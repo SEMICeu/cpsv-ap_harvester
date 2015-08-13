@@ -1,158 +1,264 @@
 # -*- coding: utf-8 -*-
+__author__ = 'Steve Verschaeve, PwC EU Services'
+
+"""
+Harvests a resource pool of JSON objects presented over HTTP and adds a semantic layer mapped to the CPSV-AP vocabulary
+and save to a triple store
+
+Python ver: 3.4
+"""
+
+import requests
 from SPARQLWrapper import SPARQLWrapper, POST, JSON
-from rdflib import Graph
-from semantics import context
-from itertools import repeat
-import requests, copy, json, re
-from collections import OrderedDict
-from rdflib.plugin import register, Serializer
+from rdflib import URIRef, Literal, Namespace, Graph
+from rdflib.namespace import FOAF, RDF
+from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
+from simpleconfigparser import simpleconfigparser
 
-# Register the JSON-LD plugin for the RDFLib parser
-register('json-ld', Serializer, 'rdflib_jsonld', 'JsonLDSerializer')
+# Configurations
+config = simpleconfigparser()
+config.read('config.ini')
+endpointURI = config['Mandatory']['endpointURI']
+graphURI = config['Mandatory']['graphURI']
+poolURI = (config['Mandatory']['poolURI']).split(',')
+cleanGraph = config['Optional']['cleanGraph']
+cleanGraphQuery = config['Optional']['cleanGraphQuery']
 
-# Settings - Mandatory
-endpointURI = 'http://localhost:8890/sparql'  # URL to sparql endpoint
-graphURI = 'http://localhost:8890/pilot'  # Named graph in the triple store
-poolURI = ('http://localhost/harvester/part1.json', 'http://localhost/harvester/part2.json')  # Pool of URI to harvest
-
-"""
-part1 + part2 = json from https://www.riigiteenused.ee/api/et/all
-The json from https://www.riigiteenused.ee/api/et/all is split up to demonstrate the use of harvesting multiple URI although
-it is not mandatory.
-There is an overlap of content between part1 and part2 for the sake of testing duplicate items(key-value pairs)
-
-Important: https://www.riigiteenused.ee/api/et/all holds mal formed URIs and is therefore not validated in the process to
-generate links
-"""
-
-cleanGraphQuery = """CLEAR GRAPH <http://localhost:8890/pilot>""" # Executed against the engine to delete the triples from the graph
-
-# Settings - Optional
-cleanGraph = 1  # 1=drop all triples; 0=do nothing
-headers = {'content-type': 'application/json'}  # HTTP header content type
-
-# Set an endpoint
+# Set up endpoint and access to triple store
 sparql = SPARQLWrapper(endpointURI)
 sparql.setReturnFormat(JSON)
 sparql.setMethod(POST)
+store = SPARQLUpdateStore(endpointURI, endpointURI)
 
 # Specify the (named) graph we're working with
 sparql.addDefaultGraph(graphURI)
+
+# Create an in memory graph
+g = Graph(store, identifier=graphURI)
 
 # Cleanup the existing triples
 if cleanGraph == 1:
 	sparql.setQuery(cleanGraphQuery)
 	sparql.query().convert()
 
-def json_to_jsonld(data):
-	"""
-	Public Server ID and Business Event ID have no matches between the JSON data and CPSV-AP vocabulary.
-	Therefore we generate the keys and add them to the JSON data.
-	"""
+# Creating a namespace for Public Service (PS)
+# FOAF and RDF are predefined RDFLib namespace, no need to create a new one
+cpsvap = Namespace("http://data.europa.eu/cv/")
+dct = Namespace("http://purl.org/dc/terms/")
+adms = Namespace("http://www.w3.org/ns/adms#")
+lang = Namespace('http://publications.europa.eu/resource/authority/language/')
 
-	# Parse line by line - split the large array of JSON objects per line
-	for line in response:
-			# Get v for k objectId and identifikaator and build strings for subjects PS and BE
-			# both objectId and identifikaator are used to build the ID strings for PS and BE.
-			ps = 'http://PSID-' + line['objectId'] + '-' + line['identifikaator'] # The Public Service ID = PSID
-			be = 'http://BEID-' + line['objectId'] + '-' + line['identifikaator'] # The Business Event ID = BEID
+# Separate namespace for channel, cost and agent as RDFLib does not accept a # as part of an predicate
+# Alternative is to construct the predicate as p=<namespace> + '#' + attribute
+chan = Namespace("http://data.europa.eu/cv/Channel#")
+cost = Namespace("http://data.europa.eu/cv/Cost#")
+agent = Namespace("http://data.europa.eu/cv/Agent#")
+sdmx = Namespace("http://purl.org/linked-data/sdmx/2009/dimension")
 
-			"""
-			A dict is not indexed and is therefore not ordered which makes it hard to move or replace keys.
-			Items (key-value pairs) will be put at the proper location within the string by removing them first and
-			appending them again as the last position is something we can work with
-			"""
 
-			# Copy v for k eluarisyndmus to be reused later in the process
-			# eluarisyndmus = name of the business event
-			eluarisyndmus = line['eluarisyndmus']
+# Build the RDF from the JSON source data
+# This function is to be called for each URL in the pool to harvest
+def json_to_rdf(json):
+	# Parse array of JSON objects line by line
+	for line in json:
 
-			# Copy k,v into new dict so we can change the items (items cannot be changed within the dictionary unless
-			#they get copied into a new dict)
-			n = copy.deepcopy(line)
+		# Loop through each key in the dict
+		for keys in line:
 
-			# Remove the eluarisyndmus k
-			n.pop('eluarisyndmus')
+			# Build the triples
 
-			# Add the generated PS ID key
-			# By removing the eluarisyndmus key, we can put the PS ID at the position where the eluarisyndmus was before
-			n['@id'] = ps
+			""" Public Service class """
+			""" -------------------- """
 
-			# Move the PS ID k to the beginning - last=false means were not moving the key to the end which means it
-			# gets moved to the beginning of the string
-			o = OrderedDict(n)
-			o.move_to_end('@id', last=False)  # Python +3.2 - only works with an orderedDict
+			# Build the ID URI as source data does not come with a term related to an ID
+			psid = URIRef('http://PSID-' + line[(config['Generic']['objectId'])] + '-' + line[
+				(config['PublicService']['identifier'])])
 
-			# Add the generated BE ID key
-			"""
-			We can't use @id as it has been added before for the PS ID. However, the term @is is needed as it
-			resolves the key to a URI. The @idBE is a temp key and will be dealed with using regex + replace later
-			in the process
-			"""
-			o['@idBE'] = be
+			# Name
+			if (config['PublicService']['name']) in keys:
+				g.add([psid, dct.name,  # Not sure of the predicate. Could also be dct:title
+					   Literal(line.get(config['PublicService']['identifier']))])
 
-			# Add the eluarisyndmus key again which we removed earlier
-			o['eluarisyndmus'] = eluarisyndmus
+			# Type - follows COFOG taxonomy: http://unstats.un.org/unsd/cr/registry/regcst.asp?Cl=4
+			g.add((psid, RDF.type, cpsvap.PublicService))  # indicates the "term" type
+			if (config['PublicService']['type']) in keys:
+				# indicates the kind of type
+				# example: public service is a type. Waste management is the kind of service for the type
+				g.add((psid, cpsvap.type, Literal(line.get(config['PublicService']['type']))))
 
-			# Create a new in memory graph for the triples
-			g = Graph()
+			# Description
+			if (config['PublicService']['description']) in keys:
+				g.add((psid, dct.description, Literal(line.get(config['PublicService']['description']))))
 
-			# Manipulate the JSON string
-			"""
-			Both the artificial PS and BE IDs have been added to the JSON string because they were not present in the
-			original JSON data. Except for the Business Event Name, no other BE properties are present in the JSON string.
-			This means we will have to generate a key-value pair to act as a predicate which looks like
-			k -> "@beid" and v -> the "be" variable defined earlier. This new key gets mapped in the context to
-			"beid":{"@id": "dct:type"} which means a type of an event.
-			All this has to be put in a seperate arry inside the JSON string prefixed by the "@graph" term.
-			Example:
-			...
-				"beid": "http://BEID-ec3472b3-645c-428a-862f-4d1dc1beaea7-TJA-043",
-  				"@graph": [
-    						{
-      							"@id": "http://BEID-ec3472b3-645c-428a-862f-4d1dc1beaea7-TJA-043",
-      							"eluarisyndmus": ""
-    						}
-  				]
+			# Identifier
+			if (config['PublicService']['identifier']) in keys:
+				g.add((psid, adms.Identifier, Literal(line.get(config['PublicService']['identifier']))))
 
-				The first part "beid" is used to create the predicate
-				The "@id" part inside the array is used to resolve the BE ID URI
+			# Language
+			if (config['PublicService']['language']) in keys:
 
-			instance m manipulates the JSON string so it has the new structure
-			"""
-			m = re.sub('"@idBE"', '","@graph": [{"@id"', re.sub('"@idBE"', '"@beid":"' + be + '"@idBE"', json.dumps(o))+ "]}")
+				if line.get(config['PublicService']['language']) in ('ET', 'et'):  # ET = Estonia
 
-			# parse the JSON through the RDFLib library zipping with the semantic layer (context)
-			# and serialize & decoding to UTF-8it to N-Triples
-			# Define and initialize the query to save the triples into the graph on the store
-			# Context is retrieved from "from semantics import context"
-			q = 'INSERT DATA { %s }' % g.parse(data=m, format='json-ld', context=context).serialize(format='nt').decode('utf-8')
-			sparql.setQuery(q)
+					# The object is a literal but I would prefer http://publications.europa.eu/resource/authority/language/ET
+					g.add((psid, dct.language, lang.ET))
 
-			# Add to the triple store
-			sparql.query().convert()
+				else:
+					# Switching to the literal from the source data
+					g.add((psid, dct.language, Literal(line.get(config['PublicService']['language']))))
 
-			# Cleanup the graph instance
-			g.close()
+			# Homepage
+			# Create a triple for the homepage
+			if (config['PublicService']['homepage']) in keys:
+				if line.get(config['PublicService']['homepage']) == "":
+					g.add((psid, FOAF.homepage, URIRef('http://unknown')))
+				else:
+					g.add((psid, FOAF.homepage, URIRef(line.get(config['PublicService']['homepage']))))
 
-# Get the number of URI to harvest
-nPools = len(poolURI)
+			# Field of activity
+			if (config['PublicService']['sector']) in keys:
+				g.add([psid, cpsvap.sector, Literal(line.get(config['PublicService']['sector']))])
+
+			# Ministry
+			if (config['PublicService']['ministry']) in keys:
+				g.add((psid, cpsvap.AgentName, Literal(line.get(config['PublicService']['ministry']))))
+
+			# Authority - Unit that defines the public service
+			if (config['PublicService']['authority']) in keys:
+				g.add((psid, cpsvap.AgentName, Literal(line.get(config['PublicService']['authority']))))
+
+			# Department - Department responsable for delivering the public service
+			if (config['PublicService']['department']) in keys:
+				g.add((psid, cpsvap.AgentName, Literal(line.get(config['PublicService']['department']))))
+
+			# Telephone
+			if (config['PublicService']['telephone']) in keys:
+				g.add((psid, cpsvap.Channel, Literal(line.get(config['PublicService']['telephone']))))
+
+			# E-mail
+			if (config['PublicService']['email']) in keys:
+				g.add((psid, cpsvap.Channel, Literal(line.get(config['PublicService']['email']))))
+
+			# Administrative expenses
+			if (config['PublicService']['expense']) in keys:
+				g.add((psid, cpsvap.CostIdentifier, Literal(line.get(config['PublicService']['expense']))))
+
+			# Check for a homepage key to create has channel
+			if (config['PublicService']['homepage']) in keys:
+				# Create a hasChannel triple
+				g.add((psid, cpsvap.hasChannel, chan.Homepage))
+
+			# Prediction
+			if (config['PublicService']['prediction']) in keys:
+				g.add((psid, cpsvap.HasInput, Literal(line.get(config['PublicService']['prediction']))))
+
+			# Payment
+			if (config['PublicService']['cost']) in keys:
+				# Build and add the Cost ID URI
+				costid = URIRef('http://COSTID-' + line[(config['Generic']['objectId'])] + '-' + line[
+					(config['PublicService']['identifier'])])
+				g.add((psid, chan.hasCost, costid))
+
+				g.add((costid, RDF.type, cpsvap.type))
+				g.add((costid, dct.description, Literal(line.get('makse'))))
+
+			""" Business Event class """
+			""" -------------------- """
+
+			# Build the ID URI as source data does not come with a term related to an ID
+			beid = URIRef('http://BEID-' + line[(config['Generic']['objectID'])] + '-' + line[
+				(config['PublicService']['Identifier'])])
+			g.add((psid, dct.isPartOf, beid))
+
+			# Name
+			if (config['BusinessEvent']['name']) in keys:
+				g.add((beid, dct.title, Literal(line.get(config['BusinessEvent']['name']))))
+
+			# Language
+			if (config['PublicService']['language']) in keys:
+
+				if line.get(config['PublicService']['language']) in ('ET', 'et'):  # ET = Estonia
+
+					# The object is a literal but a URI is prefered: http://publications.europa.eu/resource/authority/language/ET
+					g.add((beid, dct.language, lang.ET))
+
+				else:
+					# Switching to the literal from the source data
+					g.add((beid, dct.language, Literal(line.get(config['PublicService']['language']))))
+
+			""" Input class """
+			""" ----------- """
+
+			# Related documents to input
+			if (config['Input']['relatedDocuments']) in keys:
+				inputid = URIRef('http://INPUTID-' + line[(config['Generic']['objectId'])] + '-' + line[
+					(config['PublicService']['identifier'])])
+				g.add((psid, cpsvap.HasInput, inputid))
+				g.add((inputid, RDF.type, cpsvap.input))
+				g.add((inputid, FOAF.page, Literal(line.get(config['Input']['relatedDocuments']))))  # not sure about p
+
+			""" Output class """
+			""" ------------ """
+
+			# Output
+			if (config['Output']['output']) in keys:
+				outputid = URIRef('http://OUTPUTID-' + line[(config['Generic']['objectId'])] + '-' + line[
+					(config['PublicService']['identifier'])])
+				g.add((psid, cpsvap.Produces, outputid))
+				g.add((outputid, RDF.type, cpsvap.output))
+				g.add((outputid, FOAF.page, Literal(line.get(config['Ouptut']['output']))))  # not sure about p
+
+			""" Channel class """
+			""" ------------- """
+
+			# Check for a Telephone key
+			if (config['PublicService']['telephone']) in keys:
+				# Create a hasChannel triple
+				g.add((psid, cpsvap.Channel, chan.Telephone))
+
+			# Check for an E-mail
+			if (config['PublicService']['email']) in keys:
+				# Create a hasChannel triple
+				# "E-mail" is not accepted as an RDFLib object because of the hyphen so we're constructing a string
+				mail = URIRef("http://data.europa.eu/cv/Agent#E-mail")
+				g.add((psid, cpsvap.Channel, mail))
+
+			""" Person class """
+			""" ------------ """
+
+			# Name of the owner
+			if (config['Person']['person']) in keys:
+				g.add((psid, agent.Name, Literal(line.get(config['Person']['person']))))
+
+			""" Cost class """
+			""" ---------- """
+			# There is not key to be mapped but since the currency is in EUR,
+			# it can be mapped to namespace sdmx:"http://purl.org/linked-data/sdmx/2009/dimension”
+			g.add((psid, sdmx.Currency, Literal('EUR')))
+
+		# Cleanup the graph instance
+		g.close()
+
 
 # Set counter
 c = 0
 
 # Loop over all URI in the pool
-for i in repeat(None, nPools):
+while c < len(poolURI):
 	try:
 		# Fetch the JSON data
-		response = requests.get(poolURI[c], headers=headers).json()
+		response = requests.get(poolURI[c]).json()
 
 		# Process the response
-		json_to_jsonld(response)
+		json_to_rdf(response)
 
-	# Catch the bad URLs
 	except ValueError as e:
 		print(e)
 
-# Counter update
-c += 1
+	# Counter update
+	c += 1
+
+# Iterate over triples in store and print them out.
+print("--- printing raw triples ---")
+
+for s, p, o in g:
+	print(s, p, o)
