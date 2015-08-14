@@ -8,13 +8,19 @@ and save to a triple store
 Python ver: 3.4
 """
 
+import time
+
 import requests
 from SPARQLWrapper import SPARQLWrapper, POST, JSON
 from rdflib import URIRef, Literal, Namespace, Graph
 from rdflib.namespace import FOAF, RDF
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
 from simpleconfigparser import simpleconfigparser
+from termcolor import colored
 
+# Track executing time
+start_time = time.time()
+headers = {'content-type': 'application/json'}  # HTTP header content type
 # Configurations
 config = simpleconfigparser()
 config.read('config.ini')
@@ -23,6 +29,26 @@ graphURI = config['Mandatory']['graphURI']
 poolURI = (config['Mandatory']['poolURI']).split(',')
 cleanGraph = config['Optional']['cleanGraph']
 cleanGraphQuery = config['Optional']['cleanGraphQuery']
+objectId = config['Generic']['objectId']
+identifier = config['PublicService']['identifier']
+PSName = config['PublicService']['name']
+PSType = config['PublicService']['type']
+PSDescription = config['PublicService']['description']
+PSLanguage = config['PublicService']['language']
+PSHomepage = config['PublicService']['homepage']
+PSSector = config['PublicService']['sector']
+ministry = config['PublicService']['ministry']
+authority = config['PublicService']['authority']
+department = config['PublicService']['department']
+PSTelephone = config['PublicService']['telephone']
+PSEmail = config['PublicService']['email']
+expense = config['PublicService']['expense']
+prediction = config['PublicService']['prediction']
+PSCost = config['PublicService']['cost']
+BEName = config['BusinessEvent']['name']
+InputRelatedDocuments = config['Input']['relatedDocuments']
+Output = config['Output']['output']
+Person = config['Person']['person']
 
 # Set up endpoint and access to triple store
 sparql = SPARQLWrapper(endpointURI)
@@ -55,13 +81,13 @@ cost = Namespace("http://data.europa.eu/cv/Cost#")
 agent = Namespace("http://data.europa.eu/cv/Agent#")
 sdmx = Namespace("http://purl.org/linked-data/sdmx/2009/dimension")
 
-
 # Build the RDF from the JSON source data
 # This function is to be called for each URL in the pool to harvest
 def json_to_rdf(json):
-	# Parse array of JSON objects line by line
+	# Parse array of JSON objects line by line and count them (j)
+	j = 0
 	for line in json:
-
+		j += 1
 		# Loop through each key in the dict
 		for keys in line:
 
@@ -71,152 +97,149 @@ def json_to_rdf(json):
 			""" -------------------- """
 
 			# Build the ID URI as source data does not come with a term related to an ID
-			psid = URIRef('http://PSID-' + line[(config['Generic']['objectId'])] + '-' + line[
-				(config['PublicService']['identifier'])])
+			psid = URIRef('http://PSID-' + line[objectId] + '-' + line[identifier])
 
 			# Name
-			if (config['PublicService']['name']) in keys:
-				g.add([psid, dct.name,  # Not sure of the predicate. Could also be dct:title
-					   Literal(line.get(config['PublicService']['identifier']))])
+			if PSName in keys:
+				# Not sure of the predicate. Could also be dct:title
+				g.add([psid, dct.name, Literal(line.get(identifier))])
 
 			# Type - follows COFOG taxonomy: http://unstats.un.org/unsd/cr/registry/regcst.asp?Cl=4
 			g.add((psid, RDF.type, cpsvap.PublicService))  # indicates the "term" type
-			if (config['PublicService']['type']) in keys:
+			if PSType in keys:
 				# indicates the kind of type
 				# example: public service is a type. Waste management is the kind of service for the type
-				g.add((psid, cpsvap.type, Literal(line.get(config['PublicService']['type']))))
+				g.add((psid, cpsvap.type, Literal(line.get(PSType))))
 
 			# Description
-			if (config['PublicService']['description']) in keys:
-				g.add((psid, dct.description, Literal(line.get(config['PublicService']['description']))))
+			if PSDescription in keys:
+				g.add((psid, dct.description, Literal(line.get(PSDescription))))
 
 			# Identifier
-			if (config['PublicService']['identifier']) in keys:
-				g.add((psid, adms.Identifier, Literal(line.get(config['PublicService']['identifier']))))
+			if identifier in keys:
+				g.add((psid, adms.Identifier, Literal(line.get(identifier))))
 
 			# Language
-			if (config['PublicService']['language']) in keys:
+			if PSLanguage in keys:
 
-				if line.get(config['PublicService']['language']) in ('ET', 'et'):  # ET = Estonia
+				if line.get(PSLanguage) in ('ET', 'et'):  # ET = Estonia
 
 					# The object is a literal but I would prefer http://publications.europa.eu/resource/authority/language/ET
 					g.add((psid, dct.language, lang.ET))
 
 				else:
 					# Switching to the literal from the source data
-					g.add((psid, dct.language, Literal(line.get(config['PublicService']['language']))))
+					g.add((psid, dct.language, Literal(line.get(PSLanguage))))
 
 			# Homepage
 			# Create a triple for the homepage
-			if (config['PublicService']['homepage']) in keys:
-				if line.get(config['PublicService']['homepage']) == "":
+			if PSHomepage in keys:
+				if line.get(PSHomepage) == "":
 					g.add((psid, FOAF.homepage, URIRef('http://unknown')))
 				else:
-					g.add((psid, FOAF.homepage, URIRef(line.get(config['PublicService']['homepage']))))
+					g.add((psid, FOAF.homepage, URIRef(line.get(PSHomepage))))
 
 			# Field of activity
-			if (config['PublicService']['sector']) in keys:
-				g.add([psid, cpsvap.sector, Literal(line.get(config['PublicService']['sector']))])
+			if PSSector in keys:
+				g.add([psid, cpsvap.sector, Literal(line.get(PSSector))])
 
 			# Ministry
-			if (config['PublicService']['ministry']) in keys:
-				g.add((psid, cpsvap.AgentName, Literal(line.get(config['PublicService']['ministry']))))
+			if ministry in keys:
+				g.add((psid, cpsvap.AgentName, Literal(line.get(ministry))))
 
 			# Authority - Unit that defines the public service
-			if (config['PublicService']['authority']) in keys:
-				g.add((psid, cpsvap.AgentName, Literal(line.get(config['PublicService']['authority']))))
+			if authority in keys:
+				g.add((psid, cpsvap.AgentName, Literal(line.get(authority))))
 
 			# Department - Department responsable for delivering the public service
-			if (config['PublicService']['department']) in keys:
-				g.add((psid, cpsvap.AgentName, Literal(line.get(config['PublicService']['department']))))
+			if department in keys:
+				g.add((psid, cpsvap.AgentName, Literal(line.get(department))))
 
 			# Telephone
-			if (config['PublicService']['telephone']) in keys:
-				g.add((psid, cpsvap.Channel, Literal(line.get(config['PublicService']['telephone']))))
+			if PSTelephone in keys:
+				g.add((psid, cpsvap.Channel, Literal(line.get(PSTelephone))))
 
 			# E-mail
-			if (config['PublicService']['email']) in keys:
-				g.add((psid, cpsvap.Channel, Literal(line.get(config['PublicService']['email']))))
+			if PSEmail in keys:
+				g.add((psid, cpsvap.Channel, Literal(line.get(PSEmail))))
 
 			# Administrative expenses
-			if (config['PublicService']['expense']) in keys:
-				g.add((psid, cpsvap.CostIdentifier, Literal(line.get(config['PublicService']['expense']))))
+			if expense in keys:
+				g.add((psid, cpsvap.CostIdentifier, Literal(line.get(expense))))
 
 			# Check for a homepage key to create has channel
-			if (config['PublicService']['homepage']) in keys:
+			if PSHomepage in keys:
 				# Create a hasChannel triple
 				g.add((psid, cpsvap.hasChannel, chan.Homepage))
 
 			# Prediction
-			if (config['PublicService']['prediction']) in keys:
-				g.add((psid, cpsvap.HasInput, Literal(line.get(config['PublicService']['prediction']))))
+			if prediction in keys:
+				g.add((psid, cpsvap.HasInput, Literal(line.get(prediction))))
 
 			# Payment
-			if (config['PublicService']['cost']) in keys:
+			if PSCost in keys:
 				# Build and add the Cost ID URI
-				costid = URIRef('http://COSTID-' + line[(config['Generic']['objectId'])] + '-' + line[
-					(config['PublicService']['identifier'])])
+				costid = URIRef('http://COSTID-' + line[objectId] + '-' + line[
+					identifier])
 				g.add((psid, chan.hasCost, costid))
 
 				g.add((costid, RDF.type, cpsvap.type))
-				g.add((costid, dct.description, Literal(line.get('makse'))))
+				g.add((costid, dct.description, Literal(line.get(PSCost))))
 
 			""" Business Event class """
 			""" -------------------- """
 
 			# Build the ID URI as source data does not come with a term related to an ID
-			beid = URIRef('http://BEID-' + line[(config['Generic']['objectID'])] + '-' + line[
-				(config['PublicService']['Identifier'])])
+			beid = URIRef('http://BEID-' + line[objectId] + '-' + line[
+				identifier])
 			g.add((psid, dct.isPartOf, beid))
 
 			# Name
-			if (config['BusinessEvent']['name']) in keys:
-				g.add((beid, dct.title, Literal(line.get(config['BusinessEvent']['name']))))
+			if BEName in keys:
+				g.add((beid, dct.title, Literal(line.get(BEName))))
 
 			# Language
-			if (config['PublicService']['language']) in keys:
+			if PSLanguage in keys:
 
-				if line.get(config['PublicService']['language']) in ('ET', 'et'):  # ET = Estonia
+				if line.get(PSLanguage) in ('ET', 'et'):  # ET = Estonia
 
 					# The object is a literal but a URI is prefered: http://publications.europa.eu/resource/authority/language/ET
 					g.add((beid, dct.language, lang.ET))
 
 				else:
 					# Switching to the literal from the source data
-					g.add((beid, dct.language, Literal(line.get(config['PublicService']['language']))))
+					g.add((beid, dct.language, Literal(line.get(PSLanguage))))
 
 			""" Input class """
 			""" ----------- """
 
 			# Related documents to input
-			if (config['Input']['relatedDocuments']) in keys:
-				inputid = URIRef('http://INPUTID-' + line[(config['Generic']['objectId'])] + '-' + line[
-					(config['PublicService']['identifier'])])
+			if InputRelatedDocuments in keys:
+				inputid = URIRef('http://INPUTID-' + line[objectId] + '-' + line[identifier])
 				g.add((psid, cpsvap.HasInput, inputid))
 				g.add((inputid, RDF.type, cpsvap.input))
-				g.add((inputid, FOAF.page, Literal(line.get(config['Input']['relatedDocuments']))))  # not sure about p
+				g.add((inputid, FOAF.page, Literal(line.get(InputRelatedDocuments))))  # not sure about p
 
 			""" Output class """
 			""" ------------ """
 
 			# Output
-			if (config['Output']['output']) in keys:
-				outputid = URIRef('http://OUTPUTID-' + line[(config['Generic']['objectId'])] + '-' + line[
-					(config['PublicService']['identifier'])])
+			if Output in keys:
+				outputid = URIRef('http://OUTPUTID-' + line[objectId] + '-' + line[identifier])
 				g.add((psid, cpsvap.Produces, outputid))
 				g.add((outputid, RDF.type, cpsvap.output))
-				g.add((outputid, FOAF.page, Literal(line.get(config['Ouptut']['output']))))  # not sure about p
+				g.add((outputid, FOAF.page, Literal(line.get(Output))))  # not sure about p
 
 			""" Channel class """
 			""" ------------- """
 
 			# Check for a Telephone key
-			if (config['PublicService']['telephone']) in keys:
+			if PSTelephone in keys:
 				# Create a hasChannel triple
 				g.add((psid, cpsvap.Channel, chan.Telephone))
 
 			# Check for an E-mail
-			if (config['PublicService']['email']) in keys:
+			if PSEmail in keys:
 				# Create a hasChannel triple
 				# "E-mail" is not accepted as an RDFLib object because of the hyphen so we're constructing a string
 				mail = URIRef("http://data.europa.eu/cv/Agent#E-mail")
@@ -226,8 +249,8 @@ def json_to_rdf(json):
 			""" ------------ """
 
 			# Name of the owner
-			if (config['Person']['person']) in keys:
-				g.add((psid, agent.Name, Literal(line.get(config['Person']['person']))))
+			if Person in keys:
+				g.add((psid, agent.Name, Literal(line.get(Person))))
 
 			""" Cost class """
 			""" ---------- """
@@ -235,9 +258,12 @@ def json_to_rdf(json):
 			# it can be mapped to namespace sdmx:"http://purl.org/linked-data/sdmx/2009/dimension”
 			g.add((psid, sdmx.Currency, Literal('EUR')))
 
-		# Cleanup the graph instance
-		g.close()
+	# Cleanup the graph instance
+	g.close()
 
+	# Print statistics
+	print(colored(u'{0:s} - JSON count: {1:d}, Execution time: {2:.2f} seconds', 'green').format(poolURI[c], j, (
+		time.time() - start_time)))
 
 # Set counter
 c = 0
@@ -246,11 +272,12 @@ c = 0
 while c < len(poolURI):
 	try:
 		# Fetch the JSON data
-		response = requests.get(poolURI[c]).json()
+		response = requests.get(poolURI[c], headers=headers).json()
 
 		# Process the response
 		json_to_rdf(response)
 
+	# print(g.serialize(format='nt'))
 	except ValueError as e:
 		print(e)
 
@@ -258,7 +285,11 @@ while c < len(poolURI):
 	c += 1
 
 # Iterate over triples in store and print them out.
-print("--- printing raw triples ---")
+print('\r\nNumber of triples added: %d' % len(g))
+try:
+	for s, p, o in g:
+		print(s, p, o)
+except:
+	pass
 
-for s, p, o in g:
-	print(s, p, o)
+print(colored('Total execution time: %s seconds', 'yellow') % (time.time() - start_time))
