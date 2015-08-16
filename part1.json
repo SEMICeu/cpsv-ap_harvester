@@ -1,0 +1,530 @@
+[  
+   {  
+      "createdAt":"15-06-2015",
+      "objectId":"d0987ad0-9b61-412b-ad0d-2890a7b5fcda",
+      "updatedAt":"15-06-2015",
+      "keel":"et",
+      "nimetus":"L\u00f5hkematerjali k\u00e4itlemisloa taotluse l\u00e4bivaatamine",
+      "eluarisyndmus":"",
+      "identifikaator":"TJA-007",
+      "kirjeldus":"Riigil\u00f5ivu laekumist. Moodustatakse ja kutsutakse kokku valitsusasutuste esindajatest koosnev komisjon. Hinnatakse ettev\u00f5tte tehnilisi v\u00f5imalusi, kas isikutele ei ole vastuolu seoses varasemate karistusega ning kas isik vastab n\u00f5uete",
+      "sihtgrupp":"Ettev\u00f5tja",
+      "tegevusvaldkond":"Load ja registreeringud",
+      "teenusetyyp":"Diplom\/Tunnistus\/Luba\/ Setifikaat\/Koosk\u00f5lastus",
+      "ministeerium":"Majandus- ja Kommunikatsiooniministeeriumi",
+      "allasutus":"Tehnilise J\u00e4relevalve Amet",
+      "osakondyksus":"Kemikaali ja m\u00e4et\u00f6\u00f6de osakond",
+      "omanikunimi":"",
+      "omanikuamet":"",
+      "omanikutelefon":"",
+      "omanikuemail":"",
+      "teenuste_kanalid_ja_moodikud":{  
+         "empty":{  
+            "E-iseteenindus":{  
+               "link":"https:\/\/emoodul.tja.ee\/web\/",
+               "osutamistearv":"0",
+               "rahulolu":"0",
+               "halduskulu":"0",
+               "ajakulu":"0"
+            }
+         }
+      },
+      "makse":"Riigil\u00f5iv, riigimaks (tollimaks)",
+      "konfinfo":"0",
+      "eeltingimus":"",
+      "jareltingimus":"Fishing Permit",
+      "seotuddokumendid":"Fishing Permit",
+      "seisund":"Aktiivne",
+      "muudatustvajav":"",
+      "aegumisekpv":"",
+      "funktsioon":"",
+      "veebiaadress":"https:\/\/emoodul.tja.ee\/web\/",
+      "regulatsioon":[  
+         "https:\/\/www.riigiteataja.ee\/akt\/112072014071"
+      ]
+   },
+   {  
+      "createdAt":"15-06-2015",
+      "objectId":"41954101-0b7f-4cf5-93fc-9fe0a63e6ae3",
+      "updatedAt":"15-06-2015",
+      "keel":"et",
+      "nimetus":"Ajutiselt Eestis tegutsemisest teatamine",
+      "eluarisyndmus":"",
+      "identifikaator":"TJA-008",
+      "kirjeldus":"LMS \u00a7 14 lg 4 - Ajutiselt v\u00f5ib Eestis l\u00f5hkematerjali tegevusloata kasutada isik, kellel on m\u00f5ne teise Euroopa Majanduspiirkonna lepinguriigi v\u00e4ljastatud vastavasisuline tegevusluba.",
+      "sihtgrupp":"Ettev\u00f5tja",
+      "tegevusvaldkond":"Load ja registreeringud",
+      "teenusetyyp":"Diplom\/Tunnistus\/Luba\/ Setifikaat\/Koosk\u00f5lastus",
+      "ministeerium":"Majandus- ja Kommunikatsiooniministeeriumi",
+      "allasutus":"Tehnilise J\u00e4relevalve Amet",
+      "osakondyksus":"Kemikaali ja m\u00e4et\u00f6\u00f6de osakond",
+      "omanikunimi":"",
+      "omanikuamet":"",
+      "omanikutelefon":"",
+      "omanikuemail":"",
+      "teenuste_kanalid_ja_moodikud":{  
+         "empty":{  
+            "E-post":{  
+               "link":"http:\/\/www.tja.ee\/eestis-ajutiselt-tegutsevad-valisettevotted-2\/",
+               "osutamistearv":"0",
+               "rahulolu":"0",
+               "halduskulu":"0",
+               "ajakulu":"0"
+            }
+         }
+      },
+      "makse":"Riigil\u00f5iv, riigimaks (tollimaks)",
+      "konfinfo":"0",
+      "eeltingimus":"",
+      "jareltingimus":"",
+      "seotuddokumendid":"",
+      "seisund":"Aktiivne",
+      "muudatustvajav":"",
+      "aegumisekpv":"",
+      "funktsioon":"",
+      "veebiaadress":"http:\/\/www.tja.ee\/eestis-ajutiselt-tegutsevad-valisettevotted-2\/",
+      "regulatsioon":[  
+         "https:\/\/www.riigiteataja.ee\/akt\/112072014071"
+      ]
+   },
+   {  
+      "createdAt":"15-06-2015",
+      "objectId":"d1e71dfa-5139-4314-a961-06dee32dde53",
+      "updatedAt":"15-06-2015",
+      "keel":"et",
+      "nimetus":"L\u00f5hkematerjalitehase k\u00e4itamisloa taotluse l\u00e4bivaatamine",
+      "eluarisyndmus":"",
+      "identifikaator":"TJA-009",
+      "kirjeldus":"Viiakse l\u00e4bi kohapealne kontroll hinnates muuhulgas tehase ja selles t\u00f6\u00f6tavate inimeste ja k\u00e4ideldavate ohtlike ainete ohutuse ja julgeoleku tagamiseks rakendatavate abin\u00f5ude piisavust.",
+      "sihtgrupp":"Ettev\u00f5tja",
+      "tegevusvaldkond":"Load ja registreeringud",
+      "teenusetyyp":"Diplom\/Tunnistus\/Luba\/ Setifikaat\/Koosk\u00f5lastus",
+      "ministeerium":"Majandus- ja Kommunikatsiooniministeeriumi",
+      "allasutus":"Tehnilise J\u00e4relevalve Amet",
+      "osakondyksus":"Kemikaali ja m\u00e4et\u00f6\u00f6de osakond",
+      "omanikunimi":"",
+      "omanikuamet":"",
+      "omanikutelefon":"",
+      "omanikuemail":"",
+      "teenuste_kanalid_ja_moodikud":{  
+         "empty":{  
+            "E-post":{  
+               "link":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+               "osutamistearv":"0",
+               "rahulolu":"0",
+               "halduskulu":"0",
+               "ajakulu":"0"
+            }
+         }
+      },
+      "makse":"Riigil\u00f5iv, riigimaks (tollimaks)",
+      "konfinfo":"0",
+      "eeltingimus":"",
+      "jareltingimus":"",
+      "seotuddokumendid":"",
+      "seisund":"Aktiivne",
+      "muudatustvajav":"",
+      "aegumisekpv":"",
+      "funktsioon":"",
+      "veebiaadress":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+      "regulatsioon":[  
+         "https:\/\/www.riigiteataja.ee\/akt\/112072014071"
+      ]
+   },
+   {  
+      "createdAt":"15-06-2015",
+      "objectId":"645ea266-441a-41a0-a7c1-07616e48a308",
+      "updatedAt":"15-06-2015",
+      "keel":"et",
+      "nimetus":"L\u00f5hkematerjalilao k\u00e4itamisloa taotluse l\u00e4bivaatamine",
+      "eluarisyndmus":"",
+      "identifikaator":"TJA-010",
+      "kirjeldus":"Viiakse l\u00e4bi kohapealne kontroll hinnates muuhulgas lao ja selles t\u00f6\u00f6tavate inimeste ja ladustatavate ohtlike ainete ohutuse ja julgeoleku tagamiseks rakendatavate abin\u00f5ude piisavust.",
+      "sihtgrupp":"Ettev\u00f5tja",
+      "tegevusvaldkond":"Load ja registreeringud",
+      "teenusetyyp":"Diplom\/Tunnistus\/Luba\/ Setifikaat\/Koosk\u00f5lastus",
+      "ministeerium":"Majandus- ja Kommunikatsiooniministeeriumi",
+      "allasutus":"Tehnilise J\u00e4relevalve Amet",
+      "osakondyksus":"Kemikaali ja m\u00e4et\u00f6\u00f6de osakond",
+      "omanikunimi":"",
+      "omanikuamet":"",
+      "omanikutelefon":"",
+      "omanikuemail":"",
+      "teenuste_kanalid_ja_moodikud":{  
+         "empty":{  
+            "E-post":{  
+               "link":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+               "osutamistearv":"0",
+               "rahulolu":"0",
+               "halduskulu":"0",
+               "ajakulu":"0"
+            }
+         }
+      },
+      "makse":"Riigil\u00f5iv, riigimaks (tollimaks)",
+      "konfinfo":"0",
+      "eeltingimus":"",
+      "jareltingimus":"",
+      "seotuddokumendid":"Fishing Permit",
+      "seisund":"Aktiivne",
+      "muudatustvajav":"",
+      "aegumisekpv":"",
+      "funktsioon":"",
+      "veebiaadress":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+      "regulatsioon":[  
+         "https:\/\/www.riigiteataja.ee\/akt\/112072014071"
+      ]
+   },
+   {  
+      "createdAt":"15-06-2015",
+      "objectId":"45c43ab9-0ffc-4ac0-891a-e272f3389260",
+      "updatedAt":"15-06-2015",
+      "keel":"et",
+      "nimetus":"V\u00e4ljaspool l\u00f5hkematerjaliladu l\u00f5hkematerjali hoidmise loa taotluse l\u00e4bivaatamine",
+      "eluarisyndmus":"",
+      "identifikaator":"TJA-011",
+      "kirjeldus":"Hinnatakse l\u00f5hkematerjali hoidmise korda ning kontrollitakse hoidla kirjeldust ja asukoha andmeid ning hoiustatava l\u00f5hkematerjali nimetusi ja kogust. Lisaks kontrollitakse ohutute kauguste m\u00e4\u00e4ramist ja vajadusel tehakse kontrollarvutused.",
+      "sihtgrupp":"Ettev\u00f5tja",
+      "tegevusvaldkond":"Load ja registreeringud",
+      "teenusetyyp":"Diplom\/Tunnistus\/Luba\/ Setifikaat\/Koosk\u00f5lastus",
+      "ministeerium":"Majandus- ja Kommunikatsiooniministeeriumi",
+      "allasutus":"Tehnilise J\u00e4relevalve Amet",
+      "osakondyksus":"Kemikaali ja m\u00e4et\u00f6\u00f6de osakond",
+      "omanikunimi":"",
+      "omanikuamet":"",
+      "omanikutelefon":"",
+      "omanikuemail":"",
+      "teenuste_kanalid_ja_moodikud":{  
+         "empty":{  
+            "E-post":{  
+               "link":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+               "osutamistearv":"0",
+               "rahulolu":"0",
+               "halduskulu":"0",
+               "ajakulu":"0"
+            }
+         }
+      },
+      "makse":"Riigil\u00f5iv, riigimaks (tollimaks)",
+      "konfinfo":"0",
+      "eeltingimus":"",
+      "jareltingimus":"",
+      "seotuddokumendid":"",
+      "seisund":"Aktiivne",
+      "muudatustvajav":"",
+      "aegumisekpv":"",
+      "funktsioon":"",
+      "veebiaadress":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+      "regulatsioon":[  
+         "https:\/\/www.riigiteataja.ee\/akt\/112072014071"
+      ]
+   },
+   {  
+      "createdAt":"15-06-2015",
+      "objectId":"d859dfd0-7fd7-4c2d-8af0-f7eebd7681a6",
+      "updatedAt":"15-06-2015",
+      "keel":"et",
+      "nimetus":"Enamohtliku l\u00f5hket\u00f6\u00f6 loa taotluse l\u00e4bivaatamine",
+      "eluarisyndmus":"",
+      "identifikaator":"TJA-012",
+      "kirjeldus":" Kontrollitakse l\u00f5hket\u00f6\u00f6de projekti n\u00f5uetekohasust ning tehakse ohuala ja ohutute laengute m\u00e4\u00e4ramise kohta kontrollarvutused.",
+      "sihtgrupp":"Ettev\u00f5tja",
+      "tegevusvaldkond":"Load ja registreeringud",
+      "teenusetyyp":"Diplom\/Tunnistus\/Luba\/ Setifikaat\/Koosk\u00f5lastus",
+      "ministeerium":"Majandus- ja Kommunikatsiooniministeeriumi",
+      "allasutus":"Tehnilise J\u00e4relevalve Amet",
+      "osakondyksus":"Kemikaali ja m\u00e4et\u00f6\u00f6de osakond",
+      "omanikunimi":"",
+      "omanikuamet":"",
+      "omanikutelefon":"",
+      "omanikuemail":"",
+      "teenuste_kanalid_ja_moodikud":{  
+         "empty":{  
+            "E-post":{  
+               "link":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+               "osutamistearv":"0",
+               "rahulolu":"0",
+               "halduskulu":"0",
+               "ajakulu":"0"
+            }
+         }
+      },
+      "makse":"Riigil\u00f5iv, riigimaks (tollimaks)",
+      "konfinfo":"0",
+      "eeltingimus":"",
+      "jareltingimus":"",
+      "seotuddokumendid":"",
+      "seisund":"Aktiivne",
+      "muudatustvajav":"",
+      "aegumisekpv":"",
+      "funktsioon":"",
+      "veebiaadress":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+      "regulatsioon":[  
+         "https:\/\/www.riigiteataja.ee\/akt\/112072014071"
+      ]
+   },
+   {  
+      "createdAt":"15-06-2015",
+      "objectId":"cb53297e-285e-4ef0-93c8-4cc69fddf366",
+      "updatedAt":"15-06-2015",
+      "keel":"et",
+      "nimetus":"Enamohtliku l\u00f5hket\u00f6\u00f6 loa pikendamise taotluse l\u00e4bivaatamine",
+      "eluarisyndmus":"",
+      "identifikaator":"TJA-013",
+      "kirjeldus":"Kontrollitakse kas l\u00f5hket\u00f6\u00f6 ohuala piirid ja l\u00f5hket\u00f6\u00f6 tehnilised tingimused ei ole muutunud.",
+      "sihtgrupp":"Ettev\u00f5tja",
+      "tegevusvaldkond":"Load ja registreeringud",
+      "teenusetyyp":"Diplom\/Tunnistus\/Luba\/ Setifikaat\/Koosk\u00f5lastus",
+      "ministeerium":"Majandus- ja Kommunikatsiooniministeeriumi",
+      "allasutus":"Tehnilise J\u00e4relevalve Amet",
+      "osakondyksus":"",
+      "omanikunimi":"",
+      "omanikuamet":"",
+      "omanikutelefon":"",
+      "omanikuemail":"",
+      "teenuste_kanalid_ja_moodikud":{  
+         "empty":{  
+            "E-post":{  
+               "link":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+               "osutamistearv":"0",
+               "rahulolu":"0",
+               "halduskulu":"0",
+               "ajakulu":"0"
+            }
+         }
+      },
+      "makse":"Riigil\u00f5iv, riigimaks (tollimaks)",
+      "konfinfo":"0",
+      "eeltingimus":"",
+      "jareltingimus":"",
+      "seotuddokumendid":"",
+      "seisund":"Aktiivne",
+      "muudatustvajav":"",
+      "aegumisekpv":"",
+      "funktsioon":"",
+      "veebiaadress":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+      "regulatsioon":[  
+         "https:\/\/www.riigiteataja.ee\/akt\/112072014071"
+      ]
+   },
+   {  
+      "createdAt":"15-06-2015",
+      "objectId":"af1ba940-beb7-4eb7-bad5-1587cbfbf293",
+      "updatedAt":"15-06-2015",
+      "keel":"et",
+      "nimetus":"L\u00f5hkematerjali sisseveo loa taotluse l\u00e4bivaatamine",
+      "eluarisyndmus":"",
+      "identifikaator":"TJA-014",
+      "kirjeldus":"Teavitame ja anname v\u00f5imaluse Kaitsepolitseil ja Politsei- ja Piirivalveametil esitada oma arvamus taotluse kohta. Kontrollime operaatorite, l\u00f5hkematerjali, veotingimuste ja sihtkoha valmisoleku kohta esitatud andmete \u00f5igsust.",
+      "sihtgrupp":"Ettev\u00f5tja",
+      "tegevusvaldkond":"Load ja registreeringud",
+      "teenusetyyp":"Diplom\/Tunnistus\/Luba\/ Setifikaat\/Koosk\u00f5lastus",
+      "ministeerium":"Majandus- ja Kommunikatsiooniministeeriumi",
+      "allasutus":"Tehnilise J\u00e4relevalve Amet",
+      "osakondyksus":"Kemikaali ja m\u00e4et\u00f6\u00f6de osakond",
+      "omanikunimi":"",
+      "omanikuamet":"",
+      "omanikutelefon":"",
+      "omanikuemail":"",
+      "teenuste_kanalid_ja_moodikud":{  
+         "empty":{  
+            "E-post":{  
+               "link":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+               "osutamistearv":"0",
+               "rahulolu":"0",
+               "halduskulu":"0",
+               "ajakulu":"0"
+            }
+         }
+      },
+      "makse":"Riigil\u00f5iv, riigimaks (tollimaks)",
+      "konfinfo":"0",
+      "eeltingimus":"",
+      "jareltingimus":"",
+      "seotuddokumendid":"",
+      "seisund":"Aktiivne",
+      "muudatustvajav":"",
+      "aegumisekpv":"",
+      "funktsioon":"",
+      "veebiaadress":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+      "regulatsioon":[  
+         "https:\/\/www.riigiteataja.ee\/akt\/112072014071"
+      ]
+   },
+   {  
+      "createdAt":"15-06-2015",
+      "objectId":"59cbc5f8-91a9-4743-ba1a-7542e839019c",
+      "updatedAt":"15-06-2015",
+      "keel":"et",
+      "nimetus":"L\u00f5hkematerjali v\u00e4ljaveo loa taotluse l\u00e4bivaatamine",
+      "eluarisyndmus":"",
+      "identifikaator":"TJA-015",
+      "kirjeldus":"Teavitame ja anname v\u00f5imaluse Kaitsepolitseil ja Politsei- ja Piirivalveametil esitada oma arvamus taotluse kohta. Kontrollime operaatorite, l\u00f5hkematerjali, veotingimuste ja sihtkoha valmisoleku kohta esitatud andmete \u00f5igsust.",
+      "sihtgrupp":"Ettev\u00f5tja",
+      "tegevusvaldkond":"Load ja registreeringud",
+      "teenusetyyp":"Diplom\/Tunnistus\/Luba\/ Setifikaat\/Koosk\u00f5lastus",
+      "ministeerium":"Majandus- ja Kommunikatsiooniministeeriumi",
+      "allasutus":"Tehnilise J\u00e4relevalve Amet",
+      "osakondyksus":"Kemikaali ja m\u00e4et\u00f6\u00f6de osakond",
+      "omanikunimi":"",
+      "omanikuamet":"",
+      "omanikutelefon":"",
+      "omanikuemail":"",
+      "teenuste_kanalid_ja_moodikud":{  
+         "empty":{  
+            "E-post":{  
+               "link":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+               "osutamistearv":"0",
+               "rahulolu":"0",
+               "halduskulu":"0",
+               "ajakulu":"0"
+            }
+         }
+      },
+      "makse":"Riigil\u00f5iv, riigimaks (tollimaks)",
+      "konfinfo":"0",
+      "eeltingimus":"",
+      "jareltingimus":"",
+      "seotuddokumendid":"",
+      "seisund":"Aktiivne",
+      "muudatustvajav":"",
+      "aegumisekpv":"",
+      "funktsioon":"",
+      "veebiaadress":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+      "regulatsioon":[  
+         "https:\/\/www.riigiteataja.ee\/akt\/112072014071"
+      ]
+   },
+   {  
+      "createdAt":"15-06-2015",
+      "objectId":"729c49db-126f-4122-bb8f-b18cbe6d692e",
+      "updatedAt":"15-06-2015",
+      "keel":"et",
+      "nimetus":"L\u00f5hkematerjali veoloa taotluse l\u00e4bivaatamine",
+      "eluarisyndmus":"",
+      "identifikaator":"TJA-016",
+      "kirjeldus":"Kontrollime operaatorite, l\u00f5hkematerjali, veotingimuste ja sihtkoha valmisoleku kohta esitatud andmete \u00f5igsust. V\u00e4ljastatakse luba.",
+      "sihtgrupp":"Ettev\u00f5tja",
+      "tegevusvaldkond":"Load ja registreeringud",
+      "teenusetyyp":"Diplom\/Tunnistus\/Luba\/ Setifikaat\/Koosk\u00f5lastus",
+      "ministeerium":"Majandus- ja Kommunikatsiooniministeeriumi",
+      "allasutus":"Tehnilise J\u00e4relevalve Amet",
+      "osakondyksus":"Kemikaali ja m\u00e4et\u00f6\u00f6de osakond",
+      "omanikunimi":"",
+      "omanikuamet":"",
+      "omanikutelefon":"",
+      "omanikuemail":"",
+      "teenuste_kanalid_ja_moodikud":{  
+         "empty":{  
+            "E-post":{  
+               "link":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+               "osutamistearv":"0",
+               "rahulolu":"0",
+               "halduskulu":"0",
+               "ajakulu":"0"
+            }
+         }
+      },
+      "makse":"Riigil\u00f5iv, riigimaks (tollimaks)",
+      "konfinfo":"0",
+      "eeltingimus":"",
+      "jareltingimus":"",
+      "seotuddokumendid":"",
+      "seisund":"Aktiivne",
+      "muudatustvajav":"",
+      "aegumisekpv":"",
+      "funktsioon":"",
+      "veebiaadress":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+      "regulatsioon":[  
+         "https:\/\/www.riigiteataja.ee\/akt\/112072014071"
+      ]
+   },
+   {  
+      "createdAt":"15-06-2015",
+      "objectId":"fc9e7c95-63c4-436e-aa97-d7bdad35448b",
+      "updatedAt":"15-06-2015",
+      "keel":"et",
+      "nimetus":"L\u00f5hkematerjali veoloa koosk\u00f5lastamine",
+      "eluarisyndmus":"",
+      "identifikaator":"TJA-017",
+      "kirjeldus":"Kontrollime operaatorite, l\u00f5hkematerjali, veotingimuste ja sihtkoha valmisoleku kohta esitatud andmete \u00f5igsust. Koosk\u00f5lastame loa.",
+      "sihtgrupp":"Ettev\u00f5tja",
+      "tegevusvaldkond":"Load ja registreeringud",
+      "teenusetyyp":"Diplom\/Tunnistus\/Luba\/ Setifikaat\/Koosk\u00f5lastus",
+      "ministeerium":"Majandus- ja Kommunikatsiooniministeeriumi",
+      "allasutus":"Tehnilise J\u00e4relevalve Amet",
+      "osakondyksus":"Kemikaali ja m\u00e4et\u00f6\u00f6de osakond",
+      "omanikunimi":"",
+      "omanikuamet":"",
+      "omanikutelefon":"",
+      "omanikuemail":"",
+      "teenuste_kanalid_ja_moodikud":{  
+         "empty":{  
+            "E-post":{  
+               "link":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+               "osutamistearv":"0",
+               "rahulolu":"0",
+               "halduskulu":"0",
+               "ajakulu":"0"
+            }
+         }
+      },
+      "makse":"Riigil\u00f5iv, riigimaks (tollimaks)",
+      "konfinfo":"0",
+      "eeltingimus":"",
+      "jareltingimus":"",
+      "seotuddokumendid":"",
+      "seisund":"Aktiivne",
+      "muudatustvajav":"",
+      "aegumisekpv":"",
+      "funktsioon":"",
+      "veebiaadress":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+      "regulatsioon":[  
+         "https:\/\/www.riigiteataja.ee\/akt\/112072014071"
+      ]
+   },
+   {  
+      "createdAt":"15-06-2015",
+      "objectId":"77f15f0e-8599-46bd-9505-65984580c8a7",
+      "updatedAt":"15-06-2015",
+      "keel":"et",
+      "nimetus":"P\u00e4devustunnistuse taotluse l\u00e4bivaatamine",
+      "eluarisyndmus":"",
+      "identifikaator":"TJA-018",
+      "kirjeldus":"Kontrollime vanust, erialast ettevalmistust, t\u00f6\u00f6kogemust, varasemaid karistusi ning terviset\u00f5endi olemasolu, kas isik on sobiv t\u00f6\u00f6tamaks soovitud ametikohal. ",
+      "sihtgrupp":"Ettev\u00f5tja",
+      "tegevusvaldkond":"Load ja registreeringud",
+      "teenusetyyp":"Diplom\/Tunnistus\/Luba\/ Setifikaat\/Koosk\u00f5lastus",
+      "ministeerium":"Majandus- ja Kommunikatsiooniministeeriumi",
+      "allasutus":"Tehnilise J\u00e4relevalve Amet",
+      "osakondyksus":"Kemikaali ja m\u00e4et\u00f6\u00f6de osakond",
+      "omanikunimi":"",
+      "omanikuamet":"",
+      "omanikutelefon":"",
+      "omanikuemail":"",
+      "teenuste_kanalid_ja_moodikud":{  
+         "empty":{  
+            "E-post":{  
+               "link":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+               "osutamistearv":"0",
+               "rahulolu":"0",
+               "halduskulu":"0",
+               "ajakulu":"0"
+            }
+         }
+      },
+      "makse":"Riigil\u00f5iv, riigimaks (tollimaks)",
+      "konfinfo":"0",
+      "eeltingimus":"",
+      "jareltingimus":"",
+      "seotuddokumendid":"",
+      "seisund":"Aktiivne",
+      "muudatustvajav":"",
+      "aegumisekpv":"",
+      "funktsioon":"",
+      "veebiaadress":"http:\/\/www.tja.ee\/riigiloiv-8\/",
+      "regulatsioon":[  
+         "https:\/\/www.riigiteataja.ee\/akt\/112072014071"
+      ]
+   }
+]
