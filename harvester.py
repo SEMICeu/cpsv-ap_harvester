@@ -70,7 +70,7 @@ if cleanGraph == 1:
 # Creating a namespace for Public Service (PS)
 # FOAF and RDF are predefined RDFLib namespace, no need to create a new one
 cpsvap = Namespace("http://data.europa.eu/cv/")
-dct = Namespace("http://purl.org/dc/terms/")
+dc = Namespace("http://purl.org/dc/terms/")
 adms = Namespace("http://www.w3.org/ns/adms#")
 lang = Namespace('http://publications.europa.eu/resource/authority/language/')
 
@@ -102,7 +102,7 @@ def json_to_rdf(json):
 			# Name
 			if PSName in keys:
 				# Not sure of the predicate. Could also be dct:title
-				g.add([psid, dct.name, Literal(line.get(identifier))])
+				g.add([psid, dc.name, Literal(line.get(identifier))])
 
 			# Type - follows COFOG taxonomy: http://unstats.un.org/unsd/cr/registry/regcst.asp?Cl=4
 			g.add((psid, RDF.type, cpsvap.PublicService))  # indicates the "term" type
@@ -113,7 +113,7 @@ def json_to_rdf(json):
 
 			# Description
 			if PSDescription in keys:
-				g.add((psid, dct.description, Literal(line.get(PSDescription))))
+				g.add((psid, dc.description, Literal(line.get(PSDescription))))
 
 			# Identifier
 			if identifier in keys:
@@ -125,11 +125,11 @@ def json_to_rdf(json):
 				if line.get(PSLanguage) in ('ET', 'et'):  # ET = Estonia
 
 					# The object is a literal but I would prefer http://publications.europa.eu/resource/authority/language/ET
-					g.add((psid, dct.language, lang.ET))
+					g.add((psid, dc.language, lang.ET))
 
 				else:
 					# Switching to the literal from the source data
-					g.add((psid, dct.language, Literal(line.get(PSLanguage))))
+					g.add((psid, dc.language, Literal(line.get(PSLanguage))))
 
 			# Homepage
 			# Create a triple for the homepage
@@ -184,7 +184,7 @@ def json_to_rdf(json):
 				g.add((psid, chan.hasCost, costid))
 
 				g.add((costid, RDF.type, cpsvap.type))
-				g.add((costid, dct.description, Literal(line.get(PSCost))))
+				g.add((costid, dc.description, Literal(line.get(PSCost))))
 
 			""" Business Event class """
 			""" -------------------- """
@@ -192,11 +192,11 @@ def json_to_rdf(json):
 			# Build the ID URI as source data does not come with a term related to an ID
 			beid = URIRef('http://BEID-' + line[objectId] + '-' + line[
 				identifier])
-			g.add((psid, dct.isPartOf, beid))
+			g.add((psid, dc.isPartOf, beid))
 
 			# Name
 			if BEName in keys:
-				g.add((beid, dct.title, Literal(line.get(BEName))))
+				g.add((beid, dc.title, Literal(line.get(BEName))))
 
 			# Language
 			if PSLanguage in keys:
@@ -204,11 +204,11 @@ def json_to_rdf(json):
 				if line.get(PSLanguage) in ('ET', 'et'):  # ET = Estonia
 
 					# The object is a literal but a URI is prefered: http://publications.europa.eu/resource/authority/language/ET
-					g.add((beid, dct.language, lang.ET))
+					g.add((beid, dc.language, lang.ET))
 
 				else:
 					# Switching to the literal from the source data
-					g.add((beid, dct.language, Literal(line.get(PSLanguage))))
+					g.add((beid, dc.language, Literal(line.get(PSLanguage))))
 
 			""" Input class """
 			""" ----------- """
