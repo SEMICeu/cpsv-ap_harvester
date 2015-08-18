@@ -103,7 +103,7 @@ def json_to_rdf(json):
             # Name
             if PSName in keys:
                 # Not sure of the predicate. Could also be dct:title
-                g.add([psid, dc.name, Literal(line.get(identifier))])
+                g.add([psid, dc.name, Literal(line.get(PSName))])
 
             # Type - follows COFOG taxonomy: http://unstats.un.org/unsd/cr/registry/regcst.asp?Cl=4
             g.add((psid, RDF.type, cpsvap.PublicService))  # indicates the "term" type
@@ -265,7 +265,7 @@ def json_to_rdf(json):
     g.close()
 
     # Print statistics
-    print(colored(u'{0:s} - JSON count: {1:d}, Execution time: {2:.2f} seconds', 'green').format(poolURI[c], j, (
+    print(colored(u'{0:s} - JSON string count: {1:d}, Execution time: {2:.2f} seconds', 'green').format(poolURI[c], j, (
         time.time() - start_time)))
 
 
@@ -290,10 +290,8 @@ while c < len(poolURI):
 
 # Iterate over triples in store and print them out.
 print('\r\nNumber of triples added: %d' % len(g))
-try:
-    for s, p, o in g:
-        print(s, p, o)
-except:
-    pass
+
+for s, p, o in g:
+    print(s, p, o)
 
 print(colored('Total execution time: %s seconds', 'yellow') % (time.time() - start_time))
