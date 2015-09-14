@@ -101,25 +101,17 @@ def json_to_rdf(urljson, json):
             #psid = URIRef('http://PSID-' + line[objectId] + '-' + line[identifier])
             psid = URIRef(url + '/ps/' + line[identifier])
 
+            # Type - follows COFOG taxonomy: http://unstats.un.org/unsd/cr/registry/regcst.asp?Cl=4
+            g.add((psid, RDF.type, cpsvap.PublicService))  # indicates the "term" type
+
             # Name
             if PSName in keys:
                 # Not sure of the predicate. Could also be dct:title
-                g.add([psid, dct.name, Literal(line.get(PSName))])
-
-            # Type - follows COFOG taxonomy: http://unstats.un.org/unsd/cr/registry/regcst.asp?Cl=4
-            g.add((psid, RDF.type, cpsvap.PublicService))  # indicates the "term" type
-            if PSType in keys:
-                # indicates the kind of type
-                # example: public service is a type. Waste management is the kind of service for the type
-                g.add((psid, cpsvap.type, Literal(line.get(PSType))))
+                g.add([psid, dct.title, Literal(line.get(PSName))])
 
             # Description
             if PSDescription in keys:
                 g.add((psid, dct.description, Literal(line.get(PSDescription))))
-
-            # Identifier
-            #if identifier in keys:
-            #   g.add((psid, adms.Identifier, Literal(line.get(identifier))))
 
             # Language
             if PSLanguage in keys:
@@ -134,6 +126,21 @@ def json_to_rdf(urljson, json):
                     # Switching to the literal from the source data
                     g.add((psid, dct.language, Literal(line.get(PSLanguage))))
 
+            # Field of activity
+            if PSSector in keys:
+                g.add([psid, cpsvap.sector, Literal(line.get(PSSector))])
+
+            if PSType in keys:
+                # indicates the kind of type
+                # example: public service is a type. Waste management is the kind of service for the type
+                g.add((psid, dct.type, Literal(line.get(PSType))))
+
+            # Identifier
+            #if identifier in keys:
+            #   g.add((psid, adms.Identifier, Literal(line.get(identifier))))
+
+
+
             # Homepage
             # Create a triple for the homepage
             if PSHomepage in keys:
@@ -142,9 +149,6 @@ def json_to_rdf(urljson, json):
                 else:
                     g.add((psid, FOAF.homepage, URIRef(line.get(PSHomepage))))
 
-            # Field of activity
-            if PSSector in keys:
-                g.add([psid, cpsvap.sector, Literal(line.get(PSSector))])
 
             # Ministry
             if ministry in keys:
@@ -184,9 +188,9 @@ def json_to_rdf(urljson, json):
                 # Build and add the Cost ID URI
                 costid = URIRef(url + '/cost/' + line[identifier])
                 #costid = URIRef('http://COSTID-' + line[objectId] + '-' + line[identifier])
-                g.add((psid, chan.hasCost, costid))
+                g.add((psid, cpsvap.hasCost, costid))
 
-                g.add((costid, RDF.type, cpsvap.type))
+                g.add((costid, RDF.type, cpsvap.Cost))
                 g.add((costid, dct.description, Literal(line.get(PSCost))))
 
             """ Business Event class """
@@ -196,6 +200,7 @@ def json_to_rdf(urljson, json):
             beid = URIRef(url + '/be/' + line[identifier])
             #beid = URIRef('http://BEID-' + line[objectId] + '-' + line[identifier])
             g.add((psid, dct.isPartOf, beid))
+            g.add((beid, RDF.type, cpsvap.BusinessEvent))
 
             # Name
             if BEName in keys:
@@ -221,7 +226,7 @@ def json_to_rdf(urljson, json):
             if InputRelatedDocuments in keys:
                 inputid = URIRef(url + '/input/' + line[identifier])
                 #inputid = URIRef('http://INPUTID-' + line[objectId] + '-' + line[identifier])
-                g.add((psid, cpsvap.HasInput, inputid))
+                g.add((psid, cpsvap.hasInput, inputid))
                 g.add((inputid, RDF.type, cpsvap.Input))
                 g.add((inputid, FOAF.page, Literal(line.get(InputRelatedDocuments))))  # not sure about p
 
@@ -232,7 +237,7 @@ def json_to_rdf(urljson, json):
             if Output in keys:
                 outputid = URIRef(url + '/output/' + line[identifier])
                 #outputid = URIRef('http://OUTPUTID-' + line[objectId] + '-' + line[identifier])
-                g.add((psid, cpsvap.Produces, outputid))
+                g.add((psid, cpsvap.produces, outputid))
                 g.add((outputid, RDF.type, cpsvap.Output))
                 g.add((outputid, FOAF.page, Literal(line.get(Output))))  # not sure about p
 
@@ -242,14 +247,14 @@ def json_to_rdf(urljson, json):
             # Check for a Telephone key
             if PSTelephone in keys:
                 # Create a hasChannel triple
-                g.add((psid, cpsvap.Channel, chan.Telephone))
+                g.add((psid, cpsvap.hasChannel, chan.Telephone))
 
             # Check for an E-mail
             if PSEmail in keys:
                 # Create a hasChannel triple
                 # "E-mail" is not accepted as an RDFLib object because of the hyphen so we're constructing a string
                 mail = URIRef("http://data.europa.eu/cv/Agent#E-mail")
-                g.add((psid, cpsvap.Channel, mail))
+                g.add((psid, cpsvap.hasChannel, mail))
 
             """ Person class """
             """ ------------ """
