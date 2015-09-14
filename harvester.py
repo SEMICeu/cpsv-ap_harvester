@@ -198,7 +198,7 @@ def json_to_rdf(urljson, json):
 
             # Build the ID URI as source data does not come with a term related to an ID
             foid = URIRef(url + '/fo/' + line[identifier])
-            g.add((psid, cpsvap:hasCompetentAuthority, foid))
+            g.add((psid, cpsvap.hasCompetentAuthority, foid))
             g.add((foid, RDF.type, org.FormalOrganization))
 
             g.add((foid, dct.title, Literal(line.get(authority))))
