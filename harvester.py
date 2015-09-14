@@ -168,30 +168,17 @@ def json_to_rdf(urljson, json):
             #    g.add((psid, cpsvap.Channel, Literal(line.get(PSEmail))))
 
             # Administrative expenses
-            if expense in keys:
-                g.add((psid, cpsvap.CostIdentifier, Literal(line.get(expense))))
+            #if expense in keys:
+            #    g.add((psid, cpsvap.CostIdentifier, Literal(line.get(expense))))
 
             # Check for a homepage key to create has channel
-            if PSHomepage in keys:
-                # Create a hasChannel triple
-                g.add((psid, cpsvap.hasChannel, chan.Homepage))
+            #if PSHomepage in keys:
+            #    # Create a hasChannel triple
+            #    g.add((psid, cpsvap.hasChannel, chan.Homepage))
 
             # Prediction
             if prediction in keys:
                 g.add((psid, cpsvap.HasInput, Literal(line.get(prediction))))
-
-            """ Cost class """
-            """ -------------------- """
-
-            # Payment
-            if PSCost in keys:
-                # Build and add the Cost ID URI
-                costid = URIRef(url + '/cost/' + line[identifier])
-                #costid = URIRef('http://COSTID-' + line[objectId] + '-' + line[identifier])
-                g.add((psid, cpsvap.hasCost, costid))
-
-                g.add((costid, RDF.type, cpsvap.Cost))
-                g.add((costid, dct.description, Literal(line.get(PSCost))))
 
             """ Formal Organization class """
             """ -------------------- """
@@ -211,6 +198,21 @@ def json_to_rdf(urljson, json):
                 else:
                     g.add((foid, FOAF.homepage, URIRef(line.get(PSHomepage))))
 
+            """ Cost class """
+            """ -------------------- """
+
+            # Payment
+            if PSCost in keys:
+                # Build and add the Cost ID URI
+                costid = URIRef(url + '/cost/' + line[identifier])
+                #costid = URIRef('http://COSTID-' + line[objectId] + '-' + line[identifier])
+                g.add((psid, cpsvap.hasCost, costid))
+
+                g.add((costid, RDF.type, cpsvap.Cost))
+                g.add((costid, dct.description, Literal(line.get(PSCost))))
+                g.add((costid, cpsvap.monetary_value, Literal(line.get(expense), datatype=XSD.double)))
+                g.add((costid, cpsvap.currency, URIRef('http://publications.europa.eu/resource/authority/currency/EUR')))
+                g.add((costid, cpsvap.idDefinedBy, foid))
 
             """ Business Event class """
             """ -------------------- """
@@ -247,7 +249,7 @@ def json_to_rdf(urljson, json):
                 #inputid = URIRef('http://INPUTID-' + line[objectId] + '-' + line[identifier])
                 g.add((psid, cpsvap.hasInput, inputid))
                 g.add((inputid, RDF.type, cpsvap.Input))
-                g.add((inputid, FOAF.page, Literal(line.get(InputRelatedDocuments))))  # not sure about p
+                g.add((inputid, dct.title, Literal(line.get(prediction))))
 
             """ Output class """
             """ ------------ """
@@ -258,7 +260,7 @@ def json_to_rdf(urljson, json):
                 #outputid = URIRef('http://OUTPUTID-' + line[objectId] + '-' + line[identifier])
                 g.add((psid, cpsvap.produces, outputid))
                 g.add((outputid, RDF.type, cpsvap.Output))
-                g.add((outputid, FOAF.page, Literal(line.get(Output))))  # not sure about p
+                g.add((outputid, dct.title, Literal(line.get(Output))))
 
             """ Channel class """
             """ ------------- """
@@ -269,7 +271,7 @@ def json_to_rdf(urljson, json):
                 channeltelid = URIRef(url + '/channel/tel/' + line[identifier])
                 g.add((psid, cpsvap.hasChannel, channeltelid))
                 g.add((channeltelid, RDF.type, cpsvap.Channel))
-                g.add((channeltelid, dct.type, Literal("E-mail")))
+                g.add((channeltelid, dct.type, Literal("Telephone")))
                 g.add((channeltelid, cpsvap.ownedBy, psid))
 
             # Check for an E-mail
@@ -279,7 +281,7 @@ def json_to_rdf(urljson, json):
                 # "E-mail" is not accepted as an RDFLib object because of the hyphen so we're constructing a string
                 g.add((psid, cpsvap.hasChannel, channelemailid))
                 g.add((channelemailid, RDF.type, cpsvap.Channel))
-                g.add((channelemailid, dct.type, Literal("Telephone")))
+                g.add((channelemailid, dct.type, Literal("E-mail")))
                 g.add((channelemailid, cpsvap.ownedBy, psid))
 
             """ Person class """
@@ -288,12 +290,6 @@ def json_to_rdf(urljson, json):
             # Name of the owner
             if Person in keys:
                 g.add((psid, agent.Name, Literal(line.get(Person))))
-
-            """ Cost class """
-            """ ---------- """
-            # There is not key to be mapped but since the currency is in EUR,
-            # it can be mapped to namespace sdmx:"http://purl.org/linked-data/sdmx/2009/dimension”
-            g.add((psid, sdmx.Currency, Literal('EUR')))
 
     # Cleanup the graph instance
     g.close()
