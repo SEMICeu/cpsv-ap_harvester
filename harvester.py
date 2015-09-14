@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-__author__ = 'Steve Verschaeve, PwC EU Services'
-
 """
 Harvests a resource pool of JSON objects presented over HTTP and adds a semantic layer mapped to the CPSV-AP vocabulary
 and save to a triple store
 
 Python ver: 3.4
 """
+__author__ = 'Steve Verschaeve, PwC EU Services'
 
 import time
 
@@ -70,7 +69,7 @@ if cleanGraph == 1:
 # Creating a namespace for Public Service (PS)
 # FOAF and RDF are predefined RDFLib namespace, no need to create a new one
 cpsvap = Namespace("http://data.europa.eu/cv/")
-dc = Namespace("http://purl.org/dc/terms/")
+dct = Namespace("http://purl.org/dc/terms/")
 adms = Namespace("http://www.w3.org/ns/adms#")
 lang = Namespace('http://publications.europa.eu/resource/authority/language/')
 
@@ -84,7 +83,7 @@ sdmx = Namespace("http://purl.org/linked-data/sdmx/2009/dimension")
 
 # Build the RDF from the JSON source data
 # This function is to be called for each URL in the pool to harvest
-def json_to_rdf(json):
+def json_to_rdf(urljson, json):
     # Parse array of JSON objects line by line and count them (j)
     j = 0
     for line in json:
@@ -98,12 +97,14 @@ def json_to_rdf(json):
             """ -------------------- """
 
             # Build the ID URI as source data does not come with a term related to an ID
-            psid = URIRef('http://PSID-' + line[objectId] + '-' + line[identifier])
+            url = urljson.rpartition('/')[0]
+            #psid = URIRef('http://PSID-' + line[objectId] + '-' + line[identifier])
+            psid = URIRef(url + '/ps/' + line[identifier])
 
             # Name
             if PSName in keys:
                 # Not sure of the predicate. Could also be dct:title
-                g.add([psid, dc.name, Literal(line.get(PSName))])
+                g.add([psid, dct.name, Literal(line.get(PSName))])
 
             # Type - follows COFOG taxonomy: http://unstats.un.org/unsd/cr/registry/regcst.asp?Cl=4
             g.add((psid, RDF.type, cpsvap.PublicService))  # indicates the "term" type
@@ -114,7 +115,7 @@ def json_to_rdf(json):
 
             # Description
             if PSDescription in keys:
-                g.add((psid, dc.description, Literal(line.get(PSDescription))))
+                g.add((psid, dct.description, Literal(line.get(PSDescription))))
 
             # Identifier
             if identifier in keys:
@@ -127,11 +128,11 @@ def json_to_rdf(json):
 
                     # The object is a literal but I would prefer
                     # http://publications.europa.eu/resource/authority/language/ET
-                    g.add((psid, dc.language, lang.ET))
+                    g.add((psid, dct.language, lang.ET))
 
                 else:
                     # Switching to the literal from the source data
-                    g.add((psid, dc.language, Literal(line.get(PSLanguage))))
+                    g.add((psid, dct.language, Literal(line.get(PSLanguage))))
 
             # Homepage
             # Create a triple for the homepage
@@ -181,24 +182,26 @@ def json_to_rdf(json):
             # Payment
             if PSCost in keys:
                 # Build and add the Cost ID URI
-                costid = URIRef('http://COSTID-' + line[objectId] + '-' + line[
+                costid = URIRef(url + '/cost/' + line[identifier])
+                @costid = URIRef('http://COSTID-' + line[objectId] + '-' + line[
                     identifier])
                 g.add((psid, chan.hasCost, costid))
 
                 g.add((costid, RDF.type, cpsvap.type))
-                g.add((costid, dc.description, Literal(line.get(PSCost))))
+                g.add((costid, dct.description, Literal(line.get(PSCost))))
 
             """ Business Event class """
             """ -------------------- """
 
             # Build the ID URI as source data does not come with a term related to an ID
-            beid = URIRef('http://BEID-' + line[objectId] + '-' + line[
+            beid = URIRef(url + '/be/' + line[identifier])
+            #beid = URIRef('http://BEID-' + line[objectId] + '-' + line[
                 identifier])
-            g.add((psid, dc.isPartOf, beid))
+            g.add((psid, dct.isPartOf, beid))
 
             # Name
             if BEName in keys:
-                g.add((beid, dc.title, Literal(line.get(BEName))))
+                g.add((beid, dct.title, Literal(line.get(BEName))))
 
             # Language
             if PSLanguage in keys:
@@ -207,18 +210,19 @@ def json_to_rdf(json):
 
                     # The object is a literal but a URI is prefered:
                     # http://publications.europa.eu/resource/authority/language/ET
-                    g.add((beid, dc.language, lang.ET))
+                    g.add((beid, dct.language, lang.ET))
 
                 else:
                     # Switching to the literal from the source data
-                    g.add((beid, dc.language, Literal(line.get(PSLanguage))))
+                    g.add((beid, dct.language, Literal(line.get(PSLanguage))))
 
             """ Input class """
             """ ----------- """
 
             # Related documents to input
             if InputRelatedDocuments in keys:
-                inputid = URIRef('http://INPUTID-' + line[objectId] + '-' + line[identifier])
+                inputid = URIRef(url + '/input/' + line[identifier])
+                #inputid = URIRef('http://INPUTID-' + line[objectId] + '-' + line[identifier])
                 g.add((psid, cpsvap.HasInput, inputid))
                 g.add((inputid, RDF.type, cpsvap.input))
                 g.add((inputid, FOAF.page, Literal(line.get(InputRelatedDocuments))))  # not sure about p
@@ -228,7 +232,8 @@ def json_to_rdf(json):
 
             # Output
             if Output in keys:
-                outputid = URIRef('http://OUTPUTID-' + line[objectId] + '-' + line[identifier])
+                outputid = URIRef(url + '/output/' + line[identifier])
+                #outputid = URIRef('http://OUTPUTID-' + line[objectId] + '-' + line[identifier])
                 g.add((psid, cpsvap.Produces, outputid))
                 g.add((outputid, RDF.type, cpsvap.output))
                 g.add((outputid, FOAF.page, Literal(line.get(Output))))  # not sure about p
@@ -279,7 +284,7 @@ while c < len(poolURI):
         response = requests.get(poolURI[c], headers=headers).json()
 
         # Process the response
-        json_to_rdf(response)
+        json_to_rdf(poolURI[c], response)
 
     # print(g.serialize(format='nt'))
     except ValueError as e:
