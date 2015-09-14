@@ -284,13 +284,6 @@ def json_to_rdf(urljson, json):
                 g.add((channelemailid, dct.type, Literal("E-mail")))
                 g.add((channelemailid, cpsvap.ownedBy, psid))
 
-            """ Person class """
-            """ ------------ """
-
-            # Name of the owner
-            if Person in keys:
-                g.add((psid, agent.Name, Literal(line.get(Person))))
-
     # Cleanup the graph instance
     g.close()
 
