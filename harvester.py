@@ -210,7 +210,7 @@ def json_to_rdf(urljson, json):
 
                 g.add((costid, RDF.type, cpsvap.Cost))
                 g.add((costid, dct.description, Literal(line.get(PSCost))))
-                g.add((costid, cpsvap.monetary_value, Literal(line.get(expense), datatype=XSD.double)))
+                g.add((costid, cpsvap.monetary_value, Literal(line.get(expense))))
                 g.add((costid, cpsvap.currency, URIRef('http://publications.europa.eu/resource/authority/currency/EUR')))
                 g.add((costid, cpsvap.idDefinedBy, foid))
 
