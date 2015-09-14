@@ -118,8 +118,8 @@ def json_to_rdf(urljson, json):
                 g.add((psid, dct.description, Literal(line.get(PSDescription))))
 
             # Identifier
-            if identifier in keys:
-                g.add((psid, adms.Identifier, Literal(line.get(identifier))))
+            #if identifier in keys:
+            #   g.add((psid, adms.Identifier, Literal(line.get(identifier))))
 
             # Language
             if PSLanguage in keys:
@@ -183,8 +183,7 @@ def json_to_rdf(urljson, json):
             if PSCost in keys:
                 # Build and add the Cost ID URI
                 costid = URIRef(url + '/cost/' + line[identifier])
-                @costid = URIRef('http://COSTID-' + line[objectId] + '-' + line[
-                    identifier])
+                #costid = URIRef('http://COSTID-' + line[objectId] + '-' + line[identifier])
                 g.add((psid, chan.hasCost, costid))
 
                 g.add((costid, RDF.type, cpsvap.type))
@@ -195,8 +194,7 @@ def json_to_rdf(urljson, json):
 
             # Build the ID URI as source data does not come with a term related to an ID
             beid = URIRef(url + '/be/' + line[identifier])
-            #beid = URIRef('http://BEID-' + line[objectId] + '-' + line[
-                identifier])
+            #beid = URIRef('http://BEID-' + line[objectId] + '-' + line[identifier])
             g.add((psid, dct.isPartOf, beid))
 
             # Name
@@ -224,7 +222,7 @@ def json_to_rdf(urljson, json):
                 inputid = URIRef(url + '/input/' + line[identifier])
                 #inputid = URIRef('http://INPUTID-' + line[objectId] + '-' + line[identifier])
                 g.add((psid, cpsvap.HasInput, inputid))
-                g.add((inputid, RDF.type, cpsvap.input))
+                g.add((inputid, RDF.type, cpsvap.Input))
                 g.add((inputid, FOAF.page, Literal(line.get(InputRelatedDocuments))))  # not sure about p
 
             """ Output class """
@@ -235,7 +233,7 @@ def json_to_rdf(urljson, json):
                 outputid = URIRef(url + '/output/' + line[identifier])
                 #outputid = URIRef('http://OUTPUTID-' + line[objectId] + '-' + line[identifier])
                 g.add((psid, cpsvap.Produces, outputid))
-                g.add((outputid, RDF.type, cpsvap.output))
+                g.add((outputid, RDF.type, cpsvap.Output))
                 g.add((outputid, FOAF.page, Literal(line.get(Output))))  # not sure about p
 
             """ Channel class """
