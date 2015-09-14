@@ -70,7 +70,7 @@ if cleanGraph == 1:
 # FOAF and RDF are predefined RDFLib namespace, no need to create a new one
 cpsvap = Namespace("http://data.europa.eu/cv/")
 dct = Namespace("http://purl.org/dc/terms/")
-adms = Namespace("http://www.w3.org/ns/adms#")
+org = Namespace("http://www.w3.org/ns/org#")
 lang = Namespace('http://publications.europa.eu/resource/authority/language/')
 
 # Separate namespace for channel, cost and agent as RDFLib does not accept a # as part of an predicate
@@ -139,36 +139,33 @@ def json_to_rdf(urljson, json):
             #if identifier in keys:
             #   g.add((psid, adms.Identifier, Literal(line.get(identifier))))
 
-
-
             # Homepage
             # Create a triple for the homepage
-            if PSHomepage in keys:
-                if line.get(PSHomepage) == "":
-                    g.add((psid, FOAF.homepage, URIRef('http://unknown')))
-                else:
-                    g.add((psid, FOAF.homepage, URIRef(line.get(PSHomepage))))
-
+            #if PSHomepage in keys:
+            #    if line.get(PSHomepage) == "":
+            #        g.add((psid, FOAF.homepage, URIRef('http://unknown')))
+            #    else:
+            #        g.add((psid, FOAF.homepage, URIRef(line.get(PSHomepage))))
 
             # Ministry
-            if ministry in keys:
-                g.add((psid, cpsvap.AgentName, Literal(line.get(ministry))))
+            #if ministry in keys:
+            #    g.add((psid, cpsvap.AgentName, Literal(line.get(ministry))))
 
             # Authority - Unit that defines the public service
-            if authority in keys:
-                g.add((psid, cpsvap.AgentName, Literal(line.get(authority))))
+            #if authority in keys:
+             #   g.add((psid, cpsvap.AgentName, Literal(line.get(authority))))
 
             # Department - Department responsable for delivering the public service
-            if department in keys:
-                g.add((psid, cpsvap.AgentName, Literal(line.get(department))))
+            #if department in keys:
+            #    g.add((psid, cpsvap.AgentName, Literal(line.get(department))))
 
             # Telephone
-            if PSTelephone in keys:
-                g.add((psid, cpsvap.Channel, Literal(line.get(PSTelephone))))
+            #if PSTelephone in keys:
+            #    g.add((psid, cpsvap.Channel, Literal(line.get(PSTelephone))))
 
             # E-mail
-            if PSEmail in keys:
-                g.add((psid, cpsvap.Channel, Literal(line.get(PSEmail))))
+            #if PSEmail in keys:
+            #    g.add((psid, cpsvap.Channel, Literal(line.get(PSEmail))))
 
             # Administrative expenses
             if expense in keys:
@@ -183,6 +180,9 @@ def json_to_rdf(urljson, json):
             if prediction in keys:
                 g.add((psid, cpsvap.HasInput, Literal(line.get(prediction))))
 
+            """ Cost class """
+            """ -------------------- """
+
             # Payment
             if PSCost in keys:
                 # Build and add the Cost ID URI
@@ -192,6 +192,25 @@ def json_to_rdf(urljson, json):
 
                 g.add((costid, RDF.type, cpsvap.Cost))
                 g.add((costid, dct.description, Literal(line.get(PSCost))))
+
+            """ Formal Organization class """
+            """ -------------------- """
+
+            # Build the ID URI as source data does not come with a term related to an ID
+            foid = URIRef(url + '/fo/' + line[identifier])
+            g.add((psid, cpsvap:hasCompetentAuthority, foid))
+            g.add((foid, RDF.type, org.FormalOrganization))
+
+            g.add((foid, dct.title, Literal(line.get(authority))))
+
+            # Homepage
+            # Create a triple for the homepage
+            if PSHomepage in keys:
+                if line.get(PSHomepage) == "":
+                    g.add((foid, FOAF.homepage, URIRef('http://unknown')))
+                else:
+                    g.add((foid, FOAF.homepage, URIRef(line.get(PSHomepage))))
+
 
             """ Business Event class """
             """ -------------------- """
@@ -247,14 +266,21 @@ def json_to_rdf(urljson, json):
             # Check for a Telephone key
             if PSTelephone in keys:
                 # Create a hasChannel triple
-                g.add((psid, cpsvap.hasChannel, chan.Telephone))
+                channeltelid = URIRef(url + '/channel/tel/' + line[identifier])
+                g.add((psid, cpsvap.hasChannel, channeltelid))
+                g.add((channeltelid, RDF.type, cpsvap.Channel))
+                g.add((channeltelid, dct.type, Literal("E-mail")))
+                g.add((channeltelid, cpsvap.ownedBy, psid))
 
             # Check for an E-mail
             if PSEmail in keys:
                 # Create a hasChannel triple
+                channelemailid = URIRef(url + '/channel/email/' + line[identifier])
                 # "E-mail" is not accepted as an RDFLib object because of the hyphen so we're constructing a string
-                mail = URIRef("http://data.europa.eu/cv/Agent#E-mail")
-                g.add((psid, cpsvap.hasChannel, mail))
+                g.add((psid, cpsvap.hasChannel, channelemailid))
+                g.add((channelemailid, RDF.type, cpsvap.Channel))
+                g.add((channelemailid, dct.type, Literal("Telephone")))
+                g.add((channelemailid, cpsvap.ownedBy, psid))
 
             """ Person class """
             """ ------------ """
