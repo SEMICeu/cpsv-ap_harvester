@@ -106,6 +106,9 @@ def json_to_rdf(urljson, json):
             url = urljson.rpartition('/')[0]
             #psid = URIRef('http://PSID-' + line[objectId] + '-' + line[identifier])
             psid = URIRef(url + '/ps/' + line[identifier])
+            foid = URIRef(url + '/fo/' + line[identifier])
+            inputid = URIRef(url + '/input/' + line[identifier])
+            beid = URIRef(url + '/be/' + line[identifier])
 
             # Type - follows COFOG taxonomy: http://unstats.un.org/unsd/cr/registry/regcst.asp?Cl=4
             g.add((psid, RDF.type, cpsvap.PublicService))  # indicates the "term" type
@@ -204,7 +207,6 @@ def json_to_rdf(urljson, json):
 
             # Build the ID URI as source data does not come with a term related to an ID
             if FOauthority in keys:
-                foid = URIRef(url + '/fo/' + line[identifier])
                 g.add((psid, cpsvap.hasCompetentAuthority, foid))
                 g.add((foid, RDF.type, org.FormalOrganization))
                 g.add((foid, dct.title, Literal(line.get(FOauthority))))
@@ -236,7 +238,6 @@ def json_to_rdf(urljson, json):
             """ -------------------- """
 
             # Build the ID URI as source data does not come with a term related to an ID
-            beid = URIRef(url + '/be/' + line[identifier])
             #beid = URIRef('http://BEID-' + line[objectId] + '-' + line[identifier])
             g.add((psid, dct.isPartOf, beid))
             g.add((beid, RDF.type, cpsvap.BusinessEvent))
@@ -263,7 +264,6 @@ def json_to_rdf(urljson, json):
 
             # Related documents to input
             if INRelatedDocuments in keys:
-                inputid = URIRef(url + '/input/' + line[identifier])
                 #inputid = URIRef('http://INPUTID-' + line[objectId] + '-' + line[identifier])
                 g.add((psid, cpsvap.hasInput, inputid))
                 g.add((inputid, RDF.type, cpsvap.Input))
