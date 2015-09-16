@@ -187,7 +187,7 @@ def json_to_rdf(urljson, json):
             # Related documents to input
             if Rule in keys:
                 for i in Rule:
-                    ruleid = URIRef(i)
+                    ruleid = URIRef(line.get(Rule[i]))
                     g.add((psid, cpsvap.follows, ruleid))
                     g.add((ruleid, RDF.type, cpsvap.Rule))
                     g.add((ruleid, dct.title, Literal('Regulation')))
