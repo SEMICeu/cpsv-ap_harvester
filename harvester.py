@@ -28,33 +28,33 @@ def main():
     endpoint_uri = config['Mandatory']['endpointURI']
     graph_uri = config['Mandatory']['graphURI']
     pool_uri = (config['Mandatory']['poolURI']).split(',')
-    cleanGraph = config['Optional']['cleanGraph']
-    cleanGraphQuery = config['Optional']['cleanGraphQuery']
+    clean_graph = config['Optional']['cleanGraph']
+    clean_graph_query = config['Optional']['cleanGraphQuery']
 
     identifier = config['PublicService']['identifier']
-    PSName = config['PublicService']['name']
-    PSDescription = config['PublicService']['description']
-    PSLanguage = config['PublicService']['language']
-    PSSector = config['PublicService']['sector']
-    PSType = config['PublicService']['type']
+    ps_name = config['PublicService']['name']
+    ps_description = config['PublicService']['description']
+    ps_language = config['PublicService']['language']
+    ps_sector = config['PublicService']['sector']
+    ps_type = config['PublicService']['type']
 
-    RURule = config['Rule']['ruleid']
+    ru_rule = config['Rule']['ruleid']
 
-    FOHomepage = config['FormalOrganization']['homepage']
-    FOauthority = config['FormalOrganization']['authority']
+    fo_homepage = config['FormalOrganization']['homepage']
+    fo_authority = config['FormalOrganization']['authority']
 
-    COCost = config['Cost']['cost']
-    COexpense = config['Cost']['expense']
+    co_cost = config['Cost']['cost']
+    co_expense = config['Cost']['expense']
 
-    BEName = config['BusinessEvent']['name']
+    be_name = config['BusinessEvent']['name']
 
-    INRelatedDocuments = config['Input']['relatedDocuments']
-    INprediction = config['Input']['prediction']
+    in_related_documents = config['Input']['relatedDocuments']
+    in_prediction = config['Input']['prediction']
 
-    OUOutput = config['Output']['output']
+    ou_output = config['Output']['output']
 
-    CHTelephone = config['Channel']['telephone']
-    CHEmail = config['Channel']['email']
+    ch_telephone = config['Channel']['telephone']
+    ch_email = config['Channel']['email']
 
     # Set up endpoint and access to triple store
     sparql = SPARQLWrapper(endpoint_uri)
@@ -69,8 +69,8 @@ def main():
     g = Graph(store, identifier=graph_uri)
 
     # Cleanup the existing triples
-    if cleanGraph == 1:
-        sparql.setQuery(cleanGraphQuery)
+    if clean_graph == 1:
+        sparql.setQuery(clean_graph_query)
         sparql.query().convert()
 
     # Creating a namespace for Public Service (PS)
@@ -107,17 +107,17 @@ def main():
                 g.add((psid, RDF.type, cpsvap.PublicService))  # indicates the "term" type
 
                 # Name
-                if PSName in keys:
-                    g.add([psid, dct.title, Literal(line.get(PSName))])
+                if ps_name in keys:
+                    g.add([psid, dct.title, Literal(line.get(ps_name))])
 
                 # Description
-                if PSDescription in keys:
-                    g.add((psid, dct.description, Literal(line.get(PSDescription))))
+                if ps_description in keys:
+                    g.add((psid, dct.description, Literal(line.get(ps_description))))
 
                 # Language
-                if PSLanguage in keys:
+                if ps_language in keys:
 
-                    if line.get(PSLanguage) in ('ET', 'et'):  # ET = Estonia
+                    if line.get(ps_language) in ('ET', 'et'):  # ET = Estonia
 
                         # The object is a literal but I would prefer
                         # http://publications.europa.eu/resource/authority/language/ET
@@ -125,23 +125,23 @@ def main():
 
                     else:
                         # Switching to the literal from the source data
-                        g.add((psid, dct.language, Literal(line.get(PSLanguage))))
+                        g.add((psid, dct.language, Literal(line.get(ps_language))))
 
                 # Field of activity
-                if PSSector in keys:
-                    g.add([psid, cpsvap.sector, Literal(line.get(PSSector))])
+                if ps_sector in keys:
+                    g.add([psid, cpsvap.sector, Literal(line.get(ps_sector))])
 
-                if PSType in keys:
+                if ps_type in keys:
                     # indicates the kind of type
                     # example: public service is a type. Waste management is the kind of service for the type
-                    g.add((psid, dct.type, Literal(line.get(PSType))))
+                    g.add((psid, dct.type, Literal(line.get(ps_type))))
 
                 """ Rule class """
                 """ ----------- """
 
                 # Related documents to input
-                if RURule in keys:
-                    listRule = line.get(RURule)
+                if ru_rule in keys:
+                    listRule = line.get(ru_rule)
                     for s in listRule:
                         ruleid = URIRef(s)
                         g.add((psid, cpsvap.follows, ruleid))
@@ -153,31 +153,31 @@ def main():
                 """ -------------------- """
 
                 # Build the ID URI as source data does not come with a term related to an ID
-                if FOauthority in keys:
+                if fo_authority in keys:
                     g.add((psid, cpsvap.hasCompetentAuthority, foid))
                     g.add((foid, RDF.type, org.FormalOrganization))
-                    g.add((foid, dct.title, Literal(line.get(FOauthority))))
+                    g.add((foid, dct.title, Literal(line.get(fo_authority))))
                     # Homepage
                     # Create a triple for the homepage
-                    if FOHomepage in keys:
-                        if line.get(FOHomepage) == "":
+                    if fo_homepage in keys:
+                        if line.get(fo_homepage) == "":
                             g.add((foid, FOAF.homepage, URIRef('http://unknown')))
                         else:
-                            g.add((foid, FOAF.homepage, URIRef(line.get(FOHomepage))))
+                            g.add((foid, FOAF.homepage, URIRef(line.get(fo_homepage))))
 
                 """ Cost class """
                 """ -------------------- """
 
                 # Payment
-                if COCost in keys:
+                if co_cost in keys:
                     # Build and add the Cost ID URI
                     costid = URIRef(url + '/cost/' + line[identifier])
                     # costid = URIRef('http://COSTID-' + line[objectId] + '-' + line[identifier])
                     g.add((psid, cpsvap.hasCost, costid))
 
                     g.add((costid, RDF.type, cpsvap.Cost))
-                    g.add((costid, dct.description, Literal(line.get(COCost))))
-                    g.add((costid, cpsvap.monetary_value, Literal(line.get(COexpense))))
+                    g.add((costid, dct.description, Literal(line.get(co_cost))))
+                    g.add((costid, cpsvap.monetary_value, Literal(line.get(co_expense))))
                     g.add((costid, cpsvap.currency, URIRef('http://publications.europa.eu/resource/authority/currency/EUR')))
                     g.add((costid, cpsvap.idDefinedBy, foid))
 
@@ -188,13 +188,13 @@ def main():
                 g.add((beid, RDF.type, cpsvap.BusinessEvent))
 
                 # Name
-                if BEName in keys:
-                    g.add((beid, dct.title, Literal(line.get(BEName))))
+                if be_name in keys:
+                    g.add((beid, dct.title, Literal(line.get(be_name))))
 
                 # Language
-                if PSLanguage in keys:
+                if ps_language in keys:
 
-                    if line.get(PSLanguage) in ('ET', 'et'):  # ET = Estonia
+                    if line.get(ps_language) in ('ET', 'et'):  # ET = Estonia
 
                         # The object is a literal but a URI is prefered:
                         # http://publications.europa.eu/resource/authority/language/ET
@@ -202,33 +202,33 @@ def main():
 
                     else:
                         # Switching to the literal from the source data
-                        g.add((beid, dct.language, Literal(line.get(PSLanguage))))
+                        g.add((beid, dct.language, Literal(line.get(ps_language))))
 
                 """ Input class """
                 """ ----------- """
 
                 # Related documents to input
-                if INRelatedDocuments in keys:
+                if in_related_documents in keys:
                     g.add((psid, cpsvap.hasInput, inputid))
                     g.add((inputid, RDF.type, cpsvap.Input))
-                    g.add((inputid, dct.title, Literal(line.get(INprediction))))
+                    g.add((inputid, dct.title, Literal(line.get(in_prediction))))
 
                 """ Output class """
                 """ ------------ """
 
                 # Output
-                if OUOutput in keys:
+                if ou_output in keys:
                     outputid = URIRef(url + '/output/' + line[identifier])
                     # outputid = URIRef('http://OUTPUTID-' + line[objectId] + '-' + line[identifier])
                     g.add((psid, cpsvap.produces, outputid))
                     g.add((outputid, RDF.type, cpsvap.Output))
-                    g.add((outputid, dct.title, Literal(line.get(OUOutput))))
+                    g.add((outputid, dct.title, Literal(line.get(ou_output))))
 
                 """ Channel class """
                 """ ------------- """
 
                 # Check for a Telephone key
-                if CHTelephone in keys:
+                if ch_telephone in keys:
                     # Create a hasChannel triple
                     channeltelid = URIRef(url + '/channel/tel/' + line[identifier])
                     g.add((psid, cpsvap.hasChannel, channeltelid))
@@ -237,7 +237,7 @@ def main():
                     g.add((channeltelid, cpsvap.ownedBy, psid))
 
                 # Check for an E-mail
-                if CHEmail in keys:
+                if ch_email in keys:
                     # Create a hasChannel triple
                     channelemailid = URIRef(url + '/channel/email/' + line[identifier])
                     # "E-mail" is not accepted as an RDFLib object because of the hyphen so we're constructing a string
