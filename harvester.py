@@ -29,26 +29,31 @@ poolURI = (config['Mandatory']['poolURI']).split(',')
 cleanGraph = config['Optional']['cleanGraph']
 cleanGraphQuery = config['Optional']['cleanGraphQuery']
 objectId = config['Generic']['objectId']
+
 identifier = config['PublicService']['identifier']
 PSName = config['PublicService']['name']
-PSType = config['PublicService']['type']
 PSDescription = config['PublicService']['description']
 PSLanguage = config['PublicService']['language']
-PSHomepage = config['PublicService']['homepage']
 PSSector = config['PublicService']['sector']
-ministry = config['PublicService']['ministry']
-authority = config['PublicService']['authority']
-department = config['PublicService']['department']
-PSTelephone = config['PublicService']['telephone']
-PSEmail = config['PublicService']['email']
-expense = config['PublicService']['expense']
-prediction = config['PublicService']['prediction']
-PSCost = config['PublicService']['cost']
+PSType = config['PublicService']['type']
+
+RURule = config['Rule']['ruleid']
+
+FOHomepage = config['FormalOrganization']['homepage']
+FOauthority = config['FormalOrganization']['authority']
+
+COCost = config['Cost']['cost']
+COexpense = config['Cost']['expense']
+
 BEName = config['BusinessEvent']['name']
-InputRelatedDocuments = config['Input']['relatedDocuments']
-Output = config['Output']['output']
-Person = config['Person']['person']
-Rule = config['Rule']['ruleid']
+
+INRelatedDocuments = config['Input']['relatedDocuments']
+INprediction = config['Input']['prediction']
+
+OUOutput = config['Output']['output']
+
+CHTelephone = config['Channel']['telephone']
+CHEmail = config['Channel']['email']
 
 # Set up endpoint and access to triple store
 sparql = SPARQLWrapper(endpointURI)
@@ -76,10 +81,10 @@ lang = Namespace('http://publications.europa.eu/resource/authority/language/')
 
 # Separate namespace for channel, cost and agent as RDFLib does not accept a # as part of an predicate
 # Alternative is to construct the predicate as p=<namespace> + '#' + attribute
-chan = Namespace("http://data.europa.eu/cv/Channel#")
-cost = Namespace("http://data.europa.eu/cv/Cost#")
-agent = Namespace("http://data.europa.eu/cv/Agent#")
-sdmx = Namespace("http://purl.org/linked-data/sdmx/2009/dimension")
+# chan = Namespace("http://data.europa.eu/cv/Channel#")
+# cost = Namespace("http://data.europa.eu/cv/Cost#")
+#agent = Namespace("http://data.europa.eu/cv/Agent#")
+#sdmx = Namespace("http://purl.org/linked-data/sdmx/2009/dimension")
 
 
 # Build the RDF from the JSON source data
@@ -100,7 +105,7 @@ def json_to_rdf(urljson, json):
             # Build the ID URI as source data does not come with a term related to an ID
             url = urljson.rpartition('/')[0]
             #psid = URIRef('http://PSID-' + line[objectId] + '-' + line[identifier])
-            psid = URIRef(url + '/ps/' + line[identifier])
+            psid = URIRef(url + '/ps/' + line[PSidentifier])
 
             # Type - follows COFOG taxonomy: http://unstats.un.org/unsd/cr/registry/regcst.asp?Cl=4
             g.add((psid, RDF.type, cpsvap.PublicService))  # indicates the "term" type
@@ -185,8 +190,8 @@ def json_to_rdf(urljson, json):
             """ ----------- """
 
             # Related documents to input
-            if Rule in keys:
-                listRule = line.get(Rule)
+            if RURule in keys:
+                listRule = line.get(RURule)
                 for s in listRule:
                     ruleid = URIRef(s)
                     g.add((psid, cpsvap.follows, ruleid))
@@ -198,33 +203,32 @@ def json_to_rdf(urljson, json):
             """ -------------------- """
 
             # Build the ID URI as source data does not come with a term related to an ID
-            foid = URIRef(url + '/fo/' + line[identifier])
-            g.add((psid, cpsvap.hasCompetentAuthority, foid))
-            g.add((foid, RDF.type, org.FormalOrganization))
-
-            g.add((foid, dct.title, Literal(line.get(authority))))
-
-            # Homepage
-            # Create a triple for the homepage
-            if PSHomepage in keys:
-                if line.get(PSHomepage) == "":
-                    g.add((foid, FOAF.homepage, URIRef('http://unknown')))
-                else:
-                    g.add((foid, FOAF.homepage, URIRef(line.get(PSHomepage))))
+            if FOauthority in keys:
+                foid = URIRef(url + '/fo/' + line[identifier])
+                g.add((psid, cpsvap.hasCompetentAuthority, foid))
+                g.add((foid, RDF.type, org.FormalOrganization))
+                g.add((foid, dct.title, Literal(line.get(FOauthority))))
+                # Homepage
+                # Create a triple for the homepage
+                if FOHomepage in keys:
+                    if line.get(FOHomepage) == "":
+                        g.add((foid, FOAF.homepage, URIRef('http://unknown')))
+                    else:
+                        g.add((foid, FOAF.homepage, URIRef(line.get(FOHomepage))))
 
             """ Cost class """
             """ -------------------- """
 
             # Payment
-            if PSCost in keys:
+            if  COCost in keys:
                 # Build and add the Cost ID URI
                 costid = URIRef(url + '/cost/' + line[identifier])
                 #costid = URIRef('http://COSTID-' + line[objectId] + '-' + line[identifier])
                 g.add((psid, cpsvap.hasCost, costid))
 
                 g.add((costid, RDF.type, cpsvap.Cost))
-                g.add((costid, dct.description, Literal(line.get(PSCost))))
-                g.add((costid, cpsvap.monetary_value, Literal(line.get(expense))))
+                g.add((costid, dct.description, Literal(line.get(COCost))))
+                g.add((costid, cpsvap.monetary_value, Literal(line.get(COexpense))))
                 g.add((costid, cpsvap.currency, URIRef('http://publications.europa.eu/resource/authority/currency/EUR')))
                 g.add((costid, cpsvap.idDefinedBy, foid))
 
@@ -258,29 +262,29 @@ def json_to_rdf(urljson, json):
             """ ----------- """
 
             # Related documents to input
-            if InputRelatedDocuments in keys:
+            if INRelatedDocuments in keys:
                 inputid = URIRef(url + '/input/' + line[identifier])
                 #inputid = URIRef('http://INPUTID-' + line[objectId] + '-' + line[identifier])
                 g.add((psid, cpsvap.hasInput, inputid))
                 g.add((inputid, RDF.type, cpsvap.Input))
-                g.add((inputid, dct.title, Literal(line.get(prediction))))
+                g.add((inputid, dct.title, Literal(line.get(INprediction))))
 
             """ Output class """
             """ ------------ """
 
             # Output
-            if Output in keys:
+            if OUOutput in keys:
                 outputid = URIRef(url + '/output/' + line[identifier])
                 #outputid = URIRef('http://OUTPUTID-' + line[objectId] + '-' + line[identifier])
                 g.add((psid, cpsvap.produces, outputid))
                 g.add((outputid, RDF.type, cpsvap.Output))
-                g.add((outputid, dct.title, Literal(line.get(Output))))
+                g.add((outputid, dct.title, Literal(line.get(OUOutput))))
 
             """ Channel class """
             """ ------------- """
 
             # Check for a Telephone key
-            if PSTelephone in keys:
+            if CHTelephone in keys:
                 # Create a hasChannel triple
                 channeltelid = URIRef(url + '/channel/tel/' + line[identifier])
                 g.add((psid, cpsvap.hasChannel, channeltelid))
@@ -289,7 +293,7 @@ def json_to_rdf(urljson, json):
                 g.add((channeltelid, cpsvap.ownedBy, psid))
 
             # Check for an E-mail
-            if PSEmail in keys:
+            if CHEmail in keys:
                 # Create a hasChannel triple
                 channelemailid = URIRef(url + '/channel/email/' + line[identifier])
                 # "E-mail" is not accepted as an RDFLib object because of the hyphen so we're constructing a string
