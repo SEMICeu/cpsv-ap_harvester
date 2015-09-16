@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Harvests a resource pool of JSON objects presented over HTTP and adds a semantic layer mapped to the CPSV-AP vocabulary
+Harvests JSON objects over HTTP and maps to CPSV-AP vocabulary
 and save to a triple store
 
 Python ver: 3.4
@@ -17,6 +17,7 @@ from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
 from simpleconfigparser import simpleconfigparser
 from termcolor import colored
 
+
 def main():
     # Track executing time
     start_time = time.time()
@@ -24,12 +25,11 @@ def main():
     # Configurations
     config = simpleconfigparser()
     config.read('config.ini')
-    endpointURI = config['Mandatory']['endpointURI']
-    graphURI = config['Mandatory']['graphURI']
-    poolURI = (config['Mandatory']['poolURI']).split(',')
+    endpoint_uri = config['Mandatory']['endpointURI']
+    graph_uri = config['Mandatory']['graphURI']
+    pool_uri = (config['Mandatory']['poolURI']).split(',')
     cleanGraph = config['Optional']['cleanGraph']
     cleanGraphQuery = config['Optional']['cleanGraphQuery']
-    objectId = config['Generic']['objectId']
 
     identifier = config['PublicService']['identifier']
     PSName = config['PublicService']['name']
@@ -57,16 +57,16 @@ def main():
     CHEmail = config['Channel']['email']
 
     # Set up endpoint and access to triple store
-    sparql = SPARQLWrapper(endpointURI)
+    sparql = SPARQLWrapper(endpoint_uri)
     sparql.setReturnFormat(JSON)
     sparql.setMethod(POST)
-    store = SPARQLUpdateStore(endpointURI, endpointURI)
+    store = SPARQLUpdateStore(endpoint_uri, endpoint_uri)
 
     # Specify the (named) graph we're working with
-    sparql.addDefaultGraph(graphURI)
+    sparql.addDefaultGraph(graph_uri)
 
     # Create an in memory graph
-    g = Graph(store, identifier=graphURI)
+    g = Graph(store, identifier=graph_uri)
 
     # Cleanup the existing triples
     if cleanGraph == 1:
@@ -169,7 +169,7 @@ def main():
                 """ -------------------- """
 
                 # Payment
-                if  COCost in keys:
+                if COCost in keys:
                     # Build and add the Cost ID URI
                     costid = URIRef(url + '/cost/' + line[identifier])
                     # costid = URIRef('http://COSTID-' + line[objectId] + '-' + line[identifier])
@@ -250,21 +250,20 @@ def main():
         g.close()
 
         # Print statistics
-        print(colored(u'{0:s} - JSON string count: {1:d}, Execution time: {2:.2f} seconds', 'green').format(poolURI[c], j, (
+        print(colored(u'{0:s} - JSON string count: {1:d}, Execution time: {2:.2f} seconds', 'green').format(pool_uri[c], j, (
             time.time() - start_time)))
-
 
     # Set counter
     c = 0
 
     # Loop over all URI in the pool
-    while c < len(poolURI):
+    while c < len(pool_uri):
         try:
             # Fetch the JSON data
-            response = requests.get(poolURI[c], headers=headers).json()
+            response = requests.get(pool_uri[c], headers=headers).json()
 
             # Process the response
-            json_to_rdf(poolURI[c], response)
+            json_to_rdf(pool_uri[c], response)
 
         # print(g.serialize(format='nt'))
         except ValueError as e:
