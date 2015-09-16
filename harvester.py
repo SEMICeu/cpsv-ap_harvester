@@ -48,6 +48,7 @@ BEName = config['BusinessEvent']['name']
 InputRelatedDocuments = config['Input']['relatedDocuments']
 Output = config['Output']['output']
 Person = config['Person']['person']
+Rule = config['Rule']['ruleid']
 
 # Set up endpoint and access to triple store
 sparql = SPARQLWrapper(endpointURI)
@@ -185,7 +186,7 @@ def json_to_rdf(urljson, json):
 
             # Related documents to input
             if Rule in keys:
-                ruleid = URIRef((line.get(Rule))
+                ruleid = URIRef(line.get(Rule))
                 g.add((psid, cpsvap.follows, ruleid))
                 g.add((ruleid, RDF.type, cpsvap.Rule))
                 g.add((ruleid, dct.title, Literal('Regulation')))
