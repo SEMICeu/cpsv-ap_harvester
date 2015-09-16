@@ -177,8 +177,19 @@ def json_to_rdf(urljson, json):
             #    g.add((psid, cpsvap.hasChannel, chan.Homepage))
 
             # Prediction
-            if prediction in keys:
-                g.add((psid, cpsvap.HasInput, Literal(line.get(prediction))))
+            #if prediction in keys:
+            #    g.add((psid, cpsvap.HasInput, Literal(line.get(prediction))))
+
+            """ Rule class """
+            """ ----------- """
+
+            # Related documents to input
+            if Rule in keys:
+                ruleid = URIRef((line.get(Rule))
+                g.add((psid, cpsvap.follows, ruleid))
+                g.add((ruleid, RDF.type, cpsvap.Rule))
+                g.add((ruleid, dct.title, Literal('Regulation')))
+                g.add((ruleid, dct.description, Literal('Regulation')))
 
             """ Formal Organization class """
             """ -------------------- """
