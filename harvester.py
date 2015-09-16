@@ -105,7 +105,7 @@ def json_to_rdf(urljson, json):
             # Build the ID URI as source data does not come with a term related to an ID
             url = urljson.rpartition('/')[0]
             #psid = URIRef('http://PSID-' + line[objectId] + '-' + line[identifier])
-            psid = URIRef(url + '/ps/' + line[PSidentifier])
+            psid = URIRef(url + '/ps/' + line[identifier])
 
             # Type - follows COFOG taxonomy: http://unstats.un.org/unsd/cr/registry/regcst.asp?Cl=4
             g.add((psid, RDF.type, cpsvap.PublicService))  # indicates the "term" type
