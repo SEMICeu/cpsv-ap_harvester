@@ -186,11 +186,12 @@ def json_to_rdf(urljson, json):
 
             # Related documents to input
             if Rule in keys:
-                ruleid = URIRef(line.get(Rule))
-                g.add((psid, cpsvap.follows, ruleid))
-                g.add((ruleid, RDF.type, cpsvap.Rule))
-                g.add((ruleid, dct.title, Literal('Regulation')))
-                g.add((ruleid, dct.description, Literal('Regulation')))
+                for i in Rule:
+                    ruleid = URIRef(i)
+                    g.add((psid, cpsvap.follows, ruleid))
+                    g.add((ruleid, RDF.type, cpsvap.Rule))
+                    g.add((ruleid, dct.title, Literal('Regulation')))
+                    g.add((ruleid, dct.description, Literal('Regulation')))
 
             """ Formal Organization class """
             """ -------------------- """
