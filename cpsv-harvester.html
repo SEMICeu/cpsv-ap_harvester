@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>CPSV-AP Harvester</title>
+		<meta name="description" content="CPSV-AP Harvester" />
+		<link rel="stylesheet" type="text/css" href="./cpsv-ap_harvester.css">
+		<script type="text/javascript" src="./cpsv-ap_harvester.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<header class="banner">
+				<a id="logobanner" href="#"><img src="images/CPSV-AP_logo.png" width="70" height="70" alt="CPSV-AP logo" /><h1>CPSV-AP Harvester</h1></a>
+			</header>
+			<div class="body">
+				<p class="mydata">This service harvests one or more public service description files structured according to the <a href="https://joinup.ec.europa.eu/asset/cpsv-ap/description">CPSV-AP</a> specification.</p>
+			</div>
+			<div>
+				<table id="buttons" class="buttons-table">
+					<tr>
+						<td>
+							<button id="clean" onclick="clean()" class="button-cpsv">Clean data</button>
+						</td>
+						<td>
+							<button id="harvest" onclick="harvest()" class="button-cpsv">Harvest</button>
+						</td>
+						<td>
+							<button id="showAll" onclick="showAll()" class="button-cpsv">Visualise all data</button>
+						</td>
+						<td>
+							<select id="classes" class="select-cpsv">
+								<option value="PS">Public Service</option>
+								<option value="BE">Business Event</option>
+								<option value="Input">Input</option>
+								<option value="Output">Output</option>
+								<option value="Channel">Channel</option>
+								<option value="FF">Formal Framework</option>
+								<option value="Rule">Rule</option>
+								<option value="Agent">Agent</option>
+								<option value="FO">Formal Organisation</option>
+								<option value="PO">Public Organisation</option>
+								<option value="Cost">Cost</option>
+								<option value="PT">Period Of Time</option>
+								<option value="Location">Location</option>
+								<option value="Address">Address</option>
+							</select>
+							<button id="showClass" onclick="showClass()" class="button-cpsv">Visualise class</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<p>
+			<div class="datadiv">
+				<table id="data" class="mydata">
+					<tr class="mydata">
+						<th class="mydata" hidden=true id="tableHeader">Data</th>
+					</tr>
+				</table>
+			</div>
+			<div class="resultdiv" id="detailResult">
+				<p id="detailDataTitle" />
+				<p id="detailDataBody" />
+			</div>
+			<p>
+			<footer>
+				<a href="http://ec.europa.eu/"><img src="images/logo_commission.png" width="172" height="119" alt="European Commission"/></a>
+				<p>
+					<small>CPSV-AP Harvester: Copyright ©  European Union 2016. This harvester is published under the <a href="https://joinup.ec.europa.eu/community/eupl/home">EUPL v1.1 licence</a><br/>
+					This project is funded by <a href="http://ec.europa.eu/isa/actions/01-trusted-information-exchange/1-3action_en.htm">ISA Action 1.3</a> under framework contract DI/07171 Lot 2 (Specific Contract 270).<br/>
+					Authors: PwC EU Services.<br/>
+					</small>
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>
