@@ -1,2 +1,0 @@
-py show.py
-pause
