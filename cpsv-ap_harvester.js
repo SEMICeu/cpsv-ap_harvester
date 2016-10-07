@@ -207,8 +207,8 @@ function updateTable (tableID, className, URIs, data) {
 				//Only show one property per class
 				switch (className){
 					case "Channel":	{
-						if (propURI == "http://purl.org/dc/terms/type"){
-							propName = "Type";
+						if (propURI == "http://data.europa.eu/m8g/hasContactPoint"){
+							propName = "Contact Point";
 							append = true;
 						}
 						break;
@@ -220,9 +220,9 @@ function updateTable (tableID, className, URIs, data) {
 						}
 						break;
 					}
-					case "Location":	{
-						if (propURI == "http://www.w3.org/ns/locn#GeographicName"){
-							propName = "Geographic Name";
+					case "Contact Point":	{
+						if (propURI == "http://www.w3.org/2006/vcard/ns#hasURL"){
+							propName = "URL";
 							append = true;
 						}
 						break;
@@ -237,9 +237,16 @@ function updateTable (tableID, className, URIs, data) {
 					case "PeriodofTime":	{
 						break;
 					}
-					case "FormalFramework":	{
+					/* case "FormalFramework":	{
 						if (propURI == "http://data.europa.eu/eli/ontology#id_local"){
 							propName = "Name";
+							append = true;
+						}
+						break;
+					} */
+					case "Participation":	{ //
+						if (propURI == "http://purl.org/dc/terms/description"){
+							propName = "Description";
 							append = true;
 						}
 						break;
@@ -325,68 +332,78 @@ function showClass(){
 	var URIs;
 	switch (className){
 		case "PS": {
-			URIs = getclassURIs(result, "http://data.europa.eu/cv/PublicService");
+			URIs = getclassURIs(result, "http://purl.org/vocab/cpsv#PublicService");
 			updateTable("data", "PublicService", URIs, result);
 			break;
 		}
 		case "BE": {
-			URIs = getclassURIs(result, "http://data.europa.eu/cv/BusinessEvent");
+			URIs = getclassURIs(result, "http://data.europa.eu/m8g/BusinessEvent");
 			updateTable("data", "BusinessEvent", URIs, result);
 			break;
 		}
-		case "Input": {
-			URIs = getclassURIs(result, "http://data.europa.eu/cv/Input");
-			updateTable("data", "Input", URIs, result);
+		case "LE": {
+			URIs = getclassURIs(result, "http://data.europa.eu/m8g/LifeEvent");
+			updateTable("data", "LifeEvent", URIs, result);
+			break;
+		}
+		case "Participation": {
+			URIs = getclassURIs(result, "http://data.europa.eu/m8g/Participation");
+			updateTable("data", "Participation", URIs, result);
+			break;
+		}
+		case "Criterion": {
+			URIs = getclassURIs(result, "http://data.europa.eu/m8g/CriterionRequirement");
+			updateTable("data", "Criterion", URIs, result);
+			break;
+		}
+		case "Evidence": {
+			URIs = getclassURIs(result, "http://data.europa.eu/m8g/Evidence");
+			updateTable("data", "Evidence", URIs, result);
 			break;
 		}
 		case "Output": {
-			URIs = getclassURIs(result, "http://data.europa.eu/cv/Output");
+			URIs = getclassURIs(result, "http://data.europa.eu/m8g/Output");
 			updateTable("data", "Output", URIs, result);
 			break;
 		}
 		case "Channel": {
-			URIs = getclassURIs(result, "http://data.europa.eu/cv/Channel");
+			URIs = getclassURIs(result, "http://data.europa.eu/m8g/Channel");
 			updateTable("data", "Channel", URIs, result);
 			break;
 		}
 		case "FF": {
-			URIs = getclassURIs(result, "http://data.europa.eu/cv/FormalFramework");
+			URIs = getclassURIs(result, "http://purl.org/vocab/cpsv#FormalFramework");
 			updateTable("data", "FormalFramework", URIs, result);
 			break;
 		}
 		case "Rule": {
-			URIs = getclassURIs(result, "http://data.europa.eu/cv/Rule");
+			URIs = getclassURIs(result, "http://purl.org/vocab/cpsv#Rule");
 			updateTable("data", "Rule", URIs, result);
 			break;
 		}
 		case "Agent": {
-			URIs = getclassURIs(result, "http://xmlns.com/foaf/0.1/Agent");
+			URIs = getclassURIs(result, "http://purl.org/dc/terms/Agent");
 			updateTable("data", "Agent", URIs, result);
 			break;
 		}
-		case "FO": {
-			URIs = getclassURIs(result, "http://www.w3.org/ns/org#FormalOrganization");
-			updateTable("data", "FormalOrganisation", URIs, result);
+		case "Contact": {
+			URIs = getclassURIs(result, "http://www.w3.org/2006/vcard/ns#Contact");
+			updateTable("data", "Contact", URIs, result);
 			break;
 		}
 		case "PO": {
-			URIs = getclassURIs(result, "http://data.europa.eu/cv/PublicOrganisation");
+			URIs = getclassURIs(result, "http://data.europa.eu/m8g/PublicOrganisation");
 			updateTable("data", "PublicOrganisation", URIs, result);
 			break;
 		}
 		case "Cost": {
-			URIs = getclassURIs(result, "http://data.europa.eu/cv/Cost");
+			URIs = getclassURIs(result, "http://data.europa.eu/m8g/Cost");
 			updateTable("data", "Cost", URIs, result);
 			break;
 		}
 		case "PT": {
-			URIs = getclassURIs(result, "http://purl.org/dc/terms/PeriodOfTime");
+			URIs = getclassURIs(result, "http://data.europa.eu/m8g/PeriodOfTime");
 			updateTable("data", "PeriodofTime", URIs, result);
-			break;
-		}
-		case "Location": {
-			URIs = getclassURIs(result, "http://purl.org/dc/terms/Location");
-			updateTable("data", "Location", URIs, result);
 			break;
 		}
 		case "Address": {
@@ -428,59 +445,67 @@ function showAll () {
 	var URIs;
 	
 	//show the Public Services
-	URIs = getclassURIs(result, "http://data.europa.eu/cv/PublicService");
+	URIs = getclassURIs(result, "http://purl.org/vocab/cpsv#PublicService");
 	updateTable("data", "PublicService", URIs, result);
 	
 	//show the Business Events
-	URIs = getclassURIs(result, "http://data.europa.eu/cv/BusinessEvent");
+	URIs = getclassURIs(result, "http://data.europa.eu/m8g/BusinessEvent");
 	updateTable("data", "BusinessEvent", URIs, result);
 
-	//show the Inputs
-	URIs = getclassURIs(result, "http://data.europa.eu/cv/Input");
-	updateTable("data", "Input", URIs, result);
+	//show the Life Events
+	URIs = getclassURIs(result, "http://data.europa.eu/m8g/LifeEvent");
+	updateTable("data", "LifeEvent", URIs, result);
+	
+	//show the Participations
+	URIs = getclassURIs(result, "http://data.europa.eu/m8g/Participation"); //
+	updateTable("data", "Participation", URIs, result);
+	
+	//show the Criteria
+	URIs = getclassURIs(result, "http://data.europa.eu/m8g/CriterionRequirement"); //
+	updateTable("data", "Criterion", URIs, result);
+	
+	//show the Evidences
+	URIs = getclassURIs(result, "http://data.europa.eu/m8g/Evidence");
+	updateTable("data", "Evidence", URIs, result);
 
 	//show the Outputs
-	URIs = getclassURIs(result, "http://data.europa.eu/cv/Output");
+	URIs = getclassURIs(result, "http://data.europa.eu/m8g/Output"); //
 	updateTable("data", "Output", URIs, result);
 
 	//show the Channels
-	URIs = getclassURIs(result, "http://data.europa.eu/cv/Channel");
+	URIs = getclassURIs(result, "http://data.europa.eu/m8g/Channel"); //
 	updateTable("data", "Channel", URIs, result);
 
 	//show the Formal Frameworks
-	URIs = getclassURIs(result, "http://data.europa.eu/cv/FormalFramework");
+	URIs = getclassURIs(result, "http://purl.org/vocab/cpsv#FormalFramework"); //
 	updateTable("data", "FormalFramework", URIs, result);
 
 	//show the Rules
-	URIs = getclassURIs(result, "http://data.europa.eu/cv/Rule");
+	URIs = getclassURIs(result, "http://purl.org/vocab/cpsv#Rule"); //
 	updateTable("data", "Rule", URIs, result);
 
 	//show the Agents
-	URIs = getclassURIs(result, "http://xmlns.com/foaf/0.1/Agent");
+	URIs = getclassURIs(result, "http://purl.org/dc/terms/Agent"); //
 	updateTable("data", "Agent", URIs, result);
 
-	//show the Formal Organisations
-	URIs = getclassURIs(result, "http://www.w3.org/ns/org#FormalOrganization");
-	updateTable("data", "FormalOrganisation", URIs, result);
+	//show the Contacts
+	URIs = getclassURIs(result, "http://www.w3.org/2006/vcard/ns#Contact"); //
+	updateTable("data", "Contact", URIs, result);
 
 	//show the Public Organisations
-	URIs = getclassURIs(result, "http://data.europa.eu/cv/PublicOrganisation");
+	URIs = getclassURIs(result, "http://data.europa.eu/m8g/PublicOrganisation"); //
 	updateTable("data", "PublicOrganisation", URIs, result);
 
 	//show the Costs
-	URIs = getclassURIs(result, "http://data.europa.eu/cv/Cost");
+	URIs = getclassURIs(result, "http://data.europa.eu/m8g/Cost"); //
 	updateTable("data", "Cost", URIs, result);
 
 	//show the Period of Time
-	URIs = getclassURIs(result, "http://purl.org/dc/terms/PeriodOfTime");
+	URIs = getclassURIs(result, "http://data.europa.eu/m8g/PeriodOfTime"); //
 	updateTable("data", "PeriodofTime", URIs, result);
 
-	//show the Location
-	URIs = getclassURIs(result, "http://purl.org/dc/terms/Location");
-	updateTable("data", "Location", URIs, result);
-
 	//show the Address
-	URIs = getclassURIs(result, "http://www.w3.org/ns/locn#Address");
+	URIs = getclassURIs(result, "http://www.w3.org/ns/locn#Address"); //
 	updateTable("data", "Address", URIs, result);
 	
 	btn.disabled = false;
