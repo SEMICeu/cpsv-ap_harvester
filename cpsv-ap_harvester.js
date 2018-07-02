@@ -67,8 +67,9 @@ function parseResult(text){
  * #returns {list} List with the URIs typed as a class.
  */
 function getclassURIs (text, classURI){
-	var lines = parseResult(text); //Get the different triples
-	var row, i, URIs;
+	//var lines = parseResult(text); //Get the different triples
+	var row, i, URIs, aux="";
+	var lines = text;
 	
 	URIs = "";
 	for (i=0; i<lines.length; i++){
@@ -183,7 +184,8 @@ function getPropertyName(className, propURI){
 function updateTable (tableID, className, URIs, data) {
 	var lines, properties, i, j, k, aux, aux2, values, URI, table, prop, propName, value, newCell, p, append = false;
 	
-	lines = parseResult(data);
+	//lines = parseResult(data);
+	lines = data;
 	values = URIs.split(",");
 	
 	for (i=0; i<values.length; i++){
@@ -309,7 +311,7 @@ function showClass(){
 	var btn = document.getElementById("showClass");
 	btn.disabled = true;
 	btn.innerHTML = "Loading";
-	var endpoint="", result="";
+	var endpoint="", result="", data="";
 	
 	var btn2 = document.getElementById("showAll");
 	btn2.disabled = false;
@@ -320,7 +322,9 @@ function showClass(){
 	
 	cleanDetailData();
 	
-	result = getStoredData();
+	data = getStoredData();
+	
+	result = parseResult (data);
 	
 	removeTable("data");
 	
@@ -427,7 +431,7 @@ function showAll () {
 	var btn = document.getElementById("showAll");
 	btn.disabled = true;
 	btn.innerHTML = "Loading";
-	var endpoint="", result="";
+	var endpoint="", result="", data="";
 	
 	var btn2 = document.getElementById("showClass");
 	btn2.disabled = false;
@@ -438,7 +442,9 @@ function showAll () {
 	
 	cleanDetailData();
 		
-	result = getStoredData();
+	data = getStoredData();
+	
+	result = parseResult(data);
 	
 	removeTable("data");
 	

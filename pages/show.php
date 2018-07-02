@@ -1,5 +1,6 @@
 <?php
 
-system('py show.py');
+header('Access-Control-Allow-Origin: *');
+system('python show.py');
 
 ?>

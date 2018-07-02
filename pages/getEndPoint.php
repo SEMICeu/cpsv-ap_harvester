@@ -1,3 +1,4 @@
 <?php
-	system('py ./getEndPoint.py');
+	header('Access-Control-Allow-Origin: *');
+	system('python getEndPoint.py');
 ?>

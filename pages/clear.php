@@ -1,3 +1,4 @@
 <?php
-	system('py ./clear_graph.py');
+	header('Access-Control-Allow-Origin: *');
+	system('python clear_graph.py');
 ?>

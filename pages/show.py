@@ -11,7 +11,7 @@ __author__ = 'PwC EU Services'
 from configparser import ConfigParser
 
 from SPARQLWrapper import SPARQLWrapper, POST, JSON
-from rdflib import Graph
+from rdflib import Graph, URIRef, Literal
 from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
 
 # Track executing time
@@ -36,7 +36,7 @@ sparql.addDefaultGraph(graph_uri)
 g = Graph(store, identifier=graph_uri)
 
 for s, p, o in g:
-    print(s, p, o)
+	print s, p, o.encode('utf-8')
 
 # Cleanup the graph instance
 g.close()
