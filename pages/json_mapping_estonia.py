@@ -20,10 +20,11 @@ from rdflib.namespace import FOAF, RDF
 def json_to_rdf(urljson, json, g, config):
     # Creating a namespace for Public Service (PS)
     # FOAF and RDF are predefined RDFLib namespace, no need to create a new one
-    cpsvap = Namespace("http://data.europa.eu/cv/")
+    cpsvap = Namespace("http://purl.org/vocab/cpsv#")
     dct = Namespace("http://purl.org/dc/terms/")
     org = Namespace("http://www.w3.org/ns/org#")
     lang = Namespace('http://publications.europa.eu/resource/authority/language/')
+    cv = Namespace("http://data.europa.eu/m8g/")
     
     #Mapping
     identifier = config['PublicService']['identifier']
@@ -97,7 +98,7 @@ def json_to_rdf(urljson, json, g, config):
 
             # Field of activity
             if ps_sector in keys:
-                g.add([psid, cpsvap.sector, Literal(line.get(ps_sector))])
+                g.add([psid, cv.sector, Literal(line.get(ps_sector))])
 
             if ps_type in keys:
                 # indicates the kind of type
@@ -122,7 +123,7 @@ def json_to_rdf(urljson, json, g, config):
 
             # Build the ID URI as source data does not come with a term related to an ID
             if fo_authority in keys:
-                g.add((psid, cpsvap.hasCompetentAuthority, foid))
+                g.add((psid, cv.hasCompetentAuthority, foid))
                 g.add((foid, RDF.type, org.FormalOrganization))
                 g.add((foid, dct.title, Literal(line.get(fo_authority))))
                 # Homepage
@@ -141,36 +142,25 @@ def json_to_rdf(urljson, json, g, config):
                 # Build and add the Cost ID URI
                 costid = URIRef(url + '/cost/' + line[identifier])
                 # costid = URIRef('http://COSTID-' + line[objectId] + '-' + line[identifier])
-                g.add((psid, cpsvap.hasCost, costid))
+                g.add((psid, cv.hasCost, costid))
 
-                g.add((costid, RDF.type, cpsvap.Cost))
+                g.add((costid, RDF.type, cv.Cost))
                 g.add((costid, dct.description, Literal(line.get(co_cost))))
-                g.add((costid, cpsvap.monetary_value, Literal(line.get(co_expense))))
-                g.add((costid, cpsvap.currency, URIRef('http://publications.europa.eu/resource/authority/currency/EUR')))
-                g.add((costid, cpsvap.idDefinedBy, foid))
+                g.add((costid, cv.value, Literal(line.get(co_expense))))
+                g.add((costid, cv.currency, URIRef('http://publications.europa.eu/resource/authority/currency/EUR')))
+                g.add((costid, cv.idDefinedBy, foid))
 
             """ Business Event class """
             """ -------------------- """
 
-            g.add((psid, dct.isPartOf, beid))
-            g.add((beid, RDF.type, cpsvap.BusinessEvent))
+            g.add((psid, cv.isGroupedBy, beid))
+            g.add((beid, RDF.type, cv.BusinessEvent))
+            g.add((beid, dct.relation, psid))
 
             # Name
             if be_name in keys:
                 g.add((beid, dct.title, Literal(line.get(be_name))))
 
-            # Language
-            if ps_language in keys:
-
-                if line.get(ps_language) in ('ET', 'et'):  # ET = Estonia
-
-                    # The object is a literal but a URI is prefered:
-                    # http://publications.europa.eu/resource/authority/language/ET
-                    g.add((beid, dct.language, lang.ET))
-
-                else:
-                    # Switching to the literal from the source data
-                    g.add((beid, dct.language, Literal(line.get(ps_language))))
 
             """ Input class """
             """ ----------- """
@@ -178,7 +168,7 @@ def json_to_rdf(urljson, json, g, config):
             # Related documents to input
             if in_related_documents in keys:
                 g.add((psid, cpsvap.hasInput, inputid))
-                g.add((inputid, RDF.type, cpsvap.Input))
+                g.add((inputid, RDF.type, cv.Evidence))
                 g.add((inputid, dct.title, Literal(line.get(in_prediction))))
 
             """ Output class """
@@ -189,7 +179,7 @@ def json_to_rdf(urljson, json, g, config):
                 outputid = URIRef(url + '/output/' + line[identifier])
                 # outputid = URIRef('http://OUTPUTID-' + line[objectId] + '-' + line[identifier])
                 g.add((psid, cpsvap.produces, outputid))
-                g.add((outputid, RDF.type, cpsvap.Output))
+                g.add((outputid, RDF.type, cv.Output))
                 g.add((outputid, dct.title, Literal(line.get(ou_output))))
 
             """ Channel class """
@@ -199,17 +189,17 @@ def json_to_rdf(urljson, json, g, config):
             if ch_telephone in keys:
                 # Create a hasChannel triple
                 channeltelid = URIRef(url + '/channel/tel/' + line[identifier])
-                g.add((psid, cpsvap.hasChannel, channeltelid))
-                g.add((channeltelid, RDF.type, cpsvap.Channel))
+                g.add((psid, cv.hasChannel, channeltelid))
+                g.add((channeltelid, RDF.type, cv.Channel))
                 g.add((channeltelid, dct.type, Literal("Telephone")))
-                g.add((channeltelid, cpsvap.ownedBy, psid))
+                g.add((channeltelid, cv.isOwnedBy, foid))
 
             # Check for an E-mail
             if ch_email in keys:
                 # Create a hasChannel triple
                 channelemailid = URIRef(url + '/channel/email/' + line[identifier])
                 # "E-mail" is not accepted as an RDFLib object because of the hyphen so we're constructing a string
-                g.add((psid, cpsvap.hasChannel, channelemailid))
-                g.add((channelemailid, RDF.type, cpsvap.Channel))
+                g.add((psid, cv.hasChannel, channelemailid))
+                g.add((channelemailid, RDF.type, cv.Channel))
                 g.add((channelemailid, dct.type, Literal("E-mail")))
-                g.add((channelemailid, cpsvap.ownedBy, psid))
+                g.add((channelemailid, cv.isOwnedBy, psid))

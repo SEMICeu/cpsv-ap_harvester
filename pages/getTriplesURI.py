@@ -21,6 +21,10 @@ from termcolor import colored
 import sys
 import rdfextras
 
+if sys.version[0] == '2':
+	reload(sys)  
+	sys.setdefaultencoding('utf-8')
+
 rdfextras.registerplugins() # so we can Graph.query()
 
 headers = {'content-type': 'application/json'}  # HTTP header content type
@@ -66,8 +70,8 @@ for row in properties:
 				else:
 					props = props + "@#" + key
 					break
-		props = props + "##" + str(row[1])
-
+		props = props + '##' + (row[1]).encode('utf-8','ignore').decode('utf-8')
+#print(type(props))
 print (props)
 # Cleanup the graph instance
 g.close()
