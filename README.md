@@ -1,4 +1,4 @@
-# cpsv-ap_harvester
+# CPSV-AP Harvester
 
 The Public Service Description Harvester allows public administrations to get the data in a faster and more efficient way. It eases the creation of an integrated view on life events, business events and public services provided within a specific country or region, avoiding the manual update of the public service descriptions owned by different competent authorities on multiple levels of administration (national, regional, local) on a central catalogue.
 
