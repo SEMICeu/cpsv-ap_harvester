@@ -8,7 +8,21 @@
 		<link rel="stylesheet" type="text/css" href="./cpsv-ap_harvester.css">
 		<script type="text/javascript" src="./cpsv-ap_harvester.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	</head>
+
+		<link type="text/css" href="cron/jquery-cron.css" rel="stylesheet" />
+    	<script type="text/javascript" src="cron/jquery-cron.js"></script>
+
+    	<script type="text/javascript">
+		    $(document).ready(function() {
+		        $('#scheduler').cron({
+		            initial: "* * * * *",
+		            onChange: function() {
+		                $('#scheduler-val').text($(this).cron("value"));
+		            }
+		        });
+		    });
+	    </script>
+	    </head>
 	<body>
 		<div class="container">
 			<header class="banner">
@@ -17,6 +31,7 @@
 			<div class="body">
 				<p class="mydata">This service harvests one or more public service description files structured according to the <a href="https://joinup.ec.europa.eu/asset/cpsv-ap/description">CPSV-AP</a> specification.</p>
 			</div>
+
 			<div>
 				<table id="buttons" class="buttons-table">
 					<tr>
@@ -27,6 +42,14 @@
 							<button id="harvest" onclick="harvest()" class="button-cpsv">Harvest</button>
 						</td>
 						<td>
+							<button id="expand-button" class="expand-schedule-button button-cpsv closed" onclick="expandPanel()">Schedule harvesting</button>
+					        <div class="schedule-panel" hidden="true">
+					                <div id='scheduler'></div>
+							    	<!-- <p>Generated cron entry: <span class='scheduler-text' id='scheduler-val'></span></p> -->
+							    	<button id="schedule" onclick="schedule()" class="button-cpsv">Confirm</button>
+					        </div>
+					    </td>
+						<td> 
 							<button id="showAll" onclick="showAll()" class="button-cpsv">Visualise all data</button>
 						</td>
 						<td>

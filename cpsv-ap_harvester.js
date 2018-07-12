@@ -37,16 +37,50 @@ function harvest(){
 		data: { p: '1' },
 		async: false,
 		success: function (response) {
-			btn.disabled = false;
-			btn.innerHTML = "Harvest";
 			alert("The following files have been harvested:\n"+response);
 		},
 		error: function () {
-			btn.disabled = false;
-			btn.innerHTML = "Harvest";
 			alert('There was an error!');
 		},
 	});
+
+	btn.disabled = false;
+	btn.innerHTML = "Harvest";
+}
+
+function expandPanel(){
+	if($(".schedule-panel").is(':visible')){
+		$(".schedule-panel").hide();
+  	}
+  	else {
+    	$(".schedule-panel").show();
+  	}
+}
+
+function schedule(){
+	var btn = document.getElementById("schedule");
+	btn.disabled = true;
+	btn.innerHTML = "Scheduling";
+
+	var cronExpression = $('#scheduler').cron("value");
+
+	$.ajax({
+		type: "POST",
+		url: "http://localhost:80/harvester/pages/schedule.php",
+		data: { cronExpression : cronExpression},
+		async: false,
+		success: function (response) {
+			alert("The scheduling was set.");
+		},
+		error: function () {
+			alert('There was an error!');
+		},
+	});
+
+	btn.disabled = false;
+	btn.innerHTML = "Confirm";
+
+	expandPanel();
 }
 
 /**
