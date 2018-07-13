@@ -48,5 +48,6 @@ An example of the configuration file is provided below.
 The Harvester webpage acts as the user interface for the harvester. It is linked to a JavaScript file that describes the different actions that the user can execute. Those actions are:
 *	Clean the existing data from the triple store;
 *	Harvest the files indicated in the configuration file and store them in the triple store;
+*   Schedule the automatic harvesting of the files indicated in the configuration file and store them in the triple store;
 *	Visualise all the data stored in the triple store; or 
 *	Visualise data of only one CPSV-AP class stored in the triple store
