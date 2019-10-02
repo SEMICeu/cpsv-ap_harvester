@@ -36,8 +36,8 @@ sparql.addDefaultGraph(graph_uri)
 g = Graph(store, identifier=graph_uri)
 
 for s, p, o in g:
-	print s, p, o.encode('utf-8')
-
+#	print (s,p,o.encode('utf-8')) TO BE UPDATED, encoding
+	print (s,p,o)
 # Cleanup the graph instance
 g.close()
 

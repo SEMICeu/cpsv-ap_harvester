@@ -6,9 +6,9 @@ function clean(){
 	btn.disabled = true;
 	btn.innerHTML = "Removing data";
 
-	$.ajax({
+"http://172.31.46.144:8890/	$.ajax({
 		type: "GET",
-		url: "http://35.181.155.22:8890/cpsv-ap_harvester/pages/clear.php",
+		url: "http://172.31.46.144:8890/cpsv-ap_harvester/pages/clear.php",
 		data: { },
 		async: false,
 		success: function (response) {
@@ -33,7 +33,7 @@ function harvest(){
 	
 	$.ajax({
 		type: "GET",
-		url: "http://35.181.155.22:8890/cpsv-ap_harvester/pages/harvest.php",
+		url: "http://localhost:80/harvester/pages/harvest.php",
 		data: { p: '1' },
 		async: false,
 		success: function (response) {
@@ -66,7 +66,7 @@ function schedule(){
 
 	$.ajax({
 		type: "POST",
-		url: "http://35.181.155.22:8890/cpsv-ap_harvester/pages/schedule.php",
+		url: "http://localhost:80/harvester/pages/schedule.php",
 		data: { cronExpression : cronExpression},
 		async: false,
 		success: function (response) {
@@ -198,7 +198,7 @@ function appendContent (cell, v, style){
 function getPropertyName(className, propURI){
 	$.ajax({
 		type: "GET",
-		url: "http://35.181.155.22:8890/cpsv-ap_harvester/pages/getProperties.php",
+		url: "http://localhost:80/harvester/pages/getProperties.php",
 		data: { "c":className, "p":propURI },
 		async: false,
 		success: function (response) {
@@ -320,7 +320,7 @@ function getStoredData (){
 			endpoint = xhttp.responseText;
 			}
 	};
-	xhttp.open("GET", "http://35.181.155.22:8890/cpsv-ap_harvester/pages/getEndPoint.php", false); //synchronized
+	xhttp.open("GET", "http://localhost:80/harvester/pages/getEndPoint.php", false); //synchronized
 	xhttp.send();
 	
 	if (endpoint != "") {
@@ -330,7 +330,7 @@ function getStoredData (){
 				result = xhttp2.responseText;
 			}
 		};
-		xhttp2.open("GET", "http://35.181.155.22:8890/cpsv-ap_harvester/pages/show.php", false); //synchronized
+		xhttp2.open("GET", "http://localhost:80/harvester/pages/show.php", false); //synchronized
 		xhttp2.send();
 		
 	}
@@ -583,7 +583,7 @@ function getTriplesURI(URI, classType){
 	
 	$.ajax({
 		type: "GET",
-		url: "http://35.181.155.22:8890/cpsv-ap_harvester/pages/getTriplesURI.php",
+		url: "http://localhost:80/harvester/pages/getTriplesURI.php",
 		data: { "URI":URI, "class":classType },
 		async: false,
 		success: function (response) {

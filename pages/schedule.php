@@ -4,7 +4,7 @@ header('Access-Control-Allow-Origin: *');
 
 /*echo exec('crontab -r');
 $output = shell_exec('crontab -l');
-file_put_contents('/tmp/crontab.txt', $output.'47 12 * * * /var/cpsv-ap_harvester/pages/clear.php'.PHP_EOL);
+file_put_contents('/tmp/crontab.txt','/cpsv-ap_harvester/pages/clear.php'.PHP_EOL);
 echo exec('crontab /tmp/crontab.txt');
 */
 class Crontab {
@@ -80,7 +80,7 @@ $currentJobs = $crontab->getJobs();
 $arrlength = count($currentJobs);
 for($x = 0; $x < $arrlength; $x++) {
     
-    if ( substr_count($currentJobs[$x], "bash /var/cpsv-ap/cpsv-ap_harvester/pages/schedule.sh") > 0 ) {
+    if ( substr_count($currentJobs[$x], " bash /var/www/html/cpsv-ap_harvester/pages/schedule.sh") > 0 ) {
         $currentJob = $currentJobs[$x];
         $crontab->removeJob($currentJob);
     } else {
@@ -89,6 +89,6 @@ for($x = 0; $x < $arrlength; $x++) {
 }
 
 // add new job
-$crontab->addJob($cronExpression . " bash /var/cpsv-ap/cpsv-ap_harvester/pages/schedule.sh");
+$crontab->addJob($cronExpression . " bash /var/www/html/cpsv-ap_harvester/pages/schedule.sh");
 
 ?>

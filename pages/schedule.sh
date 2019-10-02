@@ -1,2 +1,2 @@
 #!/bin/bash
-curl http://cpsv-ap.semic.eu:8890/cpsv-ap_harvester/pages/harvest.php
+curl http://35.181.155.22:8890/cpsv-ap_harvester/pages/harvest.php

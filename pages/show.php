@@ -1,6 +1,6 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
-system('python show.py');
+system('PYTHONIOENCODING=utf8 python3 show.py');
 
 ?>

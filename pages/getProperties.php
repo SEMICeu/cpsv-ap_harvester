@@ -3,7 +3,7 @@
 header('Access-Control-Allow-Origin: *');
 $c = $_GET['c'];
 $p = $_GET['p'];
-$cad = 'python getProperties.py' . " " . $c . " " . $p;
+$cad = 'python3 getProperties.py' . " " . $c . " " . $p;
 system($cad);
 
 ?>
