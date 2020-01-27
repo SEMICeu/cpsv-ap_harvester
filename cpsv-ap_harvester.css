@@ -35,7 +35,7 @@ footer p{margin-top:30px;color:#7C8395}
 
 
 .class-data{
-	border:1px solid #d7d7d7;
+/*	border:1px solid #d7d7d7; */
 	padding:.2ex .5em;
 	font-family: Verdana;
 	font-size: 17px;
@@ -45,8 +45,8 @@ footer p{margin-top:30px;color:#7C8395}
 	}
 	
 div.datadiv{
-	width:780px;
-    height:500px;
+	width:800px;
+    height:1000px;
 	overflow-x:auto;
 }
 
@@ -54,8 +54,8 @@ div.resultdiv{
 	border:1px solid #d7d7d7;
 	position: absolute;
 	top: 195px;
-    left: 783px;
-	width:780px;
+        left: 810px;
+	width:650px;
     height:500px;
 	overflow-x:auto;
 }
@@ -86,7 +86,7 @@ table.mydata{
 	border-collapse:collapse;
 	border:1px solid #d7d7d7;
 	width:780px;
-    height:500px;
+  /*  height:500px; */
 	overflow-x:auto;}
 	
 th.mydata{

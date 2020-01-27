@@ -6,23 +6,28 @@
 		<title>CPSV-AP Harvester</title>
 		<meta name="description" content="CPSV-AP Harvester" />
 		<link rel="stylesheet" type="text/css" href="./cpsv-ap_harvester.css">
-		<script type="text/javascript" src="./cpsv-ap_harvester.js"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
 		<link type="text/css" href="cron/jquery-cron.css" rel="stylesheet" />
-    	<script type="text/javascript" src="cron/jquery-cron.js"></script>
+    
 
-    	<script type="text/javascript">
-		    $(document).ready(function() {
-		        $('#scheduler').cron({
-		            initial: "* * * * *",
-		            onChange: function() {
-		                $('#scheduler-val').text($(this).cron("value"));
-		            }
-		        });
-		    });
-	    </script>
-	    </head>
+
+<!-- datatables   -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">  <!-- added in v2 -->
+<link rel="stylesheet" type="text/css" href="custom_datatables.css"> <!-- added in v2 -->
+
+
+<!-- old version 3.3.0
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.3.0/css/tooltipster.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.3.0/css/themes/tooltipster-noir.min.css">
+-->
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.7/dist/css/tooltipster.bundle.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.7/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.7/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-borderless.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.7/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.7/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-shadow.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.7/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css">
+
+</head>
 	<body>
 		<div class="container">
 			<header class="banner">
@@ -30,29 +35,41 @@
 			</header>
 			<div class="body">
 				<p class="mydata">This service harvests one or more public service description files structured according to the <a href="https://joinup.ec.europa.eu/asset/cpsv-ap/description">CPSV-AP</a> specification.</p>
+
+				<p class="mydata"> </p>
 			</div>
 
 			<div>
 				<table id="buttons" class="buttons-table">
 					<tr>
-						<td>
-							<button id="clean" onclick="clean()" class="button-cpsv">Clean data</button>
+
+
+                                                <td>
+                                                  <button id="showAll" onclick="add_datatable()" class="button-cpsv tooltip" title="Display the harvested data." >Visualise all data</button>
+                                                </td>
+
+                                                <td>
+                                                        <button id="harvest" onclick="harvest_and_clean()" class="button-cpsv tooltip" title="Harvest the data from the sources configured.">Harvest</button>
+                                                </td>
+
+
+
+ 						<td>
+							<button id="clean" onclick="clean()"  class="button-cpsv tooltip" title="Clean all the data which is harvested." >Clean data</button>
 						</td>
 						<td>
-							<button id="harvest" onclick="harvest()" class="button-cpsv">Harvest</button>
-						</td>
-						<td>
-							<button id="expand-button" class="expand-schedule-button button-cpsv closed" onclick="expandPanel()">Schedule harvesting</button>
+							<button id="expand-button" class="expand-schedule-button button-cpsv closed tooltip" title="Schedule to harvest data periodically." onclick="expandPanel()">Schedule harvesting</button>
 					        <div class="schedule-panel" hidden="true">
 					                <div id='scheduler'></div>
 							    	<!-- <p>Generated cron entry: <span class='scheduler-text' id='scheduler-val'></span></p> -->
-							    	<button id="schedule" onclick="schedule()" class="button-cpsv">Confirm</button>
+							    	<button id="schedule" onclick="schedule()" class="button-cpsv tooltip" title="Choose the period for periodic harvesting and confirm.">Confirm</button>
 					        </div>
 					    </td>
-						<td> 
-							<button id="showAll" onclick="showAll()" class="button-cpsv">Visualise all data</button>
-						</td>
-						<td>
+						 
+				
+					
+<!--
+	<td>
 							<select id="classes" class="select-cpsv">
 								<option value="PS">Public Service</option>
 								<option value="BE">Business Event</option>
@@ -71,17 +88,31 @@
 								<option value="PT">Period Of Time</option>
 								<option value="Address">Address</option>
 							</select>
-							<button id="showClass" onclick="showClass()" class="button-cpsv">Visualise class</button>
+							<button id="showClass" onclick="showClass();$('#data').DataTable({'autoWidth': false,'columnDefs':[{'width':'30%','targets':0},{'width':'30%','targets':1},{'width':'40%','targets':2}]})" class="button-cpsv">Visualise class</button>
 						</td>
+-->
 					</tr>
 				</table>
 			</div>
 			<p>
 			<div class="datadiv">
-				<table id="data" class="mydata">
-					<tr class="mydata">
-						<th class="mydata" hidden=true id="tableHeader">Data</th>
-					</tr>
+				<table id="data" class="mydata display">
+
+			<!--	<th> class="mydata" hidden=true id="tableHeader">Data</th> --> <!-- removed in v2 -->
+					
+
+
+			 <thead class="mydate" hidden=true id="tableHeader">    <!-- added in v2 -->
+					<tr>					<!-- added in v2 -->
+						<th> Type </th>  			<!-- added in v2 -->
+						<th> Identifier</th>		<!-- added in v2 -->
+						<th> Additional info </th>	<!-- added in v2 -->
+					</tr>					<!-- added in v2 -->
+				</thead>  					<!-- added in v2 -->
+			
+				<tbody>						<!-- added in v2 -->
+				</tbody>					<!-- added in v2 -->
+			
 				</table>
 			</div>
 			<div class="resultdiv" id="detailResult">
@@ -99,5 +130,81 @@
 				</p>
 			</footer>
 		</div>
+
+
+
+     <!--           <script type="text/javascript" src="./cpsv-ap_harvester.js"></script>     -->
+                <script type="text/javascript" src="./cpsv-ap_harvester_2.js"></script>
+         <!--           <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  -->
+                <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+               
+        <script type="text/javascript" src="cron/jquery-cron.js"></script>
+
+
+<!-- datatables  -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script> <!-- added in v2 -->
+<!-- <script src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script> -->
+<!-- <script src="https://cdn.datatables.net/fixedheader/3.1.6/js/dataTables.fixedHeader.min.js"></script> -->
+
+<!-- tooltipster js -->
+<!-- <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.3.0/js/jquery.tooltipster.min.js"></script> -->
+
+<script type="text/javascript" src=" https://cdn.jsdelivr.net/npm/tooltipster@4.2.7/dist/js/tooltipster.bundle.min.js"></script>
+
+
+        <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#scheduler').cron({
+                            initial: "* * * * *",
+                            onChange: function() {
+                                $('#scheduler-val').text($(this).cron("value"));
+                            }
+                        });
+                        var test;
+
+
+		<!-- tooltip -->
+			 $('.tooltip').tooltipster({
+			theme: 'tooltipster-light'
+			});
+
+                   });
+            </script>
+<script type="text/javascript">
+function harvest_and_clean(){
+harvest();
+if ( $.fn.DataTable.isDataTable( '#data' ) ) {
+$("#data").DataTable().destroy();
+$("#data tbody").empty();
+$("#tableHeader").hide();
+}
+}
+
+function add_datatable(){
+showAll();
+$("#tableHeader").show();
+$('#data thead tr').clone(true).appendTo( '#data thead' );
+
+    $('#data thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+ 
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( test.column(i).search() !== this.value ) {
+                test
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+if ( ! $.fn.DataTable.isDataTable( '#data' ) ) {
+test = $('#data').DataTable({orderCellsTop: true, 'autoWidth': false,'columnDefs':[{'width':'30%','targets':0},{'width':'30%','targets':1},{'width':'40%','targets':2}]});
+} else {
+test.draw();
+}
+}
+</script>
+
 	</body>
 </html>

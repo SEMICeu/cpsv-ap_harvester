@@ -1,0 +1,35 @@
+/*
+tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+
+ table.dataTable tr.odd { background-color: white;  border:1px lightgrey;}
+ table.dataTable tr.even{ background-color: lightgrey; border:1px lightgrey; }
+*/
+
+
+table.dataTable{
+  margin: 0 auto;
+  width: 100%;
+  clear: both;
+  border-collapse: collapse;
+  table-layout: fixed; 
+  word-break: break-all;
+}
+
+table.dataTable tbody tr{
+ max-height: 87px;
+}
+
+table.dataTable tbody td{
+padding: 0px 0px;
+}
+
+#detailResult {
+display: none;
+}
+
+
+
