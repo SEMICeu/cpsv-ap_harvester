@@ -30,7 +30,7 @@ rdfextras.registerplugins() # so we can Graph.query()
 headers = {'content-type': 'application/json'}  # HTTP header content type
 # Configurations
 config = ConfigParser()
-config.read('config.ini')
+config.read('config_3.ini')
 
 URI = sys.argv[1]
 classType = sys.argv[2]

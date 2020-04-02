@@ -8,7 +8,7 @@ function clean(){
 
 	$.ajax({
 		type: "GET",
-		url: "http://35.181.155.22:8890/cpsv-ap_harvester/pages/clear.php",
+		url: "http://cpsv-ap.semic.eu/cpsv-ap_harvester/pages/clear.php",
 		data: { },
 		async: false,
 		success: function (response) {
@@ -33,7 +33,7 @@ function harvest(){
 	
 	$.ajax({
 		type: "GET",
-		url: "http://35.181.155.22:8890/cpsv-ap_harvester/pages/harvest.php",
+		url: "http://cpsv-ap.semic.eu/cpsv-ap_harvester/pages/harvest.php",
 		data: { p: '1' },
 		async: false,
 		success: function (response) {
@@ -66,7 +66,7 @@ function schedule(){
 
 	$.ajax({
 		type: "POST",
-		url: "http://35.181.155.22:8890/cpsv-ap_harvester/pages/schedule.php",
+		url: "http://cpsv-ap.semic.eu/cpsv-ap_harvester/pages/schedule.php",
 		data: { cronExpression : cronExpression},
 		async: false,
 		success: function (response) {
@@ -165,7 +165,7 @@ function createRow (tableID){
 	
 	if (tableHeader.hidden) tableHeader.hidden = false;
 	
-	var tableRef = document.getElementById(tableID);
+	var tableRef = document.getElementById(tableID); // Added in v2,to insert in the body instead of the header
 
 	// Insert a row in the table at the last row
 	var newRow   = tableRef.insertRow(tableRef.rows.length);
@@ -198,7 +198,7 @@ function appendContent (cell, v, style){
 function getPropertyName(className, propURI){
 	$.ajax({
 		type: "GET",
-		url: "http://35.181.155.22:8890/cpsv-ap_harvester/pages/getProperties.php",
+		url: "http://cpsv-ap.semic.eu/cpsv-ap_harvester/pages/getProperties.php",
 		data: { "c":className, "p":propURI },
 		async: false,
 		success: function (response) {
@@ -287,6 +287,8 @@ function updateTable (tableID, className, URIs, data) {
 						}
 						break;
 					}
+
+
 					default:	{
 						if (propURI == "http://purl.org/dc/terms/title"){
 							propName = "Name";
@@ -320,7 +322,7 @@ function getStoredData (){
 			endpoint = xhttp.responseText;
 			}
 	};
-	xhttp.open("GET", "http://35.181.155.22:8890/cpsv-ap_harvester/pages/getEndPoint.php", false); //synchronized
+	xhttp.open("GET", "http://cpsv-ap.semic.eu/cpsv-ap_harvester/pages/getEndPoint.php", false); //synchronized
 	xhttp.send();
 	
 	if (endpoint != "") {
@@ -330,7 +332,7 @@ function getStoredData (){
 				result = xhttp2.responseText;
 			}
 		};
-		xhttp2.open("GET", "http://35.181.155.22:8890/cpsv-ap_harvester/pages/show.php", false); //synchronized
+		xhttp2.open("GET", "http://cpsv-ap.semic.eu/cpsv-ap_harvester/pages/show.php", false); //synchronized
 		xhttp2.send();
 		
 	}
@@ -449,6 +451,13 @@ function showClass(){
 			updateTable("data", "Address", URIs, result);
 			break;
 		}
+                case "Concept": {
+                         URIs = getclassURIs(result, "http://www.w3.org/2004/02/skos/core#Concept");
+                         updateTable("data", "Concept", URIs, result);
+                         break;
+                 }
+
+
 	}
 	
 	btn.disabled = false;
@@ -548,6 +557,10 @@ function showAll () {
 	URIs = getclassURIs(result, "http://www.w3.org/ns/locn#Address"); //
 	updateTable("data", "Address", URIs, result);
 	
+        //show the Concept
+        URIs =  getclassURIs(result, "http://www.w3.org/2004/02/skos/core#Concept"); //
+        updateTable("data", "Concept", URIs, result);
+
 	btn.disabled = false;
 	btn.innerHTML = "Visualise all data";
 	
@@ -583,7 +596,7 @@ function getTriplesURI(URI, classType){
 	
 	$.ajax({
 		type: "GET",
-		url: "http://35.181.155.22:8890/cpsv-ap_harvester/pages/getTriplesURI.php",
+		url: "http://cpsv-ap.semic.eu/cpsv-ap_harvester/pages/getTriplesURI.php",
 		data: { "URI":URI, "class":classType },
 		async: false,
 		success: function (response) {

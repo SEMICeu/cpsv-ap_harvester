@@ -18,7 +18,7 @@ from rdflib.plugins.stores.sparqlstore import SPARQLUpdateStore
 headers = {'content-type': 'application/json'}  # HTTP header content type
 # Configurations
 config = ConfigParser()
-config.read('config.ini')
+config.read('config_3.ini')
 
 endpoint_uri = config['Mandatory']['endpointURI']
 graph_uri = config['Mandatory']['graphURI']

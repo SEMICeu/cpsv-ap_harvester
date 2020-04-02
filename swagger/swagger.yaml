@@ -1,0 +1,385 @@
+swagger: "2.0"
+info:
+  description: "CPSV-AP Harvester API"
+  version: "1.0.0"
+  title: "Harvester API"
+  termsOfService: "https://ec.europa.eu/isa2/solutions/core-public-service-vocabulary-application-profile-cpsv-ap_en"
+  contact:
+    email: "emidio.stani@pwc.com"
+  license:
+    name: "Apache License"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "cpsv-ap.semic.eu"
+basePath: "/cpsv-ap_harvester/api/v1"
+tags:
+- name: "Business Event"
+  description: "A business event of a public service."
+- name: "Channel"
+  description: "A way to provide a public service."
+- name: "Concept"
+  description: "A way to classify entities."
+- name: "Contact Point"
+  description: "A contact point for a public service."
+- name: "Evidence"
+  description: "An evidence provided to a public service."
+- name: "Life Event"
+  description: "A life event of a public service."
+- name: "Linguistic System"
+  description: "Language in which a public service is described."
+- name: "Location"
+  description: "Location of a Public Administration."
+- name: "Public Organization"
+  description: "A public organization managing public services."
+- name: "Public Service"
+  description: "A public service managed by a public organization."
+
+schemes:
+- "http"
+paths:
+  /linguisticSystemByURI:
+    get:
+      tags:
+      - "Linguistic System"
+      summary: "Find linguistic system by URI"
+      description: "Returns a single linguistics system"
+      operationId: "getLinguisticSystemByURI"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "linguisticSystemURI"
+        in: "query"
+        description: "URI of the linguistic system"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            $ref: "#/definitions/LinguisticSystem"
+        400:
+          description: "Invalid URI supplied"
+        404:
+          description: "Linguistic System not found"
+  /businessEventByURI:
+    get:
+      tags:
+      - "Business Event"
+      summary: "Find business event by URI"
+      description: "Returns a single business event"
+      operationId: "getBusinessEventByURI"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "businessEventURI"
+        in: "query"
+        description: "URI of the business event"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            $ref: "#/definitions/BusinessEvent"
+        400:
+          description: "Invalid URI supplied"
+        404:
+          description: "Business Event not found"
+  /lifeEventByURI:
+    get:
+      tags:
+      - "Life Event"
+      summary: "Find life event by URI"
+      description: "Returns a single life event"
+      operationId: "getLifeEventByURI"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "lifeEventURI"
+        in: "query"
+        description: "URI of the life event"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            $ref: "#/definitions/LifeEvent"
+        400:
+          description: "Invalid URI supplied"
+        404:
+          description: "Life Event not found"
+  /contactPointByURI:
+    get:
+      tags:
+      - "Contact Point"
+      summary: "Find contact point by URI"
+      description: "Returns a single contact point"
+      operationId: "getContactPointByURI"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "contactPointURI"
+        in: "query"
+        description: "URI of the contact point"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            $ref: "#/definitions/ContactPoint"
+        400:
+          description: "Invalid URI supplied"
+        404:
+          description: "Contact Point not found"
+  /conceptByURI:
+    get:
+      tags:
+      - "Concept"
+      summary: "Find concept by URI"
+      description: "Returns a single concept"
+      operationId: "getConceptByURI"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "conceptURI"
+        in: "query"
+        description: "URI of the concept to provide"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            $ref: "#/definitions/Concept"
+        400:
+          description: "Invalid URI supplied"
+        404:
+          description: "Concept not found"
+  /channelByURI:
+    get:
+      tags:
+      - "Channel"
+      summary: "Find channel by URI"
+      description: "Returns a single channel"
+      operationId: "getChannelByURI"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "channelURI"
+        in: "query"
+        description: "URI of the channel to provide"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            $ref: "#/definitions/Channel"
+        400:
+          description: "Invalid URI supplied"
+        404:
+          description: "Channel not found"
+  /evidenceByURI:
+    get:
+      tags:
+      - "Evidence"
+      summary: "Find evidence by URI"
+      description: "Returns a single evidence"
+      operationId: "getEvidenceByURI"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "evidenceURI"
+        in: "query"
+        description: "URI of the evidence to provide"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Evidence"
+        400:
+          description: "Invalid URI supplied"
+        404:
+          description: "Evidence not found"
+  /locationByURI:
+    get:
+      tags:
+      - "Location"
+      summary: "Find location by URI"
+      description: "Returns a single location"
+      operationId: "getLocationByURI"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "locationURI"
+        in: "query"
+        description: "URI of the location to provide"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Location"
+        400:
+          description: "Invalid URI supplied"
+        404:
+          description: "Location not found"
+  /publicOrganizationByURI:
+    get:
+      tags:
+      - "Public Organization"
+      summary: "Find public organization by URI"
+      description: "Returns a single public organization"
+      operationId: "getPublicOrganizationByURI"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "publicOrganizationURI"
+        in: "query"
+        description: "URI of public organization to provide"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PublicOrganization"
+        400:
+          description: "Invalid URI supplied"
+        404:
+          description: "Public Organization not found"
+  /publicservices:
+    get:
+      tags:
+      - "Public Service"
+      summary: "Get all the public services"
+      description: "Get all the public services"
+      operationId: "getPublicServices"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              type: string
+        400:
+          description: "Invalid status value"
+  /publicServiceByURI:
+    get:
+      tags:
+      - "Public Service"
+      summary: "Find public service by URI"
+      description: "Returns a single public service"
+      operationId: "getPublicServiceByURI"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "publicServiceURI"
+        in: "query"
+        description: "URI of public service to provide"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PublicService"
+        400:
+          description: "Invalid URI supplied"
+        404:
+          description: "Public Service not found"
+definitions:
+  LinguisticSystem:
+    type: "object"
+    properties:
+      prefLabel:
+        type: "string"
+    xml:
+      name: "LinguisticSystem"
+  BusinessEvent:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      title:
+        type: "string"
+    xml:
+      name: "BusinessEvent"
+  LifeEvent:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      title:
+        type: "string"
+    xml:
+      name: "LifeEvent"
+  ContactPoint:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+    xml:
+      name: "ContactPoint"
+  Concept:
+    type: "object"
+    properties:
+      prefLabel:
+        type: "string"
+    xml:
+      name: "Concept"
+  Channel:
+    type: "object"
+    properties:
+      id: 
+        type: "string"
+    xml:
+      name: "Channel"
+  Evidence:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      title:
+        type: "string"
+    xml:
+      name: "Evidence"
+  Location:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+    xml:
+      name: "Location"
+  PublicOrganization:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      label:
+        type: "string"
+      spatialURI:
+        type: "string"
+    xml:
+      name: "PublicOrganization"
+  PublicService:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      competentAuthorityURI:
+        type: "string"
+      channelURI:
+        type: "string"
+    xml:
+      name: "PublicService"

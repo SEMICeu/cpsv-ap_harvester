@@ -48,7 +48,7 @@ function harvest(){
 		data: { p: '1' },
 		async: false,
 		success: function (response) {
-			alert("The following files have been harvested:\n"+response);
+			alert("The following files have been processed:\n"+response);
 		},
 		error: function () {
 			alert('There was an error!');
@@ -238,9 +238,10 @@ function updateTable (tableID, className, URIs, data) {
 	//lines = parseResult(data);
 	lines = data;
 	values = URIs.split(",");
-	
+
 	for (i=0; i<values.length; i++){
 		URI = values[i];
+	//	console.log("URI: " + URI);
 		if (URI != "") {
 			properties = "";
 			properties = getURIproperties(lines, URI);
@@ -249,9 +250,40 @@ function updateTable (tableID, className, URIs, data) {
 
 			tableFull = false;
 
+/*
+			if (className == "Contact") {
+			console.log("length :" + className + " " + aux.length);
+			console.log(aux);
+			}
+
+			if (aux.length == 1){
+				newRow = createRow(tableID);
+				newCell = newRow.insertCell(0);
+                                p = appendContent (newCell, className, "class-data");
+                                p.setAttribute("onclick","updateDetailData('"+URI+"', '"+className+"')");
+                                p.setAttribute("style", "cursor:pointer");
+                                newCell = newRow.insertCell(1); //added in v2
+                                appendContent (newCell, URI, "mydata");
+				console.log(className);
+				newCell = newRow.insertCell(2);
+				appendContent(newCell," test ","mydata");
+
+			}
+			else {
+*/
+   
+
 			for (j=1; j<aux.length; j++){
+//                           if(className == "Concept"){
+//                              console.log("Concept index:" + j);
+//                              console.log("Concept aux"+ j +":" + aux[j]);
+//                            }
+
+
 				prop = aux[j].split(" ");
+//                                console.log("prop" + prop);
 				propURI = prop[1];
+//                                console.log("propURI" + propURI);
 				append = false;
 				if(j == 1) {
 //					newCell = createRow (tableID); // commented in v2
@@ -262,6 +294,7 @@ function updateTable (tableID, className, URIs, data) {
 					p.setAttribute("style", "cursor:pointer");
 					newCell = newRow.insertCell(1); //added in v2
 					appendContent (newCell, URI, "mydata");
+
 				}
 
 				//Only show one property per class
@@ -273,6 +306,9 @@ function updateTable (tableID, className, URIs, data) {
 						} else if (propURI == "http://purl.org/dc/terms/type"){
 							propName = "Type";
 							append = true;
+						} else if (propURI == "http://purl.org/dc/terms/identifier"){
+							propName = "Identifier";
+							append = true;
 						}
 						break;
 					}
@@ -283,9 +319,9 @@ function updateTable (tableID, className, URIs, data) {
 						}
 						break;
 					}
-					case "Contact Point":	{
-						if (propURI == "http://www.w3.org/2006/vcard/ns#hasURL"){
-							propName = "URL";
+					case "Contact":	{
+						if (propURI == "http://purl.org/dc/terms/identifier"){
+							propName = "Identifier";
 							append = true;
 						}
 						break;
@@ -323,6 +359,82 @@ function updateTable (tableID, className, URIs, data) {
 						}
 						break;
 					}
+
+
+                                         case "Location": {
+                                                 if (propURI =="http://purl.org/dc/terms/title"){
+                                                         propName = "Name";
+                                                         append = true;
+                                                 }
+						break;
+                                         }
+
+                                          case "LinguisticSystem": {
+                                                   if (propURI =="http://www.w3.org/2004/02/skos/core#prefLabel"){
+                                                          propName ="Preferred Label";
+                                                           append = true;
+                                                   }
+
+                                                    break;
+                                          }
+		
+					case "Language": {
+						if (propURI =="http://www.w3.org/2004/02/skos/core#prefLabel"){
+							propName ="Language";
+							append = true;
+						}
+						
+						break;
+					}
+
+
+					case "Concept": {
+                                                 if (propURI =="http://www.w3.org/2004/02/skos/core#prefLabel"){
+                                                        propName ="Preferred Label";
+                                                         append = true;
+                                                 }
+
+                                                  break;
+              				}
+/*
+                                         case "LinguisticSystem": {
+                                                  if (propURI ="http://www.w3.org/2004/02/skos/core#prefLabel"){
+                                                         propName ="Preferred Label";
+                                                          append = true;
+                                                  }
+
+                                                   break;
+                                         }
+
+*/
+
+
+
+                                        case "LegalResource": {
+                                                if (propURI == "http://purl.org/dc/terms/identifier"){
+                                                       propName = "Identifier";
+                                                       append = true;
+                                                }
+                                                break;
+                                        }
+
+					case "ContactPoint": {
+						if (propURI =="http://purl.org/dc/terms/identifier"){
+							propName = "Identifier";
+							append = true;
+						}
+						break;
+					}
+
+                                        case "PublicServiceDataset": {
+                                                if (propURI =="http://purl.org/dc/terms/identifier"){
+                                                        propName = "Identifier";
+                                                        append = true;
+                                                }
+                                                break;
+                                        }
+
+
 					default:	{
 						if (propURI == "http://purl.org/dc/terms/title"){
 							propName = "Name";
@@ -337,11 +449,17 @@ function updateTable (tableID, className, URIs, data) {
 						value = value + " " + prop[k];
 					}
 					newCell = newRow.insertCell(2);
+//                                        if(className == "Concept") {
+//                                           console.log("My prop:" + prop);
+//                                           console.log("Aux length:" + aux.length);
+//                                           console.log("Aux2:" + aux[2]);
+//                                           console.log("Current Aux"+j+":" + aux[j]);
+//                                        } 
 					appendContent (newCell, "<b>" + propName + ":</b>" + value, "mydata");
 					tableFull = true;
-				}
-			  
+				}  
 			}
+//		   }
 		}
 	}
 }
@@ -571,7 +689,7 @@ function showAll () {
 	updateTable("data", "Agent", URIs, result);
 
 	//show the Contacts
-	URIs = getclassURIs(result, "http://www.w3.org/2006/vcard/ns#Contact"); //
+	URIs = getclassURIs(result, "https://schema.org/ContactPoint"); //
 	updateTable("data", "Contact", URIs, result);
 
 	//show the Public Organisations
@@ -589,7 +707,37 @@ function showAll () {
 	//show the Address
 	URIs = getclassURIs(result, "http://www.w3.org/ns/locn#Address"); //
 	updateTable("data", "Address", URIs, result);
+
+	//show the Location
+	URIs = getclassURIs(result,"http://purl.org/dc/terms/Location"); //
+	updateTable("data", "Location",URIs, result);
 	
+//	//show the Language
+//         URIs = getclassURIs(result,"http://purl.org/dc/terms/LinguisticSystem"); //
+  //       updateTable("data", "Language",URIs, result);
+
+	//show the Concept
+	URIs = getclassURIs(result,"http://www.w3.org/2004/02/skos/core#Concept"); //
+	updateTable("data", "Concept",URIs, result);
+
+
+	// show the LinguisticSystem
+	URIs = getclassURIs(result,"http://purl.org/dc/terms/LinguisticSystem"); //
+	updateTable("data", "LinguisticSystem",URIs, result);
+
+        // show the Legal Resource
+        URIs = getclassURIs(result,"http://data.europa.eu/eli/ontology#LegalResource"); //
+        updateTable("data", "LegalResource",URIs, result);
+
+	// show the Contact Point
+         URIs = getclassURIs(result,"https://schema.org/ContactPoint"); //
+         updateTable("data", "ContactPoint",URIs, result);
+
+       // show the Public Service Dataset
+         URIs = getclassURIs(result,"http://data.europa.eu/m8g/PublicServiceDataset"); //
+         updateTable("data", "PublicServiceDataset",URIs, result);
+
+
 	btn.disabled = false;
 	btn.innerHTML = "Visualise all data";
 	
@@ -634,7 +782,6 @@ function getTriplesURI(URI, classType){
 	});
 	return props;
 }
-
 /**
  * Update the data on the right with the detail data.
  * #param {string} URI - URI of the element of which to show the data.
@@ -653,7 +800,7 @@ function updateDetailData (URI, classType) {
 	title.className = "title";
 	
 	var body = document.getElementById("detailDataBody");
-	body.innerHTML = "<b>Identifier: </b>" + URI;
+	body.innerHTML = "<b>URI: </b>" + URI;
 	body.className = "mydata";
 	
 	var properties = triples.split("@#");

@@ -1,0 +1,152 @@
+swagger: "2.0"
+info:
+  description: "CPSV-AP Harvester API"
+  version: "1.0.0"
+  title: "Harvester API"
+  termsOfService: "https://ec.europa.eu/isa2/solutions/core-public-service-vocabulary-application-profile-cpsv-ap_en"
+  contact:
+    email: "emidio.stani@pwc.com"
+  license:
+    name: "Apache License"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "cpsv-ap.semic.eu"
+basePath: "/cpsv-ap_harvester/api/v1"
+tags:
+- name: "location"
+  description: "Location of a Public Administration"
+  externalDocs:
+    description: "Find out more"
+    url: "https://github.com/catalogue-of-services-isa/CPSV-AP"
+- name: "public organization"
+  description: "A public organization managing public services"
+- name: "public service"
+  description: "A public service managed by a public organization"
+  externalDocs:
+    description: "Find out more about our store"
+    url: "https://github.com/catalogue-of-services-isa/CPSV-AP"
+schemes:
+- "https"
+- "http"
+paths:
+  /locationByURI:
+    get:
+      tags:
+      - "location"
+      summary: "Find location by URI"
+      description: "Returns a single location"
+      operationId: "getLocationByURI"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "locationURI"
+        in: "query"
+        description: "URI of the location to provide"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Location"
+        400:
+          description: "Invalid URI supplied"
+        404:
+          description: "Location not found"
+  /publicOrganizationByURI:
+    get:
+      tags:
+      - "public organization"
+      summary: "Find public organization by URI"
+      description: "Returns a single public organization"
+      operationId: "getPublicOrganizationByURI"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "publicOrganizationURI"
+        in: "query"
+        description: "URI of public organization to provide"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PublicOrganization"
+        400:
+          description: "Invalid URI supplied"
+        404:
+          description: "Public Organization not found"
+  /publicservices:
+    get:
+      tags:
+      - "public service"
+      summary: "Get all the public services"
+      description: "Get all the public services"
+      operationId: "getPublicServices"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PublicService"
+        400:
+          description: "Invalid status value"
+  /publicserviceByURI:
+    get:
+      tags:
+      - "public service"
+      summary: "Find public service by URI"
+      description: "Returns a single public service"
+      operationId: "getPublicServiceByURI"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "publicServiceURI"
+        in: "query"
+        description: "URI of public service to provide"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PublicService"
+        400:
+          description: "Invalid URI supplied"
+        404:
+          description: "Public Service not found"
+definitions:
+  Location:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+    xml:
+      name: "Location"
+  PublicOrganization:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      label:
+        type: "string"
+      spatialURI:
+        type: "string"
+    xml:
+      name: "PublicOrganizaiton"
+  PublicService:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      competentAuthorityURI:
+        type: "string"
+    xml:
+      name: "PublicService"

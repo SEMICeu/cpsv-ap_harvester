@@ -13,7 +13,7 @@ from configparser import ConfigParser
 
 # Configurations
 config = ConfigParser()
-config.read('config.ini')
+config.read('config_3.ini')
 
 endpoint_uri = config['Mandatory']['endpointURI']
 

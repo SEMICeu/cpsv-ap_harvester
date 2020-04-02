@@ -1,0 +1,297 @@
+<?php
+/**
+ * Harvester API
+ * @version 1.0.0
+ */
+use Models\Location as Location;
+use Models\PublicOrganization as PO;
+use Models\PublicService as PS;
+use Models\Evidence as Evidence;
+use Models\Channel as Channel;
+use Models\Concept as Concept;
+use Models\LinguisticSystem as LinguisticSystem;
+use Models\ContactPoint as ContactPoint;
+use Models\BusinessEvent as BusinessEvent;
+use Models\LifeEvent as LifeEvent;
+use GuzzleHttp\Client;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as Xlsx;
+use ML\JsonLD\JsonLD;
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$app = new Slim\App();
+
+function harvester_get_node($url){
+     $client = new Client();
+     $res = $client->request('GET', $url);
+     return $res;
+}
+
+
+ /**
+  * GET getBusinessEventByURI
+  * Summary: Find BusinessEvent by URI
+  * Notes: returns a single BusinessEvent
+  * Output-Formats: [application/json]
+ */
+$app->GET('/v1/businessEventByURI', function($request, $response, $args) {
+ 
+                $queryParams = $request->getQueryParams();
+                $businessEventURI = $queryParams['businessEventURI'];
+
+                $endpoint = 'http://35.181.155.22/sparql?default-graph-uri=http%3A%2F%2F35.181.155.22%2Fpilot&query=';
+                $query = 'PREFIX dct:  <http://purl.org/dc/terms/> PREFIX cv: <http://data.europa.eu/m8g/>' .
+                         'CONSTRUCT { ' .
+                         '?s dct:identifier ?identifier . ' .
+                         '?s dct:title ?title . ' .
+                         '}' .
+                         'WHERE { '.
+                         '?s rdf:type cv:BusinessEvent . ' .
+                         '?s dct:identifier ?identifier . ' .
+                         '?s dct:title ?title . ' .
+                         'FILTER(?s = <' . $businessEventURI . '>) ' .
+                         '}' ;
+
+                $output = '&format=application%2Fx-json%2Bld%2Bctx';
+                $url = $endpoint . urlencode($query) . $output;
+                $res = harvester_get_node($url)->getBody();
+                if(empty(json_decode($res, true))) {
+                   $response = $response->withStatus(404);
+                } else {
+                $identifier = json_decode($res)->{'@graph'}[0]->identifier;
+                $title = json_decode($res)->{'@graph'}[0]->title;
+
+
+                $be = new BusinessEvent;
+                $be->setId($identifier);
+                $be->setTitle($title);
+
+                $message= json_encode($be);
+                
+                $response = $response->write($message)->withStatus(200);
+                }
+                return $response;
+ });
+
+/**
+ * GET importSpreadSheetFromURL
+ * Summary: Import a CPSV-AP 2.2.1 compliant spreadsheet by URL
+ * Notes: Returns a public service list
+ * Output-Formats: [application/json]
+ */
+$app->GET('/v1/importSpreadsheetFromURL', function($request, $response, $args) {
+
+          $queryParams = $request->getQueryParams();
+          $spreadsheetURL = $queryParams['spreadsheetURL'];
+          
+          $file_path = __DIR__.'/download/';
+          $file_name = "data.xslx";
+
+          try {
+             if (download($spreadsheetURL, $file_path, $file_name)['response_code'] == '200') {
+
+                 $reader = new Xlsx;
+                 $reader->setReadDataOnly(true);
+                 $spreadsheet = $reader->load($file_path . $file_name);
+/*
+                 $file = file_get_contents(__DIR__ . '/rdf/CPSV-AP_v2.2.1.jsonld');
+                 $context =  json_decode($file, true)['@context'];
+*/
+
+
+                 $cpsvap_array = array();
+
+
+                 $spreadsheet->setActiveSheetIndexByName('Public Service');
+                 $worksheet = $spreadsheet->getActiveSheet();
+                 $highestRow = $worksheet->getHighestRow();
+
+
+                 for ($x = 2; $x <= $highestRow; $x++){
+
+			// URI
+                        $ps_uri = $worksheet->getCell('A' . $x)->getValue();
+			// name $ps_name =  $worksheet->getCell('B' . $x)->getValue();
+                        $ps_description = $worksheet->getCell('C' . $x)->getValue();
+                        $ps_ca = $worksheet->getCell('D' . $x)->getValue();
+
+			$ps_key = $worksheet->getCell('E' . $x)->getValue();
+			$ps_key_array = array_map('trim', explode(";",$ps_key));
+
+
+                        $ps = new PS;
+                        $ps->setId($ps_uri);
+                        $ps->setTitle($ps_name);
+                        $ps->setDescription($ps_description);
+                        $ps->setCompetentAuthorityURI($ps_ca);
+			$ps->setKeyword($ps_key_array);
+                  /* 
+                        $ops_enc = json_encode($ps);
+                        $ops = json_decode($ops_enc,true);
+                        $ops['isTypeOf'] = "PublicService";
+                  */
+                        $cpsvap_array[] = $ps;
+                 }
+
+
+/*
+                 $ps_uri = $worksheet->getCell('A2')->getValue();
+                 $ps_name =  $worksheet->getCell('B2')->getValue();
+                 $ps_description = $worksheet->getCell('C2')->getValue();
+                 $ps_ca = $worksheet->getCell('D2')->getValue();
+             
+                 $ps = new PS;
+                 $ps->setId($ps_uri);
+                 $ps->setTitle($ps_name);
+                 $ps->setDescription($ps_description);
+                 $ps->setCompetentAuthorityURI($ps_ca);
+                
+                 $ps1 = json_encode($ps);
+                 $ops1 = json_decode($ps1,true);
+                 $ops1['@type'] = "http://data.europa.eu/m8g/PublicService";
+*/
+
+                 $spreadsheet->setActiveSheetIndexByName('Public Organisation');
+                 $worksheet = $spreadsheet->getActiveSheet();
+                 $highestRow = $worksheet->getHighestRow();
+                 $ca_uri = $worksheet->getCell('A2')->getValue();
+                 $ca_label =  $worksheet->getCell('C2')->getValue();
+
+                 $po =  new PO;
+                 $po->setId($ca_uri);
+                 $po->setLabel($ca_label);
+
+                 $po1 = json_encode($po);
+                 $opo1 = json_decode($po1, true);
+                 $opo1['@type'] = "http://data.europa.eu/m8g/PublicOrganization";
+
+                 //"@context" => "https://raw.githubusercontent.com/catalogue-of-services-isa/CPSV-AP/master/releases/2.2.1/CPSV-AP_v2.2.1.jsonld",
+                 //$file = file_get_contents(__DIR__ . '/rdf/CPSV-AP_v2.2.1.jsonld');
+                 //$context =  json_decode($file, true)['@context'];
+ /*
+                 $ps_dataset = (object) [
+                       "@type" =>  "http://data.europa.eu/m8g/PublicServiceDataset",
+                       "@context" => $context,
+                       'hasPart' => [$ops1]
+
+                 ];
+
+                 $message = json_encode($ps_dataset);
+*/
+                 $cpsvap_base = (object) [
+                      "@base" => "http://cpsvap.semic.eu/"
+                 ];
+
+                 $cpsvap_list = (object) [
+                        "@context" => array("https://raw.githubusercontent.com/catalogue-of-services-isa/CPSV-AP/master/releases/2.2.1/CPSV-AP_v2.2.1.jsonld", $cpsvap_base ),
+                        "@graph" => $cpsvap_array
+                 ];
+
+
+                 $message = json_encode($cpsvap_list);
+
+                 //$file = file_get_contents(__DIR__ . '/rdf/CPSV-AP_v2.2.1.jsonld');
+                 
+                 //$json_array[] = json_decode($file, true);
+                 //$json_array[] = json_decode($message, true);
+
+                 //$fp = fopen(__DIR__ . '/rdf/results.jsonld', 'w');
+                 //fwrite($fp, $message);
+                 //fclose($fp);
+
+                 //$compacted = JsonLD::compact(__DIR__ . '/rdf/' . 'results.jsonld', __DIR__ . '/rdf/' . 'CPSV-AP_v2.2.1.jsonld');
+
+/*
+                 $graph = new EasyRdf_Graph();
+                 $graph->parseFile(__DIR__ . '/rdf/results.jsonld', 'jsonld');
+                 $gs = new EasyRdf_GraphStore('http://35.181.155.22/sparql-graph-crud');
+                 $gs->insert($graph, 'http://test.upload/virtuoso');
+                 
+
+                 $po_list = (object) [
+                        "@context" => $context,
+                        "@graph" => [$opo1]
+                 ];
+
+                 $fp = fopen(__DIR__ . '/rdf/po.jsonld', 'w');
+                 fwrite($fp, json_encode($po_list));
+                 fclose($fp);
+
+                 $graph = new EasyRdf_Graph();
+                 $graph->parseFile(__DIR__ . '/rdf/po.jsonld', 'jsonld');
+                 $gs = new EasyRdf_GraphStore('http://35.181.155.22/sparql-graph-crud');
+                 $gs->insert($graph, 'http://test.upload/virtuoso');
+*/
+                 //$message= json_encode($myArray);
+                 $response = $response->withHeader('Content-Type', 'application/ld+json');
+                 $response->write($message)->withStatus(200);
+              } else {
+                 $response = $response->withStatus(404);
+              }
+           } catch (\GuzzleHttp\Exception\ConnectException $e) {
+                  $response = $response->withStatus(400);
+           }
+           return $response;
+});
+
+
+function download($url, $filepath, $filename){
+       $path = $filepath . $filename;
+       $file_path = fopen($path,'w');
+       $client = new \GuzzleHttp\Client();
+       $response = $client->get($url, ['http_errors' => false, 'save_to' => $file_path]);
+       return ['response_code'=>$response->getStatusCode(), 'name' => $filename];
+}
+
+
+function upload($path, $filename){
+
+        $url = "http://35.181.155.22/sparql-graph-crud?graph-uri=http://test.upload/virtuoso";
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post($url, [
+                   'multipart' => [
+                                     [
+                                          'name'     => 'FileContents',
+                                          'contents' => file_get_contents($path . $filename),
+                                          'filename' => $filename
+                                     ]
+                                  ]
+        ]);
+        return ['response_code'=>$response->getStatusCode(), 'name' => $filename];
+}
+
+
+/**
+ * GET getPublicServices
+ * Summary: Get all the public services
+ * Notes: Get all the public services
+ * Output-Formats: [application/json]
+ */
+$app->GET('/v1/publicservices', function($request, $response, $args) {
+            
+            $endpoint = 'http://35.181.155.22/sparql?default-graph-uri=http%3A%2F%2F35.181.155.22%2Fpilot&query=';
+
+            $query='PREFIX cpsv: <http://purl.org/vocab/cpsv#> '.
+                   'CONSTRUCT {?s rdf:type cpsv:PublicService} '.
+                   'WHERE { '.
+                   '?s rdf:type cpsv:PublicService . '.
+                   '}';
+            $output = '&format=application%2Fx-json%2Bld%2Bctx';
+            $url = $endpoint . urlencode($query) . $output;
+            $res = harvester_get_node($url)->getBody();
+
+            $list = json_decode($res)->{'@graph'};
+            
+            $myArray = array();
+            foreach ($list as  $publicservice) {
+                $myArray[] = $publicservice->{'@id'};
+            }
+            
+            $message= json_encode($myArray);
+            $response->write($message);
+            return $response;
+});
+
+    
+
+$app->run();
