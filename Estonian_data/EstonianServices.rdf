@@ -1,0 +1,1117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:eli="http://data.europa.eu/eli/ontology#"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:vann="http://purl.org/vocab/vann/"
+	xmlns:cpsv="http://purl.org/vocab/cpsv#"
+	xmlns:cv="http://data.europa.eu/m8g/"
+	xmlns:locn="http://www.w3.org/ns/locn#"
+	xmlns:schema="http://schema.org/"
+	xmlns:adms="http://www.w3.org/ns/adms#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:dcat="http://www.w3.org/ns/dcat#"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/TCC-001">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Applying for admission to a preschool</dct:title>
+	<dct:description>An application can be submitted to enroll a child to any municipal preschool establishment in Tallinn if the child and at least one parent are residents of Tallinn according to the Population Register.</dct:description>
+	<cv:sector>Education</cv:sector>
+	<dct:type>Affiliation/ Registration</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/StartingEducation"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/TallinCouncil"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Finance"/>
+	<cv:hasFormalFramework rdf:resource="https://oigusaktid.tallinn.ee/id=3001"/>
+	<cv:hasChannel rdf:resource="https://www.eesti.ee/eng/services/citizen/perekond_1/lasteaiakoha_taotlemine_tallinnas#Eservice"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasChannel rdf:resource="http://www.tallinn.ee/est/haridus/Lasteaiakoha-taotlemine-4#Email"/>
+	<cv:hasChannel rdf:resource="https://www.eesti.ee/eng/services/citizen/perekond_1/lasteaiakoha_taotlemine_tallinnas#web"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/EAS-001">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Start-up grant</dct:title>
+	<dct:description>The start-up grant aims to support the creation of enterprises that have a lot of development potential, and thereby expand regional entrepreneurship and number of exporters.</dct:description>
+	<cv:sector>Professional, scientific and technical activities</cv:sector>
+	<dct:type>Grants</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/StartingBusiness"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/EE"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/EconomicAffairs"/>
+	<cv:hasFormalFramework rdf:resource="http://www.eas.ee/wp-content/uploads/2015/12/Starditoetus_eng_2ver.pdf"/>
+	<cv:hasChannel rdf:resource="http://www.eas.ee/service/starditoetus-eng/?lang=en#Eservice"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasChannel rdf:resource="http://www.eas.ee/service/starditoetus-eng/?lang=en#web"/>
+	<cv:hasChannel rdf:resource="http://www.eas.ee/service/starditoetus-eng/?lang=en#bureau"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/PPA-048">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Checking the validity of an identity document</dct:title>
+	<cv:sector>Administrative and support service activities</cv:sector>
+	<dct:type>Interactive information service</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/Other"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/123032015017"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/JUM-055">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Submission of applications and documents in the Company Registration Portal</dct:title>
+	<dct:description>The Company Registration Portal is an Internet environment that allows entrepreneurs to submit electronic applications, documents and annual reports to the Commercial Register.</dct:description>
+	<cv:sector>Information and communication</cv:sector>
+	<dct:type>Interactive information service</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/Notifying_and_reporting_to_authorities"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Justiitsministeerium"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Justiitsministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/en/eli/511012016002/consolide"/>
+	<cv:hasChannel rdf:resource="https://ettevotjaportaal.rik.ee/webaddress"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/AdministrationPolicyDepartment"/>
+	<cv:hasChannel rdf:resource="https://ettevotjaportaal.rik.ee/homepage"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/SKA-040">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Entrepreneur's applications to the Social Insurance Board</dct:title>
+	<dct:description>The entrepreneur shall see applications saved and submitted wihtin the last 12 months.</dct:description>
+	<cv:sector>Professional, scientific and technical activities</cv:sector>
+	<dct:type>Report</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/Notifying_and_reporting_to_authorities"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Sotsiaalkindlustusamet"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Sotsiaalministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/112072014146"/>
+	<cv:hasChannel rdf:resource="https://www.eesti.ee/est/teenused/ettevotja/tookeskkond_ja_personal_1/ettevotte_taotluste_menetlusinfo/webaddress"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/126022015017"/>
+	<cv:hasChannel rdf:resource="https://www.eesti.ee/est/teenused/ettevotja/tookeskkond_ja_personal_1/ettevotte_taotluste_menetlusinfo/State"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/110012014013"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/MA-066">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Issuing the document proving the right to drive</dct:title>
+	<dct:description>Entering the data of the document proving the right to drive into the traffic registry and issuing the driving licence of B, AM, A1, A2, A, C1, C1E, C, CE, D1, D1E, D, DE, T categories and driving licences for bikes, engines and trams.</dct:description>
+	<cv:sector>Transporting and storage</cv:sector>
+	<dct:type>Diploma/Credential/Licence/Certificate</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/Driving_a_vehicle"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Maanteeamet"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Majandus"/>
+	<cpsv:hasInput rdf:resource="http://data.europa.eu/Estonia/Input/HealthCertificate"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/123032015119"/>
+	<cv:hasChannel rdf:resource="http://www.mnt.ee/index.php?id=10644/Webaddress"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/ExaminationDepartment"/>
+	<cpsv:hasInput rdf:resource="http://data.europa.eu/Estonia/Input/Id_and_oldDrivingLicense"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/122042015011"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/122042015005"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/122042015020"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/122042015019"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/120052015006"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/PPA-025">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Possibility of booking time in the servicepoint</dct:title>
+	<dct:description>If you wish you can, make a reservation in the service point.</dct:description>
+	<cv:sector>Other services activities</cv:sector>
+	<dct:type>Data updates</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/Other"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Politsei"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Siseministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/101042015003"/>
+	<cv:hasChannel rdf:resource="https://broneering.politsei.ee/"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/Other"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Juhtimisarvestuse"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/SIM-024">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Checking entrance ban validity date imposed to a person by Estonia</dct:title>
+	<dct:description>Foreigner can check whether entrance ban imposed to a person is still valid.</dct:description>
+	<cv:sector>Professional, scientific and technical activities</cv:sector>
+	<dct:type>Assertion</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/Moving_to_from_the_country"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Siseministeerium"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Siseministeeriumi"/>
+	<cpsv:hasInput rdf:resource="http://data.europa.eu/Estonia/Input/AinultParitavate"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/123032015029"/>
+	<cv:hasChannel rdf:resource="https://vana.siseministeerium.ee/17115/"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/MigrationPolicyDepartment"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/UNES-002">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Responding to information requests</dct:title>
+	<dct:description>Responding to information requests related to Estonian National Commission for UNESCO</dct:description>
+	<cv:sector>Arts, entertainment and recreation</cv:sector>
+	<dct:type>Request for information/Objection</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/Other"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/SAUNESCO"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Kultuuriministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/122032011010"/>
+	<cv:hasChannel rdf:resource="http://127.0.0.1:3362/www.unesco.ee"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/mta-215">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Declaration INF 2</dct:title>
+	<dct:description>Disclosure of housing loan interests paid by natural persons</dct:description>
+	<cv:sector>Professional, scientific and technical activities</cv:sector>
+	<dct:type>Report</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/Looking_place_live"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Maksu"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/13246182"/>
+	<cv:hasChannel rdf:resource="http://www.emta.ee/index.php?id=12223"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasFormalFramework rdf:resource="http://www.emta.ee/index.php/id=30303"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/ARCH-012">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title> Higher education possibilities in Estonia</dct:title>
+	<dct:description>Study in Estonia is your official national guide to higher education in the Republic of Estonia. Our aim is to promote Estonia as an attractive study destination and promote studying possibilities for international students.</dct:description>
+	<cv:sector>Education</cv:sector>
+	<dct:type>Interactive information service</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/StartingEducation"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Sihtasutus"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Haridus"/>
+	<cv:hasFormalFramework rdf:resource="https://www.hm.ee/sites/default/files/strateegia2020.pdf"/>
+	<cv:hasChannel rdf:resource="http://www.studyinestonia.ee/"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/EducationAgency"/>
+	<cv:hasFormalFramework rdf:resource="http://archimedes.ee/wp-content/uploads/2015/09/archimedes-pohikiri-02-04-2015.pdf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/mta-217">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Declaration INF 3</dct:title>
+	<dct:description>Disclosure of training expenses paid by natural persons</dct:description>
+	<cv:sector>Professional, scientific and technical activities</cv:sector>
+	<dct:type>Report</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/StartingEducation"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Maksu"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/13246182"/>
+	<cv:hasChannel rdf:resource="http://www.emta.ee/index.php?id=12223"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasFormalFramework rdf:resource="http://www.emta.ee/index.php/id=30303"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/ARCH-013">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Evaluation of foreign education qualifications in Estonia</dct:title>
+	<dct:description>The centre evaluates foreign qualifications and determines the Estonian correspondence to the attested qualifications for: commencing or continuing studies in Estonian higher education institutions employment in non-regulated professions.</dct:description>
+	<cv:sector>Education</cv:sector>
+	<dct:type>Consultation</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/StartingEducation"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Sihtasutus"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Haridus"/>
+	<cv:hasFormalFramework rdf:resource="https://www.hm.ee/sites/default/files/strateegia2020.pdf"/>
+	<cv:hasChannel rdf:resource="http://archimedes.ee/enic/"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/AgencyAcademicRecognition"/>
+	<cv:hasFormalFramework rdf:resource="http://archimedes.ee/wp-content/uploads/2015/09/archimedes-pohikiri-02-04-2015.pdf"/>
+	<cv:hasFormalFramework rdf:resource="http://adm.archimedes.ee/enic/wp-includes/file=2012"/>
+	<cv:hasFormalFramework rdf:resource="http://adm.archimedes.ee/enic/wp-includes/file=2015"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/mta-212">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Declaration INF 5</dct:title>
+	<dct:description>Disclosure of insurance premiums received on the basis of an insurance contract for a supplementary funded pension</dct:description>
+	<cv:sector>Professional, scientific and technical activities</cv:sector>
+	<dct:type>Report</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/Retirement"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Maksu"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/13246182"/>
+	<cv:hasChannel rdf:resource="http://www.emta.ee/index.php?id=12223"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasFormalFramework rdf:resource="http://www.emta.ee/index.php/id=30303"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/mta-213">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Declaration INF 1</dct:title>
+	<dct:description>Disclosure of recipients of dividends and other equity payments</dct:description>
+	<cv:sector>Professional, scientific and technical activities</cv:sector>
+	<dct:type>Report</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/Other"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Maksu"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="http://www.emta.ee/index.php/id=30303"/>
+	<cv:hasChannel rdf:resource="http://www.emta.ee/index.php?id=12223"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/13246182"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/mta-224">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Declaration INF 4</dct:title>
+	<dct:description>Disclosure of gifts and donations received</dct:description>
+	<cv:sector>Professional, scientific and technical activities</cv:sector>
+	<dct:type>Report</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/Other"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Maksu"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/13246182"/>
+	<cv:hasChannel rdf:resource="http://www.emta.ee/index.php?id=12223"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasFormalFramework rdf:resource="http://www.emta.ee/index.php/id=30303"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/VTA-057">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>An electronic solution for simplifying administrative procedures (Electronic Maritime Information System)</dct:title>
+	<dct:description>The EMDE application aims to simplify administrative procedures applied to transmission of maritime notifications, filling in and submission of documents and checking procedures.</dct:description>
+	<cv:sector>Other services activities</cv:sector>
+	<dct:type>Interactive information service</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/DoingBusiness"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Veeteede"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Majandus"/>
+	<cpsv:hasInput rdf:resource="http://data.europa.eu/Estonia/Input/VTA57"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/106032013016"/>
+	<cv:hasChannel rdf:resource="https://www.emde.ee/vi-iloginedit"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasCompetentAuthority rdf:resource="http://127.0.0.1:3362/http%3A%2F%2Fdata.europa.eu%2FEstonia%2FPublicOrganisation%2FIT+Development"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/mta-218">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Declaration INF 6</dct:title>
+	<dct:description>Disclosure of amounts paid to acquire units of a voluntary pension fund</dct:description>
+	<cv:sector>Professional, scientific and technical activities</cv:sector>
+	<dct:type>Report</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/Retirement"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Maksu"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/13246182"/>
+	<cv:hasChannel rdf:resource="http://www.emta.ee/index.php?id=12223"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasFormalFramework rdf:resource="http://www.emta.ee/index.php/id=30303"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/KKA-013">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Forest notification</dct:title>
+	<dct:description>Entrepreneur or citizen who must submit the forest notification to forest law. Forest owners and also their representives or land renters. Forest notification is needed when you plan to do clearcut, shelterwood, thinning, ...on your proporty.  </dct:description>
+	<cv:sector>Agriculture, forestry and fishing</cv:sector>
+	<dct:type>Diploma/Credential/Licence/Certificate</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/Other"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Keskkonnaamet"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Keskkonnaministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/105012011016"/>
+	<cv:hasChannel rdf:resource="http://www.keskkonnaamet.ee/public/41_Metsateatis.pdf"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/DoingBusiness"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/ForestsDepartment"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/STAT-024">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Consumer Price Index</dct:title>
+	<dct:description>To provide information about the changes in Estonia in the prices of consumer goods and paid services, which enables to observe and estimate the changes in Estonian economy. The study is implemented according to European Union ( EU) regulation.</dct:description>
+	<cv:sector>Information and communication</cv:sector>
+	<dct:type>Interactive information service</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/DoingBusiness"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Statistikaamet"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="http://eur-http://eur-lex.europa.eu/LexUriServ/LexUriServ.do/uri=CONSLEG"/>
+	<cv:hasChannel rdf:resource="http://pub.stat.ee/px-web.2001/I_Databas/Economy/24Prices/24Prices.asp"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/Other"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/EconomicsandEnvironmentalStatDep"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/mta-222">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Declaration INF 9</dct:title>
+	<dct:description>Disclosure of use of gifts and donations and other income</dct:description>
+	<cv:sector>Professional, scientific and technical activities</cv:sector>
+	<dct:type>Report</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/Other"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Maksu"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/13246182"/>
+	<cv:hasChannel rdf:resource="http://www.emta.ee/index.php?id=12223"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasFormalFramework rdf:resource="http://www.emta.ee/index.php/id=30303"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/mta-216">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Declaration INF 12</dct:title>
+	<dct:description>Disclosure of internest paid to non-residents</dct:description>
+	<cv:sector>Professional, scientific and technical activities</cv:sector>
+	<dct:type>Report</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/Moving_to_from_the_country"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Maksu"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/13246182"/>
+	<cv:hasChannel rdf:resource="http://www.emta.ee/index.php?id=12223"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasFormalFramework rdf:resource="http://www.emta.ee/index.php/id=30303"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/mta-219">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Declaration INF 14</dct:title>
+	<dct:description>Disclosure of compensation for the use of personal automobile and the cover of training expenses</dct:description>
+	<cv:sector>Financial and insurance activities</cv:sector>
+	<dct:type>Report</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/DoingBusiness"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Maksu"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/13246182"/>
+	<cv:hasChannel rdf:resource="http://www.emta.ee/index.php?id=12223"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasFormalFramework rdf:resource="http://www.emta.ee/index.php/id=30303"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/RES-202">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Fire safety self inspection report submission</dct:title>
+	<dct:description>The proprietor of a building submits a fire safety report for any building where fire safety risk is elevated, where lots of people congregate or where significant material damage is possible. The report is submitted once a year to the ERB.</dct:description>
+	<cv:sector>Public administration and defence, compulsory social security</cv:sector>
+	<dct:type>Report</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/DoingBusiness"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Paasteamet"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Siseministeeriumi"/>
+	<cpsv:hasInput rdf:resource="http://data.europa.eu/Estonia/Input/NationalID"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/115022011005"/>
+	<cv:hasChannel rdf:resource="https://tuleohutusaruanne.ee/"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/FireSafetysDevelopment"/>
+	<cpsv:hasInput rdf:resource="http://data.europa.eu/Estonia/Input/DSC"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/mta-223">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Declaration INF 16</dct:title>
+	<dct:description>Disclosure of internest and insurance indemnities paid to resident natural persons</dct:description>
+	<cv:sector>Professional, scientific and technical activities</cv:sector>
+	<dct:type>Report</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/Moving_to_from_the_country"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Maksu"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/13246182"/>
+	<cv:hasChannel rdf:resource="http://www.emta.ee/index.php?id=12223"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasFormalFramework rdf:resource="http://www.emta.ee/index.php/id=30303"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/mta-220">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Submission of forest information</dct:title>
+	<dct:description>Notification cutting right or timber sales and purchase transaction</dct:description>
+	<cv:sector>Agriculture, forestry and fishing</cv:sector>
+	<dct:type>Report</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/DoingBusiness"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Maksu"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/13119089"/>
+	<cv:hasChannel rdf:resource="http://www.emta.ee/index.php?id=12223"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasFormalFramework rdf:resource="http://www.emta.ee/index.php/id=14402"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/RM-055">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Submitting e-tenders in public procurements</dct:title>
+	<dct:description>Submitting tenders in public procurements published at Public Procurement Register https://riigihanked.riik.ee</dct:description>
+	<cv:sector>Financial and insurance activities</cv:sector>
+	<dct:type>Buy/sell/rent</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/DoingBusiness"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/Rahandusministeerium"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi"/>
+	<cpsv:hasInput rdf:resource="http://data.europa.eu/Estonia/Input/NationalID"/>
+	<cv:hasFormalFramework rdf:resource="https://riigihanked.riik.ee"/>
+	<cv:hasChannel rdf:resource="https://riigihanked.riik.ee"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/PublicProcDevelopment"/>
+	<cpsv:hasInput rdf:resource="http://data.europa.eu/Estonia/Input/MobileID"/>
+	<cpsv:hasInput rdf:resource="http://data.europa.eu/Estonia/Input/eResidencydigiID"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/RIA-050">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+	<dct:title>Notification service of state portal eesti.ee</dct:title>
+	<dct:description>State and local government authorities and other performers of public law functions will send all documents and notifications related to You or Your companies to the e-mail addresses personalidentificationcode@eesti.ee or registrycode@eesti.ee</dct:description>
+	<cv:sector>Information and communication</cv:sector>
+	<dct:type>Interactive information service</dct:type>
+	<dct:language>English</dct:language>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/LE/Other"/>
+	<cv:hasCompetentAuthority rdf:resource="http://data.europa.eu/Estonia/PublicOrganisation/RiigiInfo"/>
+	<cv:serviceProvider rdf:resource="http://data.europa.eu/Estonia/Agent/Majandus"/>
+	<cpsv:hasInput rdf:resource="http://data.europa.eu/Estonia/Input/IDCard_eResidency"/>
+	<cv:hasFormalFramework rdf:resource="https://www.riigiteataja.ee/akt/128042011001"/>
+	<cv:hasChannel rdf:resource="https://www.eesti.ee/est/teemad/kodanik/riigiportaali_abi/ametliku_e_posti_seadistamine"/>
+	<cv:hasCost rdf:resource="http://data.europa.eu/Estonia/Cost/Kliendile"/>
+	<cv:isGroupedBy rdf:resource="http://data.europa.eu/BE/Other"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/BE/StartingBusiness">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/BusinessEvent"/>
+	<dct:title>Starting Business</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/BE/Notifying_and_reporting_to_authorities">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/BusinessEvent"/>
+	<dct:title>Notifying and reporting to authorities</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/BE/DoingBusiness">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/BusinessEvent"/>
+	<dct:title>Doing business</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/LE/StartingEducation">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/LifeEvent"/>
+	<dct:title>Starting Education</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/LE/Other">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/LifeEvent"/>
+	<dct:title>Other</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/LE/Driving_a_vehicle">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/LifeEvent"/>
+	<dct:title>Driving a vehicle</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/LE/Moving_to_from_the_country">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/LifeEvent"/>
+	<dct:title>Moving to/from the country</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/LE/Looking_place_live">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/LifeEvent"/>
+	<dct:title>Looking for a place to live</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/LE/Retirement">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/LifeEvent"/>
+	<dct:title>Retirement</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Input/HealthCertificate">
+	<dct:description>A valid health certificate of a motorized vehicle driver presented through the e-health info system;
+permanent residence in Estonia for at least 185 according to the State Population Registry; 
+the absence of traffic punishments in the criminal records database upon applying for the provisional driving licence and exchanging it;
+the second phase driver training must have been passed in a driving school; 
+parental consent upon applying for an accompanied drivers’ licence and a a moped licence if person is under 18 years old.</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Input/Id_and_oldDrivingLicense">
+	<dct:title>Identification document; the old driving licence or a certificate of training. 
+</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Input/AinultParitavate">
+	<dct:title>Ainult päritavate isikuandmete täpne teadja saab andmeid registrist näha.</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Input/IDCard_eResidency">
+	<dct:title>ID-card o e-residency card</dct:title>
+	<dct:description>Person has to have a valid ID-card or e-residency card and valid certificates. For more information about e-residency please refer to https://e-estonia.com/e-residents/about/
+</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Input/VTA57">
+	<dct:description>The user rights can be obtained from the EMDE support persons provided the person wants to apply for the system user. Another easier option to log on without the use of ID-card is to obtain a user name and password. A standard option for obtaining user rights is to submit to the EMDE Support at emde@vta.ee a digitally signed proxy which is signed by an authorized signatory of the entity or authority in need of user rights. Relevant addresses and contact forms are available at the EMDE login page.</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Input/NationalID">
+	<dct:title>National ID card</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Input/DSC">
+	<dct:title>Digital signature capability</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Input/MobileID">
+	<dct:title>Mobile ID card</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Input/eResidencydigiID">
+	<dct:title>e-Resident's digi-ID</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Cost/Kliendile">
+	<cv:value rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.0</cv:value>
+	<dct:description>Kliendile tasuta</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Cost/Riigiloiv">
+	<dct:description>Riigilõiv, riigimaks (tollimaks)</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.eesti.ee/eng/services/citizen/perekond_1/lasteaiakoha_taotlemine_tallinnas#Eservice">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.tallinn.ee/est/haridus/Lasteaiakoha-taotlemine-4#Email">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>E-mail</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.eesti.ee/eng/services/citizen/perekond_1/lasteaiakoha_taotlemine_tallinnas#web">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.eas.ee/service/starditoetus-eng/?lang=en#Eservice">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.eas.ee/service/starditoetus-eng/?lang=en#web">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.eas.ee/service/starditoetus-eng/?lang=en#bureau">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ettevotjaportaal.rik.ee/webaddress">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://ettevotjaportaal.rik.ee/homepage">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.eesti.ee/est/teenused/ettevotja/tookeskkond_ja_personal_1/ettevotte_taotluste_menetlusinfo/webaddress">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.eesti.ee/est/teenused/ettevotja/tookeskkond_ja_personal_1/ettevotte_taotluste_menetlusinfo/State">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.mnt.ee/index.php?id=10644/Webaddress">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.mnt.ee/index.php?id=10644/Homepage">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://broneering.politsei.ee/">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://vana.siseministeerium.ee/17115/">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/www.unesco.ee">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.emta.ee/index.php?id=12223">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.studyinestonia.ee/">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/www.riigiteenused.ee">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://archimedes.ee/enic/">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.mkm.ee/et/teenuste-otsing">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.emde.ee/vi-iloginedit">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.keskkonnaamet.ee/public/41_Metsateatis.pdf">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pub.stat.ee/px-web.2001/I_Databas/Economy/24Prices/24Prices.asp">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.ria.ee/avalike-teenuste-arendamine-sf/">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.mkm.ee/et/tegevused-eesmargid/infouhiskond/infouhiskonna-teenused">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://tuleohutusaruanne.ee/">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://riigihanked.riik.ee">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.eesti.ee/est/teemad/kodanik/riigiportaali_abi/ametliku_e_posti_seadistamine">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/Channel"/>
+	<dct:type>Homepage</dct:type>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://oigusaktid.tallinn.ee/id=3001">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:description>https://oigusaktid.tallinn.ee/?id=3001</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.eas.ee/wp-content/uploads/2015/12/Starditoetus_eng_2ver.pdf">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Start-up grant</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/123032015017">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Isikut tõendavate dokumentide seadus</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/en/eli/511012016002/consolide">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Commercial Code</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/112072014146">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Töölepingu seadus</dct:title>
+	<dct:description>https://www.riigiteataja.ee/akt/112072014146?leiaKehtiv</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/126022015017">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Töötervishoiu ja tööohutuse seadus</dct:title>
+	<dct:description>https://www.riigiteataja.ee/akt/126022015017?leiaKehtiv</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/110012014013">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Sotsiaalmaksuseadus</dct:title>
+	<dct:description>https://www.riigiteataja.ee/akt/110012014013?leiaKehtiv#para2b1</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/123032015119">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Liiklusseadus</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/122042015011">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Mootorsõidukijuhi ettevalmistamise tingimused ja kord ning mootorsõidukijuhi ettevalmistamise õppekavad</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/122042015005">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Jalgratturi ja pisimopeedijuhi ettevalmistamise, eksamineerimise ning juhiloa väljastamise kord, jalgratturi juhiloa vorm ning nõuded õppevahenditele ja õppeväljakutele ning jalgratturi kvalifikatsioonile</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/122042015020">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Vedurijuhiloa väljaandmise, uuendamise ja duplikaadi väljaandmise eeskiri ning vedurijuhiloa vorm</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/122042015019">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Vedurijuhi eksamineerimise kord</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/120052015006">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Mootorsõidukijuhi eksamineerimise, talle juhtimisõiguse andmise kord ja juhiloa vormid ning nõuded eksamisõidukitele</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/101042015003">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Politsei- ja Piirivalveameti põhimäärus</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/123032015029">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Väljasõidukohustuse ja sissesõidukeelu seadus</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/122032011010">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Avaliku teabe seadus</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/13246182">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Tulumaksuseadus</dct:title>
+	<dct:description>https://www.riigiteataja.ee/akt/13246182?leiaKehtiv</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.hm.ee/sites/default/files/strateegia2020.pdf">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Eesti elukestva õppe
+Eesti elukestva õppe strateegia 2020</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://archimedes.ee/wp-content/uploads/2015/09/archimedes-pohikiri-02-04-2015.pdf">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>SIHTASUTUS ARCHIMEDES PÕHIKIRI</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://adm.archimedes.ee/enic/wp-includes/file=2012">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Eesti ENIC/NARIC Keskuse tegevus</dct:title>
+	<dct:description>http://adm.archimedes.ee/enic/wp-includes/ms-files.php?file=2012/07/Factsheet-Eesti_ENIC-NARIC-keskuse-tegevus.pdf</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://adm.archimedes.ee/enic/wp-includes/file=2015">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>KÕRGHARIDUSELE JUURDEPÄÄSU VÕIMALDAVATE NING KÕRGHARIDUST TÕENDAVATE VÄLISRIIGI DIPLOMITE, TUNNISTUSTE, AKADEEMILISTE KRAADIDE JA TEISTE KVALIFIKATSIOONIDE HINDAMINE EESTI ENIC/NARIC KESKUSES</dct:title>
+	<dct:description>http://adm.archimedes.ee/enic/wp-includes/ms-files.php?file=2015/06/Hindamise-kord_2011.pdf</dct:description>
+</rdf:Description>
+
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/106032013016">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Veeteede Ameti põhimäärus</dct:title>
+	<dct:description>https://www.riigiteataja.ee/akt/106032013016?leiaKehtiv</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/105012011016">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Metsaseadus</dct:title>
+	<dct:description>https://www.riigiteataja.ee/akt/105012011016&amp;leiaKehtiv</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://eur-http://eur-lex.europa.eu/LexUriServ/LexUriServ.do/uri=CONSLEG">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>COUNCIL REGULATION (EC) No 2494/95</dct:title>
+	<dct:description>http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CONSLEG:1995R2494:20090807:EN:PDF</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.mkm.ee/et/tegevused-eesmargid/infouhiskond">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Infoühiskond</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/115022011005">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Nõuded tuleohutuse enesekontrollile ja tuleohutusaruandele ning tuleohutusaruande koostamise kohustuslikkuse kriteeriumid</dct:title>
+	<dct:description>https://www.riigiteataja.ee/akt/115022011005?leiaKehtiv</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/13119089">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Metsaseadus</dct:title>
+	<dct:description>https://www.riigiteataja.ee/akt/13119089?leiaKehtiv</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://riigihanked.riik.ee">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/128042011001">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Riigi Infosüsteemi Ameti põhimäärus</dct:title>
+	<dct:description>https://www.riigiteataja.ee/akt/128042011001?leiaKehtiv</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.emta.ee/index.php/id=14402">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Erakliendi avaleht</dct:title>
+	<dct:description>http://www.emta.ee/index.php?id=14402</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://www.riigiteataja.ee/akt/106012011020">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Riigihangete seadus</dct:title>
+	<dct:description>https://www.riigiteataja.ee/akt/106012011020?leiaKehtiv</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.emta.ee/index.php/id=30303">
+	<rdf:type rdf:resource="http://purl.org/vocab/cpsv#FormalFramework"/>
+	<dct:title>Erakliendi avaleht</dct:title>
+	<dct:description>http://www.emta.ee/index.php/id=30303</dct:description>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Agent/Finance">
+	<rdf:type rdf:resource="http://purl.org/dc/terms/Agent"/>
+	<dct:title>Ministry of Finance (administrative area)</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Agent/EconomicAffairs">
+	<rdf:type rdf:resource="http://purl.org/dc/terms/Agent"/>
+	<dct:title>Ministry of Economic Affairs and Communications (administrative area)</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Agent/Justiitsministeeriumi">
+	<rdf:type rdf:resource="http://purl.org/dc/terms/Agent"/>
+	<dct:title>Justiitsministeeriumi haldusala</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Agent/Sotsiaalministeeriumi">
+	<rdf:type rdf:resource="http://purl.org/dc/terms/Agent"/>
+	<dct:title>Sotsiaalministeeriumi haldusala</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Agent/Majandus">
+	<rdf:type rdf:resource="http://purl.org/dc/terms/Agent"/>
+	<dct:title>Majandus- ja Kommunikatsiooniministeeriumi haldusala</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Agent/Siseministeeriumi">
+	<rdf:type rdf:resource="http://purl.org/dc/terms/Agent"/>
+	<dct:title>Siseministeeriumi haldusala</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Agent/Kultuuriministeeriumi">
+	<rdf:type rdf:resource="http://purl.org/dc/terms/Agent"/>
+	<dct:title>Kultuuriministeeriumi haldusala</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Agent/Rahandusministeeriumi">
+	<rdf:type rdf:resource="http://purl.org/dc/terms/Agent"/>
+	<dct:title>Rahandusministeeriumi haldusala</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Agent/Haridus">
+	<rdf:type rdf:resource="http://purl.org/dc/terms/Agent"/>
+	<dct:title>Haridus- ja Teadusministeeriumi haldusala</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Agent/Keskkonnaministeeriumi">
+	<rdf:type rdf:resource="http://purl.org/dc/terms/Agent"/>
+	<dct:title>Keskkonnaministeeriumi haldusala</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/TallinCouncil">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Tallinn City Council</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/EE">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>EE (Enterprise Estonia)</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Justiitsministeerium">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Justiitsministeerium</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/AdministrationPolicyDepartment">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Judicial Administration Policy Department</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Sotsiaalkindlustusamet">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Sotsiaalkindlustusamet</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Maanteeamet">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Maanteeamet</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/ExaminationDepartment">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Examination department</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Politsei">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Politsei- ja Piirivalveamet</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Juhtimisarvestuse">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Juhtimisarvestuse ja planeerimise büroo</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Siseministeerium">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Siseministeerium</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/MigrationPolicyDepartment">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Citizenship and Migration Policy Department</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/SAUNESCO">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>SA UNESCO Eesti Rahvuslik Komisjon</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Maksu">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Maksu- ja Tolliamet</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Sihtasutus">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Sihtasutus Archimedes</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/MinistryEconomic">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Ministry of Economic Affairs and Communications</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/EducationAgency">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Education Agency</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/InformationSocietyServicesDevelopment">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Information Society Services Development </dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/AgencyAcademicRecognition">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Agency of Academic Recognition</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Veeteede">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Veeteede Amet</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Keskkonnaamet">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Keskkonnaamet</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Statistikaamet">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Statistikaamet</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Paasteamet">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Päästeamet</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Rahandusministeerium">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Rahandusministeerium</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/RiigiInfo">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Riigi Infosüsteemi Amet (RIA)</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://127.0.0.1:3362/http%3A%2F%2Fdata.europa.eu%2FEstonia%2FPublicOrganisation%2FIT+Development">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>IT-Development Department</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/ForestsDepartment">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Forest Department</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/EconomicsandEnvironmentalStatDep">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Economic and Environmental Statistics Department</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/Infouhiskonna">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Infoühiskonna teenuste arendamise osakond</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/FireSafetysDevelopment">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Department of fire safety supervision</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/PublicOrganisation/PublicProcDevelopment">
+	<rdf:type rdf:resource="http://data.europa.eu/m8g/PublicOrganisation"/>
+	<dct:title>Public procurement and state aid department</dct:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Contact/tallinas">
+	<rdf:type rdf:resource="http://schema.org/ContactPoint"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Contact/starditoetus">
+	<rdf:type rdf:resource="http://schema.org/ContactPoint"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Contact/ettevotjaportaal">
+	<rdf:type rdf:resource="http://schema.org/ContactPoint"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Contact/ettevotte_taotluste_menetlusinfo">
+	<rdf:type rdf:resource="http://schema.org/ContactPoint"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.europa.eu/Estonia/Contact/Driving/webaddress">
+	<rdf:type rdf:resource="http://schema.org/ContactPoint"/>
+</rdf:Description>
+
+</rdf:RDF>

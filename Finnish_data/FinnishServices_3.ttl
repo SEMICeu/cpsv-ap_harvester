@@ -1,0 +1,52 @@
+@prefix eli: <http://data.europa.eu/eli/ontology#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix cpsv: <http://purl.org/vocab/cpsv#> .
+@prefix cv: <http://data.europa.eu/m8g/> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix schema: <https://schema.org/> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+
+<http://data.europa.eu/FI/Fireinspections> a cpsv:PublicService ;
+	dct:identifier "Building stability inspections" ;
+	dct:title "Building stability inspections " ;
+	dct:description "Bulding stability inspections are the responsibility of the joint municipal rescue authority." ;
+	cv:sector <http://data.europa.eu/Finland/Sector/PublicAdministrationDefenceCompulsorySocialSecurity> ;
+	cv:isGroupedBy <http://data.europa.eu/BE/DoingBusiness> ;
+	cv:hasCost <http://data.europa.eu/FI/subjectToCharge> .
+
+
+<http://data.europa.eu/Finland/Sector/PublicAdministrationDefenceCompulsorySocialSecurity> a skos:Concept ;
+         skos:prefLabel "PublicAdministration Defence Compulsory SocialSecurity" .
+
+<http://data.europa.eu/BE/DoingBusiness> a cv:BusinessEvent, cv:Event ;
+	dct:title "Doing business" ;
+	dct:identifier "DoingBusiness" .
+
+<http://data.europa.eu/FI/subjectToCharge> a cv:Cost ;
+	dct:description "Subject to charge" ;
+	dct:identifier "subjectToCharge" .
+
+<http://127.0.0.1:3362/0165116-3> a cv:PublicOrganisation ;
+	dct:title "City of Mikkeli" ;
+	dct:identifier "0165116-3" ;
+	skos:prefLabel "City of Mikkeli" ;
+	cv:hasAddress <http://data.europa.eu/Finland/Address/visitingAddress/TownHall>;
+	dct:spatial <http://data.europa.eu/Finland/Location/Mikkeli> .
+
+<http://data.europa.eu/Finland/Address/visitingAddress/TownHall> a locn:Address ;
+         locn:fullAddress "Maaherrankatu 9-11" ;
+         locn:adminUnitL1 "50100.0" ;
+         locn:adminUnitL2 "Mikkeli" .
+
+<http://data.europa.eu/Finland/Location/Mikkeli> a dct:Location ;
+         dct:title "Mikkeli".
+
